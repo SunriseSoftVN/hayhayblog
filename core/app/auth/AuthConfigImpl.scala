@@ -7,6 +7,7 @@ import jp.t2v.lab.play2.auth.{CookieIdContainer, IdContainer, AuthConfig}
 import play.api.mvc.AcceptExtractors
 import model.{Administrator, Permission}
 import dao.UserDao
+import scala.concurrent.{Future, ExecutionContext}
 
 /**
  * The Class AuthConfigImpl.
@@ -25,22 +26,34 @@ trait AuthConfigImpl extends AuthConfig with Rendering with AcceptExtractors {
 
   def sessionTimeoutInSeconds = 3600
 
-  def resolveUser(email: Id) = UserDao.findByEmail(email)
+  def resolveUser(email: Id)(implicit context: ExecutionContext): Future[Option[User]] = Future {
+    UserDao.findByEmail(email)
+  }
 
   implicit val idTag: ClassTag[Id] = classTag[Id]
 
-  def loginSucceeded(request: RequestHeader) = Redirect("/admin")
+  def loginSucceeded(request: RequestHeader)(implicit context: ExecutionContext) = Future {
+    Redirect("/admin")
+  }
 
-  def logoutSucceeded(request: RequestHeader) = Redirect("/user/login")
+  def logoutSucceeded(request: RequestHeader)(implicit context: ExecutionContext) = Future {
+    Redirect("/user/login")
+  }
 
-  def authenticationFailed(request: RequestHeader) = render {
-    case Accepts.Json() => Forbidden("Please login")
-    case _ => Redirect("/user/login")
-  }(request)
+  def authenticationFailed(request: RequestHeader)(implicit context: ExecutionContext) = Future {
+    render {
+      case Accepts.Json() => Forbidden("Please login")
+      case _ => Redirect("/user/login")
+    }(request)
+  }
 
-  def authorizationFailed(request: RequestHeader) = Forbidden("Please login")
+  def authorizationFailed(request: RequestHeader)(implicit context: ExecutionContext) = Future {
+    Forbidden("Please login")
+  }
 
-  def authorize(user: User, authority: Authority) = user.role == authority.value || user.role == Administrator.value
+  def authorize(user: User, authority: Authority)(implicit context: ExecutionContext) = Future {
+    user.role == authority.value || user.role == Administrator.value
+  }
 
   override lazy val idContainer: IdContainer[Id] = new CookieIdContainer[Id]
 }
