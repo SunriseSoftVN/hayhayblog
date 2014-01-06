@@ -26,7 +26,10 @@ object ApplicationBuild extends Build {
     "org.scalanlp" %% "breeze-process" % "0.3",
     "org.apache.commons" % "commons-email" % "1.3.1",
     "org.ocpsoft.prettytime" % "prettytime" % "3.1.0.Final",
-    "com.mohiva" %% "play-html-compressor" % "0.2-SNAPSHOT"
+    "com.mohiva" %% "play-html-compressor" % "0.2-SNAPSHOT",
+    "com.restfb" % "restfb" % "1.6.11",
+    "com.google.http-client" % "google-http-client-jackson2" % "1.11.0-beta",
+    "com.google.apis" % "google-api-services-oauth2" % "v2-rev48-1.16.0-rc"
   )
 
   val appResolvers = Seq(
