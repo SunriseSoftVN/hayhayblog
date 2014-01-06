@@ -9,7 +9,7 @@ dbplugin = disabled
 #ehcacheplugin = disabled
 
 #Mongo Db Connection
-mongodb.default.db = "pricemonitor"
+mongodb.default.db = "hayhayblog"
 # Optional values
 mongodb.default.host = "localhost"
 #mongodb.default.port = 27017
