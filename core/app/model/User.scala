@@ -1,12 +1,19 @@
 package model
 
+import org.bson.types.ObjectId
+import org.joda.time.DateTime
+
 /**
  * The Class User.
  *
  * @author Nguyen Duc Dung
- * @since 1/6/14 3:10 AM
+ * @since 10/5/13 6:29 PM
  *
  */
-class User {
-
-}
+case class User(
+                 _id: ObjectId = new ObjectId,
+                 email: String,
+                 password: String,
+                 role: String = NormalUser.value,
+                 registerDate: DateTime = DateTime.now()
+                 ) extends BaseModel(_id)
