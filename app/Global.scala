@@ -1,11 +1,13 @@
 import com.mongodb.casbah.commons.conversions.scala.RegisterJodaTimeConversionHelpers
 import com.typesafe.config.ConfigFactory
 import dao.UserDao
+import filter.HTMLCompressorFilter
 import java.io.File
 import model.{Administrator, User}
 import org.apache.commons.codec.digest.DigestUtils
 import play.api._
 import play.libs.Akka
+import play.api.mvc.WithFilters
 
 /**
  * The Class Global.
@@ -14,7 +16,7 @@ import play.libs.Akka
  * @since 1/6/14 9:51 AM
  *
  */
-object Global extends GlobalSettings {
+object Global extends WithFilters(HTMLCompressorFilter()) {
 
   lazy val devConfFilePath = "conf/dev.conf"
   lazy val prodConfFilePath = "prod.conf"
@@ -42,6 +44,7 @@ object Global extends GlobalSettings {
 
   override def onStop(app: Application) = {
     Akka.system.shutdown()
+    Akka.system.awaitTermination()
     Logger.info("Shutdown...")
   }
 }

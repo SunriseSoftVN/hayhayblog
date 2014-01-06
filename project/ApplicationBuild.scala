@@ -25,7 +25,8 @@ object ApplicationBuild extends Build {
     "org.jsoup" % "jsoup" % "1.7.2",
     "org.scalanlp" %% "breeze-process" % "0.3",
     "org.apache.commons" % "commons-email" % "1.3.1",
-    "org.ocpsoft.prettytime" % "prettytime" % "3.1.0.Final"
+    "org.ocpsoft.prettytime" % "prettytime" % "3.1.0.Final",
+    "com.mohiva" %% "play-html-compressor" % "0.2-SNAPSHOT"
   )
 
   val appResolvers = Seq(
@@ -60,6 +61,6 @@ object ApplicationBuild extends Build {
       "dto._"
     ),
     resolvers ++= appResolvers
-  ).dependsOn(admin)
+  ).dependsOn(admin).aggregate(core, admin)
 
 }
