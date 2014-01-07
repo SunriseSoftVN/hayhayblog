@@ -14,7 +14,7 @@ case class User(
                  _id: ObjectId = new ObjectId,
                  email: String,
                  password: String,
-                 fullName: Option[String] = None,
+                 fullname: Option[String] = None,
                  role: String = NormalUser.value,
                  registerDate: DateTime = DateTime.now()
                  ) extends BaseModel(_id)
