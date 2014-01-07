@@ -9,7 +9,21 @@
 </head>
 
 <body>
-@content
+<div id="wrap">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        @navbar()
+    </div>
+
+    <!-- Begin page content -->
+    <div class="container">
+        @content
+    </div>
+</div>
+
+@footer()
+
+</div>
 </body>
 
 </html>
