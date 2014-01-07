@@ -2,3 +2,4 @@
 GET        /                    admin.controllers.Home.index
 
 GET        /user                admin.controllers.Users.index
+GET        /category            admin.controllers.Categories.index

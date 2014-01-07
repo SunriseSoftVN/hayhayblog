@@ -1,10 +1,10 @@
-@(users: List[User], totalPage: Long, currentPage: Long, query: Option[String])
+@(data: List[Category], totalPage: Long, currentPage: Long, query: Option[String])
 <div class="page-header">
-    <h3>Users</h3>
+    <h3>Categories</h3>
 
     <form class="form-inline" role="form">
         <div class="form-group">
-            <input class="form-control" name="query" id="query" placeholder="Search by email" value="@query">
+            <input class="form-control" name="query" id="query" placeholder="Search by name" value="@query">
         </div>
         <button type="submit" class="btn btn-default">Search</button>
     </form>
@@ -14,18 +14,14 @@
     <thead>
     <tr>
         <th>#</th>
-        <th>Email</th>
-        <th>Fullname</th>
-        <th>Registered Date</th>
+        <th>Name</th>
     </tr>
     </thead>
     <tbody>
-    @users.map{user =>
+    @data.map{cat =>
     <tr>
         <td>1</td>
-        <td>@user.email</td>
-        <td>@user.fullname.getOrElse("")</td>
-        <td>@user.registerDate</td>
+        <td>@cat.name</td>
     </tr>
     }
     </tbody>
