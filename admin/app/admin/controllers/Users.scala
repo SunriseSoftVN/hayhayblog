@@ -3,6 +3,7 @@ package admin.controllers
 import play.api.mvc._
 import jp.t2v.lab.play2.auth.AuthElement
 import auth.AuthConfigImpl
+import model.Administrator
 
 /**
  * The Class Users.
@@ -13,8 +14,8 @@ import auth.AuthConfigImpl
  */
 object Users extends Controller with AuthElement with AuthConfigImpl with AdminTemplate {
 
-  def index = Action {
+  def index = StackAction(AuthorityKey -> Administrator)(implicit request => {
     renderOk(admin.views.html.users.list())
-  }
+  })
 
 }
