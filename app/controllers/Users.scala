@@ -27,7 +27,9 @@ object Users extends Controller with AuthElement with AuthConfigImpl with LoginL
     })
   }
 
-  def login = TODO
+  def login = Action {
+    Ok(views.html.users.login())
+  }
 
   def auth = TODO
 
