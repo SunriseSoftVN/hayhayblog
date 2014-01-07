@@ -1,0 +1,15 @@
+@(content: Html, title: String, description: String)
+
+@import admin.views.html.partials._
+
+<!DOCTYPE html>
+<html>
+<head>
+    @header(title, description)
+</head>
+
+<body>
+@content
+</body>
+
+</html>

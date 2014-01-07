@@ -3,7 +3,6 @@ package filter
 import play.api.Play
 import play.api.Play.current
 import com.googlecode.htmlcompressor.compressor.HtmlCompressor
-import com.mohiva.play.htmlcompressor.HTMLCompressorFilter
 
 /**
  * Defines a user-defined HTML compressor filter.
@@ -19,7 +18,7 @@ object HTMLCompressorFilter {
    *
    * @return The HTML compressor filter.
    */
-  def apply() = new HTMLCompressorFilter({
+  def apply() = new com.mohiva.play.htmlcompressor.HTMLCompressorFilter({
     val compressor = new HtmlCompressor()
     if (Play.isDev) {
       compressor.setPreserveLineBreaks(true)

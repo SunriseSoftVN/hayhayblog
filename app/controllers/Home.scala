@@ -7,7 +7,7 @@ import model.NormalUser
 import scala.concurrent.{ExecutionContext, Future}
 import ExecutionContext.Implicits.global
 
-object Application extends Controller with AuthElement with AuthConfigImpl {
+object Home extends Controller with AuthElement with AuthConfigImpl {
 
   def index = StackAction(AuthorityKey -> NormalUser) {
     implicit request =>
