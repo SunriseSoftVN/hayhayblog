@@ -7,7 +7,9 @@ GET        /                           controllers.Home.index
 
 GET        /user/login                 controllers.Users.login
 GET        /user/register              controllers.Users.register
+POST       /user/registerPost          controllers.Users.registerPost
 GET        /user/recover               controllers.Users.recover
+POST       /user/recoverPost           controllers.Users.recoverPost
 POST       /user/auth                  controllers.Users.auth
 GET        /user/logout                controllers.Users.logout
 

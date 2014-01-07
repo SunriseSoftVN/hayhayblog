@@ -27,13 +27,32 @@ object Users extends Controller with AuthElement with AuthConfigImpl with LoginL
     })
   }
 
-  def recover = Action {
-    Ok(views.html.users.recoverpassword(loginForm))
+  lazy val registerForm = Form {
+    tuple(
+      "email" -> email,
+      "fullname" -> optional(text),
+      "password" -> text(minLength = 6),
+      "rePassword" -> text(minLength = 6)
+    ) verifying("password.error.match", fields => fields match {
+      case (emailAddress, fullname, password, rePassword) => password == rePassword
+    })
   }
 
-  def register = Action {
-    Ok(views.html.users.register(loginForm))
+  lazy val recoverForm = Form {
+    "email" -> email
   }
+
+  def recover = Action {
+    Ok(views.html.users.recoverpassword(recoverForm))
+  }
+
+  def recoverPost = TODO
+
+  def register = Action {
+    Ok(views.html.users.register(registerForm))
+  }
+
+  def registerPost = TODO
 
   def login = Action {
     Ok(views.html.users.login(loginForm))
