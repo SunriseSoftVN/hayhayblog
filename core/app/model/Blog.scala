@@ -13,5 +13,6 @@ case class Blog(
                  _id: ObjectId = new ObjectId(),
                  name: String,
                  url: String,
+                 isEnable: Boolean = false,
                  categoryId: ObjectId
                  ) extends BaseModel(_id)

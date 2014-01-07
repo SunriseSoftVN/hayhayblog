@@ -1,2 +1,4 @@
 
 GET        /                    admin.controllers.Home.index
+
+GET        /user                admin.controllers.Users.index
