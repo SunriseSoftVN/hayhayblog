@@ -2,3 +2,4 @@ application.name=HayHayBlog
 application.url=hayhayblog.com
 application.title=Tong hop nhung blog hay
 application.description=Tong hop nhung blog hay
+login.failed=Tên đăng nhập hoặc mật khẩu không đúng

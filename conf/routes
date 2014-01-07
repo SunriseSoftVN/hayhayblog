@@ -6,6 +6,8 @@
 GET        /                           controllers.Home.index
 
 GET        /user/login                 controllers.Users.login
+GET        /user/register              controllers.Users.register
+GET        /user/recover               controllers.Users.recover
 POST       /user/auth                  controllers.Users.auth
 GET        /user/logout                controllers.Users.logout
 
