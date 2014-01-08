@@ -1,5 +1,6 @@
 
-GET        /                    admin.controllers.Home.index
+GET        /                            admin.controllers.Home.index
 
-GET        /user                admin.controllers.Users.index
-GET        /category            admin.controllers.Categories.index
+GET        /user                        admin.controllers.Users.index
+GET        /category                    admin.controllers.Categories.index
+GET        /category/create             admin.controllers.Categories.create
