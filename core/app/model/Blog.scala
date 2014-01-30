@@ -14,6 +14,7 @@ case class Blog(
                  name: String,
                  url: String,
                  rssUrl: String,
+                 description: Option[String] = None,
                  isEnable: Boolean = false,
                  categoryId: ObjectId
                  ) extends BaseModel(_id)

@@ -29,6 +29,7 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
       "name" -> text(minLength = 3),
       "url" -> nonEmptyText.verifying(urlConstraint),
       "rssUrl" -> nonEmptyText.verifying(urlConstraint),
+      "description" -> optional(text),
       "isEnable" -> boolean,
       "categoryId" -> of[ObjectId]
     )(Blog.apply)(Blog.unapply)

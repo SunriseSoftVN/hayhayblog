@@ -1,15 +1,12 @@
 package controllers
 
 import play.api.mvc._
-import jp.t2v.lab.play2.auth.{AuthElement, AsyncAuth}
+import jp.t2v.lab.play2.auth.OptionalAuthElement
 import auth.AuthConfigImpl
-import model.NormalUser
-import scala.concurrent.{ExecutionContext, Future}
-import ExecutionContext.Implicits.global
 
-object Home extends Controller with AuthElement with AuthConfigImpl {
+object Home extends Controller with OptionalAuthElement with AuthConfigImpl {
 
-  def index = StackAction(AuthorityKey -> NormalUser) {
+  def index = StackAction {
     implicit request =>
       Ok(views.html.index())
   }
