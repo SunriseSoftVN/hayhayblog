@@ -37,22 +37,22 @@ object UserCtr extends Controller with AuthElement with AuthConfigImpl with Admi
 
   def index = StackAction(AuthorityKey -> Administrator)(implicit request => {
     val pageDto: PageDto[User] = PageDto(request)
-    renderOk(admin.views.html.users.list(UserDao.query(pageDto)))
+    renderOk(admin.views.html.user.list(UserDao.query(pageDto)))
   })
 
   def create = StackAction(AuthorityKey -> Administrator)(implicit request => {
-    renderOk(admin.views.html.users.edit(editForm))
+    renderOk(admin.views.html.user.edit(editForm))
   })
 
   def edit(id: ObjectId) = StackAction(AuthorityKey -> Administrator)(implicit request => {
     UserDao.findOneById(id).map(user => {
-      renderOk(admin.views.html.users.edit(editForm.fill(user)))
+      renderOk(admin.views.html.user.edit(editForm.fill(user)))
     }).getOrElse(NotFound)
   })
 
   def update = StackAction(AuthorityKey -> Administrator)(implicit request => {
     editForm.bindFromRequest.fold(
-      error => renderOk(admin.views.html.users.edit(error)),
+      error => renderOk(admin.views.html.user.edit(error)),
       user => {
         if (UserDao.findOneById(user._id).isDefined) {
           UserDao.save(user)

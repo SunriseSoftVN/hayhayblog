@@ -6,9 +6,11 @@ GET        /user/create                 admin.controllers.UserCtr.create
 POST       /user/update                 admin.controllers.UserCtr.update
 GET        /user/edit/:id               admin.controllers.UserCtr.edit(id: ObjectId)
 
-
 GET        /category                    admin.controllers.CategoryCtr.index
 GET        /category/create             admin.controllers.CategoryCtr.create
 GET        /category/edit/:id           admin.controllers.CategoryCtr.edit(id: ObjectId)
 GET        /category/delete/:id         admin.controllers.CategoryCtr.delete(id: ObjectId)
 POST       /category/update             admin.controllers.CategoryCtr.update
+
+GET        /blog                        admin.controllers.BlogCtr.index
+GET        /blog/create                 admin.controllers.BlogCtr.create

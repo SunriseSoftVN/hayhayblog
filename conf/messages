@@ -14,3 +14,7 @@ lbl.password=Mật khẩu
 lbl.fullname=Họ và tên
 lbl.email=Email
 lbl.registerDate=Ngày đăng ký
+lbl.url=Url
+lbl.rssUrl=Rss Url
+lbl.isEnable=Enable
+lbl.category=Category

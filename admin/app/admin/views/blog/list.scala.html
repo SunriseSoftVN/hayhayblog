@@ -1,0 +1,49 @@
+@(pageDto: PageDto[Blog])
+@import boostraptable._
+
+<div>
+    <h3>Blog</h3>
+
+    <form class="form-inline pull-right" role="form">
+        <div class="form-group">
+            <input type="hidden" name="fieldName" value="name"/>
+            <input class="form-control input-sm" name="filter" id="filter" placeholder="Search..." value="@pageDto.filter" autofocus>
+        </div>
+    </form>
+    <div class="pull-left">
+        <a href="/admin/blog/create" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i> @Messages("btn.addNew")
+        </a>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<hr/>
+
+<table class="table table-bordered table-condensed table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        @colHeader(pageDto, "name", "Name")
+        @colHeader(pageDto, "url", "Url")
+        @colHeader(pageDto, "isEnable", "Enable")
+        <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    @pageDto.items.map{blog =>
+    <tr>
+        <td>@{pageDto.items.indexOf(blog) + ((pageDto.currentPage - 1) * pageDto.itemDisplay) + 1}</td>
+        <td><a href="/admin/blog/edit/@blog.id">@blog.name</a></td>
+        <td>@blog.url</td>
+        <td>@blog.isEnable</td>
+        <td>
+            <a href="/admin/blog/edit/@blog.id" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i></a>
+            @deleteBtn("/admin/blog/delete/"+ blog.id)
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>
+
+@tablePagination(pageDto)

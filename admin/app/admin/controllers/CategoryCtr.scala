@@ -29,22 +29,22 @@ object CategoryCtr extends Controller with AuthElement with AuthConfigImpl with 
 
   def index = StackAction(AuthorityKey -> Administrator)(implicit request => {
     val pageDto: PageDto[Category] = PageDto(request)
-    renderOk(admin.views.html.categories.list(CategoryDao.query(pageDto)))
+    renderOk(admin.views.html.category.list(CategoryDao.query(pageDto)))
   })
 
   def create = StackAction(AuthorityKey -> Administrator)(implicit request => {
-    renderOk(admin.views.html.categories.edit(form))
+    renderOk(admin.views.html.category.edit(form))
   })
 
   def edit(id: ObjectId) = StackAction(AuthorityKey -> Administrator)(implicit request => {
     CategoryDao.findOneById(id).map(category => {
-      renderOk(admin.views.html.categories.edit(form.fill(category)))
+      renderOk(admin.views.html.category.edit(form.fill(category)))
     }).getOrElse(NotFound)
   })
 
   def update = StackAction(AuthorityKey -> Administrator)(implicit request => {
     form.bindFromRequest.fold(
-      error => renderBadRequest(admin.views.html.categories.edit(error)),
+      error => renderBadRequest(admin.views.html.category.edit(error)),
       category => {
         CategoryDao.save(category)
         Redirect("/admin/category")
