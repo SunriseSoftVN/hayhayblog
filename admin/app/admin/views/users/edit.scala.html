@@ -1,0 +1,29 @@
+@(editForm : Form[User])
+@import helper._
+@import views.html.bootstrapform._
+@implicitFieldConstructor = @{FieldConstructor(bootstrapform.filedContructor2.f)}
+
+<div>
+    <h3>Edit user</h3>
+</div>
+
+<hr/>
+<div class="col-md-5">
+    <form action="/admin/user/update" method="post" class="form-horizontal" role="form">
+        @inputText(editForm("_id"), 'class -> "form-control", 'hidden -> true)
+        @inputText(editForm("email"), 'class -> "form-control input-sm", '_label -> Messages("lbl.email"))
+        @inputText(editForm("fullname"), 'class -> "form-control input-sm", '_label -> Messages("lbl.fullname"))
+        @inputText(editForm("password"), 'class -> "form-control input-sm", '_label -> Messages("lbl.password"))
+        @inputText(editForm("registerDate"), 'class -> "form-control input-sm", '_label -> Messages("lbl.registerDate"))
+        @select(editForm("role"), Role.asSelectValue() ,'class -> "form-control", '_label -> "Role")
+
+        @formGlobalError(editForm)
+
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-7">
+                <button type="submit" class="btn btn-primary">@Messages("btn.submit")</button>
+                <a href="/admin/user" class="btn btn-default">@Messages("btn.cancel")</a>
+            </div>
+        </div>
+    </form>
+</div>

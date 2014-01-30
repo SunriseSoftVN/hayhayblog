@@ -10,3 +10,7 @@ email.notExist=Email không tồn tại
 lbl.name=Tên
 name.exits=Tên đã bị trùng
 btn.addNew=Thêm mới
+lbl.password=Mật khẩu
+lbl.fullname=Họ và tên
+lbl.email=Email
+lbl.registerDate=Ngày đăng ký

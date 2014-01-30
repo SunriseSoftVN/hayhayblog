@@ -1,7 +1,12 @@
 
 GET        /                            admin.controllers.Home.index
 
-GET        /user                        admin.controllers.Users.index
+GET        /user                        admin.controllers.UserCtr.index
+GET        /user/create                 admin.controllers.UserCtr.create
+POST       /user/update                 admin.controllers.UserCtr.update
+GET        /user/edit/:id               admin.controllers.UserCtr.edit(id: ObjectId)
+
+
 GET        /category                    admin.controllers.CategoryCtr.index
 GET        /category/create             admin.controllers.CategoryCtr.create
 GET        /category/edit/:id           admin.controllers.CategoryCtr.edit(id: ObjectId)
