@@ -14,11 +14,4 @@ object Home extends Controller with AuthElement with AuthConfigImpl {
       Ok(views.html.index())
   }
 
-  def test = Action.async {
-    Future {
-      Thread.sleep(2000)
-      Ok(views.html.index())
-    }
-  }
-
 }
