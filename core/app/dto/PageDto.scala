@@ -23,11 +23,11 @@ case class PageDto[E](
                        colHeader: List[(String, Int)] = Nil
                        ) {
 
-  override def toString = s"?filter=${filter.getOrElse("")}&page=$currentPage&orderedField=$orderedField"
+  override def toString = s"?fieldName=${fieldName.getOrElse("")}&filter=${filter.getOrElse("")}&page=$currentPage&orderedField=${orderedField.getOrElse("")}&sortAsc=$sortAsc"
 
-  def previousPage = s"?filter=${filter.getOrElse("")}&page=${currentPage - 1}&orderedField=$orderedField"
+  def previousPage = s"?fieldName=${fieldName.getOrElse("")}&filter=${filter.getOrElse("")}&page=${currentPage - 1}&orderedField=${orderedField.getOrElse("")}&sortAsc=$sortAsc"
 
-  def nextPage = s"?filter=${filter.getOrElse("")}&page=${currentPage + 1}&orderedField=$orderedField"
+  def nextPage = s"?fieldName=${fieldName.getOrElse("")}&filter=${filter.getOrElse("")}&page=${currentPage + 1}&orderedField=${orderedField.getOrElse("")}&sortAsc=$sortAsc"
 }
 
 object PageDto {

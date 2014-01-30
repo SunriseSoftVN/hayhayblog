@@ -5,6 +5,7 @@ import scala._
 import com.mongodb.casbah.commons.MongoDBObject
 import com.mongodb.casbah.Imports._
 import dto.PageDto
+import org.apache.commons.lang3.StringUtils
 
 /**
  * The Class BaseDao.
@@ -22,7 +23,9 @@ trait BaseDao[ObjectType <: AnyRef, ID <: Any] extends ModelCompanion[ObjectType
       MongoDBObject(pageDto.fieldName.get -> MongoDBObject("$regex" -> pageDto.filter.get, "$options" -> "i"))
     } else MongoDBObject.empty
 
-    val sortBy = pageDto.orderedField.map(field => MongoDBObject(field -> pageDto.sortAsc)).getOrElse(MongoDBObject.empty)
+    val sortBy = if(pageDto.orderedField.isDefined && StringUtils.isNotBlank(pageDto.orderedField.get)) {
+      MongoDBObject(pageDto.orderedField.get -> pageDto.sortAsc)
+    } else MongoDBObject.empty
 
     val totalRow = count(query)
 

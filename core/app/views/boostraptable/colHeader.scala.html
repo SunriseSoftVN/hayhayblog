@@ -1,7 +1,5 @@
-@(pageDto: PageDto[_])
+@(pageDto: PageDto[_], filedName: String, title: String)
 
-@pageDto.colHeader.map{header =>
-<th class="header sort @if(true) {headerSortUp} else {headerSortDown}">
-    <a href="#">@header._1</a>
+<th class="header sort @if(pageDto.sortAsc > 0) {headerSortUp} else {headerSortDown}">
+    <a href='@pageDto.copy(orderedField = Some(filedName), sortAsc = 0 - pageDto.sortAsc)'>@title</a>
 </th>
-}

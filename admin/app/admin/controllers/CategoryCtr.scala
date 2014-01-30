@@ -22,7 +22,7 @@ object CategoryCtr extends Controller with AuthElement with AuthConfigImpl with 
 
   lazy val form = Form(
     mapping(
-      "_id" -> default(of[ObjectId], new ObjectId()),
+      "_id" -> of[ObjectId],
       "name" -> text(minLength = 3)
     )(Category.apply)(Category.unapply)
   )
