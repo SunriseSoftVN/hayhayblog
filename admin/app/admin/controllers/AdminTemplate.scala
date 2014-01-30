@@ -19,4 +19,10 @@ trait AdminTemplate extends Controller {
     admin.views.html.tml.main(content, title, description)
   )
 
+  def renderBadRequest(content: Html,
+               title: String = Messages("application.title"),
+               description: String = Messages("application.description")) = BadRequest(
+    admin.views.html.tml.main(content, title, description)
+  )
+
 }

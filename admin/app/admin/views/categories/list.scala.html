@@ -3,30 +3,40 @@
 
 <div>
     <h3>Category</h3>
+
     <form class="form-inline pull-right" role="form">
         <div class="form-group">
+            <input type="hidden" name="fieldName" value="name"/>
             <input class="form-control input-sm" name="filter" id="filter" placeholder="Search..." value="@pageDto.filter" autofocus>
         </div>
     </form>
     <div class="pull-left">
-        <a href="/admin/company/create" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> @Messages("btn.addNew")</a>
+        <a href="/admin/category/create" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus"></i> @Messages("btn.addNew")
+        </a>
     </div>
     <div class="clearfix"></div>
 </div>
 
+<hr/>
 
 <table class="table table-bordered table-condensed table-hover">
     <thead>
     <tr>
         <th>#</th>
         <th>Name</th>
+        <th>Options</th>
     </tr>
     </thead>
     <tbody>
     @pageDto.items.map{cat =>
     <tr>
-        <td>1</td>
-        <td>@cat.name</td>
+        <td>@{pageDto.items.indexOf(cat) + ((pageDto.currentPage - 1) * pageDto.itemDisplay) + 1}</td>
+        <td><a href="/admin/category/edit/@cat.id">@cat.name</a></td>
+        <td>
+            <a href="/admin/category/edit/@cat.id" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i></a>
+            @deleteBtn("/admin/category/delete/"+ cat.id)
+        </td>
     </tr>
     }
     </tbody>

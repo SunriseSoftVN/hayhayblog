@@ -23,7 +23,7 @@
     @users.map{user =>
     <tr>
         <td>1</td>
-        <td>@user.email</td>
+        <td><a href="/admin/user/@user.id">@user.email</a></td>
         <td>@user.fullname.getOrElse("")</td>
         <td>@user.registerDate</td>
     </tr>

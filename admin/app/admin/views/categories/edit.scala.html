@@ -9,8 +9,8 @@
 
 <hr/>
 <div class="col-md-5">
-    <form action="/admin/company/update" method="post" class="form-horizontal" role="form">
-        @inputText(editForm("id"), 'class -> "form-control", 'hidden -> true)
+    <form action="/admin/category/update" method="post" class="form-horizontal" role="form">
+        @inputText(editForm("_id"), 'class -> "form-control", 'hidden -> true)
         @inputText(editForm("name"), 'class -> "form-control input-sm", '_label -> Messages("lbl.name"))
 
         @formGlobalError(editForm)
@@ -18,7 +18,7 @@
         <div class="form-group">
             <div class="col-sm-offset-5 col-sm-7">
                 <button type="submit" class="btn btn-primary">@Messages("btn.submit")</button>
-                <a href="/admin/company" class="btn btn-default">@Messages("btn.cancel")</a>
+                <a href="/admin/category" class="btn btn-default">@Messages("btn.cancel")</a>
             </div>
         </div>
     </form>
