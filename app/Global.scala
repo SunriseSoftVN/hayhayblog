@@ -1,3 +1,5 @@
+import actor.{Start, FeedSpout}
+import akka.actor.Props
 import com.mongodb.casbah.commons.conversions.scala.RegisterJodaTimeConversionHelpers
 import com.typesafe.config.ConfigFactory
 import dao.UserDao
@@ -6,8 +8,12 @@ import java.io.File
 import model.{Administrator, User}
 import org.apache.commons.codec.digest.DigestUtils
 import play.api._
-import play.libs.Akka
+import play.api.libs.concurrent.Akka
 import play.api.mvc.WithFilters
+import scala.concurrent.duration._
+import play.api.Play.current
+import scala.concurrent.ExecutionContext
+import ExecutionContext.Implicits.global
 
 /**
  * The Class Global.
@@ -18,9 +24,9 @@ import play.api.mvc.WithFilters
  */
 object Global extends WithFilters(HTMLCompressorFilter()) {
 
-  lazy val devConfFilePath = "conf/dev.conf"
-  lazy val prodConfFilePath = "prod.conf"
-
+  val devConfFilePath = "conf/dev.conf"
+  val prodConfFilePath = "prod.conf"
+  lazy val feedSpout = Akka.system.actorOf(Props(new FeedSpout(nrOfCrawlActor = 100)), name = "feedSpout")
 
   override def onStart(app: Application) {
     Logger.info("Starting...")
@@ -32,6 +38,7 @@ object Global extends WithFilters(HTMLCompressorFilter()) {
         role = Administrator.value
       ))
     }
+    Akka.system.scheduler.schedule(10.seconds, 10.minutes, feedSpout, Start)
   }
 
   override def onLoadConfig(config: Configuration, path: File, classLoader: ClassLoader, mode: Mode.Mode) = if (mode == Mode.Prod) {
