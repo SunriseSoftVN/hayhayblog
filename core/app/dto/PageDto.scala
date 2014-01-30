@@ -13,10 +13,12 @@ import utils.{Options, String2Int}
  */
 case class PageDto[E](
                        items: Seq[E] = Nil,
+                       fieldName: Option[String],
                        filter: Option[String] = None,
                        currentPage: Int = 0,
                        totalPage: Int = 0,
-                       orderedField: Int = 1,
+                       orderedField: Option[String],
+                       sortAsc: Int = 1,
                        itemDisplay: Int = 50,
                        colHeader: List[(String, Int)] = Nil
                        ) {
@@ -30,16 +32,27 @@ case class PageDto[E](
 
 object PageDto {
 
-  def apply(request: Request[AnyContent]) = {
+  def apply[E](request: Request[AnyContent]) = {
     val filter = request.getQueryString("filter")
     val currentPage = request.getQueryString("page").collect {
       case String2Int(_page) => _page
     }.getOrElse(1)
-    val orderedField = request.getQueryString("orderedField").collect {
+
+    val sortAsc = request.getQueryString("sortAsc").collect {
       case String2Int(_page) => _page
     }.getOrElse(1)
 
-    new PageDto(filter = Options.trim(filter), currentPage = currentPage, orderedField = orderedField)
+    val orderedField = request.getQueryString("orderedField")
+
+    val fieldName = request.getQueryString("fieldName")
+
+    new PageDto[E](
+      filter = Options.trim(filter),
+      currentPage = currentPage,
+      orderedField = orderedField,
+      fieldName = fieldName,
+      sortAsc = sortAsc
+    )
   }
 
 }

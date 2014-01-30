@@ -4,6 +4,7 @@ import com.novus.salat.dao.{ModelCompanion, SalatDAO}
 import scala._
 import com.mongodb.casbah.commons.MongoDBObject
 import com.mongodb.casbah.Imports._
+import dto.PageDto
 
 /**
  * The Class BaseDao.
@@ -14,22 +15,29 @@ import com.mongodb.casbah.Imports._
  */
 trait BaseDao[ObjectType <: AnyRef, ID <: Any] extends ModelCompanion[ObjectType, ID] {
 
-  def query(fieldName: String, fieldValue: Any, sortFiled: String, sortAsc: Int = 1, page: Int = 1, itemDisplay: Int = 10) = {
-    val skip = (page - 1) * itemDisplay
-    find(MongoDBObject(fieldName -> MongoDBObject("$regex" -> fieldValue, "$options" -> "i")))
-      .skip(skip)
-      .limit(itemDisplay)
-      .sort(MongoDBObject(sortFiled -> sortAsc))
-      .toList
-  }
+  def query(pageDto: PageDto[_ <: ObjectType]) = {
+    val skip = (pageDto.currentPage - 1) * pageDto.itemDisplay
 
-  def totalPage(fieldName: String, fieldValue: Any, itemDisplay: Int = 10): Long = {
-    val totalRow = count(MongoDBObject(fieldName -> MongoDBObject("$regex" -> fieldValue, "$options" -> "i")))
-    var page = totalRow / itemDisplay
-    if (totalRow - page * itemDisplay > 0) {
-      page += 1
+    val query = if (pageDto.fieldName.isDefined && pageDto.filter.isDefined) {
+      MongoDBObject(pageDto.fieldName.get -> MongoDBObject("$regex" -> pageDto.filter.get, "$options" -> "i"))
+    } else MongoDBObject.empty
+
+    val sortBy = pageDto.orderedField.map(field => MongoDBObject(field -> pageDto.sortAsc)).getOrElse(MongoDBObject.empty)
+
+    val totalRow = count(query)
+
+    var totalPage = totalRow / pageDto.itemDisplay
+    if (totalRow - totalPage * pageDto.itemDisplay > 0) {
+      totalPage += 1
     }
-    page
+
+    val items = find(query)
+      .skip(skip)
+      .limit(pageDto.itemDisplay)
+      .sort(sortBy)
+      .toList
+
+    pageDto.copy(items = items, totalPage = totalPage.toInt)
   }
 
   def findList(ids: List[ID]) = find(MongoDBObject("_id" -> MongoDBObject("$in" -> ids))).toList
