@@ -7,6 +7,14 @@ object ApplicationBuild extends Build {
   val appName = "hayhayblog"
   val appVersion = "0.0.1"
 
+  val parserDependencies = Seq(
+    "org.jsoup" % "jsoup" % "1.7.3",
+    "org.scalanlp" %% "breeze-process" % "0.3",
+    "com.googlecode.juniversalchardet" % "juniversalchardet" % "1.0.3",
+    "rome" % "rome" % "1.0" exclude("jdom", "jdom"),
+    "org.jdom" % "jdom" % "1.1.3"
+  )
+
   val templateEngine = Seq(
     "com.mohiva" %% "play-html-compressor" % "0.2-SNAPSHOT",
     "org.ocpsoft.prettytime" % "prettytime" % "3.2.4.Final",
@@ -32,13 +40,11 @@ object ApplicationBuild extends Build {
     "jp.t2v" %% "stackable-controller" % "0.3.0",
     "jp.t2v" %% "play2-auth" % "0.11.0",
     "jp.t2v" %% "play2-auth-test" % "0.11.0" % "test",
-    "org.jsoup" % "jsoup" % "1.7.3",
-    "org.scalanlp" %% "breeze-process" % "0.3",
     "org.apache.commons" % "commons-email" % "1.3.1",
     "com.restfb" % "restfb" % "1.6.11",
     "com.google.http-client" % "google-http-client-jackson2" % "1.11.0-beta",
     "com.google.apis" % "google-api-services-oauth2" % "v2-rev48-1.16.0-rc"
-  ) ++ persistentDependencies ++ templateEngine
+  ) ++ persistentDependencies ++ templateEngine ++ parserDependencies
 
   val appResolvers = Seq(
     "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
