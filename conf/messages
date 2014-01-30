@@ -1,6 +1,11 @@
 application.name=HayHayBlog
 application.url=hayhayblog.com
-application.title=Tong hop nhung blog hay
-application.description=Tong hop nhung blog hay
+application.title=Khám phá thế giới blog
+application.description=Khám phá thế giới blog
 login.failed=Tên đăng nhập hoặc mật khẩu không đúng
 password.error.match=Mật khẩu không giống nhau
+btn.submit=Lưu
+btn.cancel=Hủy
+email.notExist=Email không tồn tại
+lbl.name=Tên
+name.exits=Tên đã bị trùng

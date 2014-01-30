@@ -1,0 +1,26 @@
+@(pageDto: PageDto[_])
+
+@if(pageDto.totalPage > 1) {
+<ul class="pagination pull-right pagination-sm">
+    <li class="@if(pageDto.currentPage - 1 <= 0) {disabled}">
+        @if(pageDto.currentPage - 1 > 0) {
+        <a href="@pageDto.previousPage">&laquo;</a>
+        } else {
+        <a>&laquo;</a>
+        }
+    </li>
+
+    @for(i <- 1 to pageDto.totalPage) {
+    <li class="@if(i == pageDto.currentPage) {active}">
+        <a href="@pageDto.copy(currentPage = i)">@i</a>
+    </li>
+    }
+    <li class="@if(pageDto.currentPage + 1 > pageDto.totalPage) {disabled}">
+        @if(pageDto.currentPage + 1 <= pageDto.totalPage) {
+        <a href="@pageDto.nextPage">&raquo;</a>
+        } else {
+        <a>&raquo;</a>
+        }
+    </li>
+</ul>
+}

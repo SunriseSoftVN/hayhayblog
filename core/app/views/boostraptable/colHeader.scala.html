@@ -1,0 +1,11 @@
+@(pageDto: PageDto[_])
+
+@pageDto.colHeader.map{header =>
+<th class="header sort @if(Math.abs(pageDto.orderedField) == header._2) {@if(pageDto.orderedField > 0) {headerSortUp} else {headerSortDown}}">
+    @if(Math.abs(pageDto.orderedField) == header._2 && pageDto.orderedField > 0) {
+    <a href="@pageDto.copy(orderedField = 0 - header._2)">@header._1</a>
+    } else {
+    <a href="@pageDto.copy(orderedField = header._2)">@header._1</a>
+    }
+</th>
+}

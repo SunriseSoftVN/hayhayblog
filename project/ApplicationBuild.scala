@@ -47,6 +47,11 @@ object ApplicationBuild extends Build {
   )
 
   val core = play.Project(appName + "-core", appVersion, appDependencies, path = file("core")).settings(
+    templatesImport ++= Seq(
+      "org.bson.types.ObjectId",
+      "model._",
+      "dto._"
+    ),
     resolvers ++= appResolvers
   )
 

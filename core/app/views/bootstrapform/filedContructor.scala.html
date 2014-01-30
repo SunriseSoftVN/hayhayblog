@@ -1,0 +1,7 @@
+@(elements: helper.FieldElements)
+<div class="form-group  @if(elements.hasErrors) {has-error} @if(elements.args.get('hidden).getOrElse(false) == true) {hide}">
+    <label class="control-label" for="@elements.id">@elements.label(elements.lang)</label>
+    @elements.input
+    <p class="help-block">@elements.errors.mkString(", ")</p>
+    <p class="help-inline">@elements.args.get('note)</p>
+</div>

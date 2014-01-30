@@ -1,0 +1,10 @@
+@(editForm : Form[_])
+@editForm.globalError.map { error =>
+<div class="form-group has-error">
+    <div class="col-sm-offset-5 col-sm-7">
+        <p class="help-block">
+            @Messages(error.message)
+        </p>
+    </div>
+</div>
+}
