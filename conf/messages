@@ -18,3 +18,4 @@ lbl.url=Url
 lbl.rssUrl=Rss Url
 lbl.isEnable=Enable
 lbl.category=Category
+error.url=invalid Url

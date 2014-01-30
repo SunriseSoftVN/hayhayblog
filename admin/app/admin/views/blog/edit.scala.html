@@ -1,4 +1,4 @@
-@(editForm : Form[Blog])
+@(editForm : Form[Blog], categories: List[(String, String)])
 @import helper._
 @import views.html.bootstrapform._
 @implicitFieldConstructor = @{FieldConstructor(bootstrapform.filedContructor2.f)}
@@ -15,7 +15,7 @@
         @inputText(editForm("url"), 'class -> "form-control input-sm", '_label -> Messages("lbl.url"))
         @inputText(editForm("rssUrl"), 'class -> "form-control input-sm", '_label -> Messages("lbl.rssUrl"))
         @checkbox(editForm("isEnable"), 'class -> "checkbox", '_label -> Messages("lbl.isEnable"))
-        @inputText(editForm("categoryId"), 'class -> "form-control input-sm", '_label -> Messages("lbl.category"))
+        @select(editForm("categoryId"), categories ,'class -> "form-control", '_label -> Messages("lbl.category"))
 
         @formGlobalError(editForm)
 

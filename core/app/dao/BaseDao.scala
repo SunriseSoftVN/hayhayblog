@@ -16,6 +16,8 @@ import org.apache.commons.lang3.StringUtils
  */
 trait BaseDao[ObjectType <: AnyRef, ID <: Any] extends ModelCompanion[ObjectType, ID] {
 
+  def all = findAll().toList
+
   def query(pageDto: PageDto[_ <: ObjectType]) = {
     val skip = (pageDto.currentPage - 1) * pageDto.itemDisplay
 
