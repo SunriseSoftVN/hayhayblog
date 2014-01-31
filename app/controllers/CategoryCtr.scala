@@ -14,8 +14,12 @@ import dao.CategoryDao
  */
 object CategoryCtr extends Controller with OptionalAuthElement with AuthConfigImpl with MainTemplate {
 
-  def index(shortName: String) = StackAction(implicit request => {
-    CategoryDao.findByShortName(shortName).mapRender(cat => renderOk(views.html.category.index(cat)))
+  def index = StackAction(implicit request => {
+    renderOk(views.html.category.index())
+  })
+
+  def view(shortName: String) = StackAction(implicit request => {
+    CategoryDao.findByShortName(shortName).mapRender(cat => renderOk(views.html.category.view(cat)))
   })
 
 }
