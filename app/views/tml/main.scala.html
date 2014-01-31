@@ -1,0 +1,26 @@
+@(content: Html, title: String, description: String)
+
+@import views.html.partials._
+
+<!DOCTYPE html>
+<html>
+<head>
+    @header(title, description)
+</head>
+
+<body>
+<div id="wrap">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        @navbar()
+    </div>
+
+    <!-- Begin page content -->
+    <div class="container">
+        @content
+    </div>
+</div>
+
+</body>
+
+</html>
