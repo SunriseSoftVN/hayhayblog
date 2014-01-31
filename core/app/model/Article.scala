@@ -33,4 +33,6 @@ case class Article(
   }
 
   override def hashCode() = _id.hashCode
+
+  def shortDescription = description.substring(0, 100)
 }

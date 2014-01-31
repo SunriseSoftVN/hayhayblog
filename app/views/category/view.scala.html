@@ -1,19 +1,35 @@
 @(category: Category, articles: List[Article])
 
-@articles.map{ article =>
-<div class="post">
-    <div class="content">
-        <a class="post-link" href="@article.url" target="_blank">
-            @article.featureImage.map{ imageUrl =>
-            <div class="post-media-container">
-                <img class="post-media" src="@imageUrl">
+<div id="masonry">
+    @articles.map{ article =>
+    <div class="post">
+        <div class="content">
+            <a class="post-link" href="@article.url" target="_blank">
+                @article.featureImage.map{ imageUrl =>
+                <div class="post-media-container">
+                    <img class="post-media" src="@imageUrl">
+                </div>
+                }
+                <h2>@article.title</h2>
+            </a>
+            <div class="blogname">
+                <a class="blog-link" href="@article.url" target="_blank">Test</a>
             </div>
-            }
-            <h2>@article.title</h2>
-        </a>
-        <div class="blogname">
-            <a class="blog-link" href="@article.url" target="_blank">Test</a>
+            <p>@article.shortDescription</p>
+            <div class="actions">
+                <a href="#">
+                    <i class="fa fa-heart"></i>
+                    <span>Like</span>
+                </a>
+                <a href="#">
+                    <i class="fa fa-share"></i>
+                    <span>Share</span>
+                </a>
+                <a href="#">
+                    <i class="fa fa-flag"></i>
+                </a>
+            </div>
         </div>
     </div>
+    }
 </div>
-}
