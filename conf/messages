@@ -9,6 +9,7 @@ btn.cancel=Hủy
 email.notExist=Email không tồn tại
 email.exits=Email đã tồn tại
 lbl.name=Tên
+lbl.shortName=Định danh
 name.exits=Tên đã bị trùng
 btn.addNew=Thêm mới
 lbl.password=Mật khẩu

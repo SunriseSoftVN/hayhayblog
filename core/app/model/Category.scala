@@ -11,5 +11,6 @@ import org.bson.types.ObjectId
  */
 case class Category(
                      _id: ObjectId = new ObjectId(),
-                     name: String
+                     name: String,
+                     shortName: String
                      ) extends BaseModel(_id)

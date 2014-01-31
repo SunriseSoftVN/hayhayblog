@@ -17,4 +17,8 @@ case class User(
                  fullname: Option[String] = None,
                  role: String = NormalUser.value,
                  registerDate: DateTime = DateTime.now()
-                 ) extends BaseModel(_id)
+                 ) extends BaseModel(_id) {
+
+  def isAdmin = Administrator.value == role
+
+}

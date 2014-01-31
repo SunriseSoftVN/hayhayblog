@@ -12,6 +12,7 @@
     <form action="/admin/category/update" method="post" class="form-horizontal" role="form">
         @inputText(editForm("_id"), 'class -> "form-control", 'hidden -> true)
         @inputText(editForm("name"), 'class -> "form-control input-sm", '_label -> Messages("lbl.name"))
+        @inputText(editForm("shortName"), 'class -> "form-control input-sm", '_label -> Messages("lbl.shortName"))
 
         @formGlobalError(editForm)
 

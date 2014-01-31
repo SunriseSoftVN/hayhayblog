@@ -1,12 +1,11 @@
 package dao
 
 import com.novus.salat.dao.SalatDAO
-import model.{Category, User}
+import model.Category
 import org.bson.types.ObjectId
 import se.radley.plugin.salat._
 import play.api.Play.current
 import com.mongodb.casbah.commons.MongoDBObject
-import org.apache.commons.codec.digest.DigestUtils
 
 /**
  * The Class UserDao.
@@ -19,4 +18,5 @@ object CategoryDao extends BaseDao[Category, ObjectId] {
 
   def dao = new SalatDAO[Category, ObjectId](collection = mongoCollection("category")) {}
 
+  def findByShortName(shortName: String) = findOne(MongoDBObject("shortName" -> shortName))
 }

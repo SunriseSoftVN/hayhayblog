@@ -2,8 +2,9 @@ package controllers
 
 import play.api.templates.Html
 import play.api.i18n.Messages
-import play.api.mvc.Controller
+import play.api.mvc.{SimpleResult, Controller}
 import model.User
+import dao.CategoryDao
 
 /**
  * The Class MainTemplate.
@@ -15,7 +16,7 @@ import model.User
 trait MainTemplate extends Controller {
 
 
-  def navbar(user: Option[User]) = views.html.partials.navbar(user)
+  def navbar(user: Option[User]) = views.html.partials.navbar(user, CategoryDao.all)
 
   def renderOk(content: Html,
                title: String = Messages("application.title"),
@@ -28,5 +29,9 @@ trait MainTemplate extends Controller {
                        description: String = Messages("application.description"))(implicit user: Option[User]) = BadRequest(
     views.html.tml.main(content, title, description, navbar(user))
   )
+
+  implicit class RichOption[E](op: Option[E]) {
+    def mapRender(f: E => SimpleResult) = op.map(f).getOrElse(NotFound)
+  }
 
 }

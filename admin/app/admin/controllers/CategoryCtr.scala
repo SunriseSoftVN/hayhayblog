@@ -10,6 +10,7 @@ import play.api.data.Forms._
 import com.mongodb.casbah.commons.Imports._
 import formater.ObjectIdFormat._
 import dto.PageDto
+import org.apache.commons.lang3.StringUtils
 
 /**
  * The Class CategoryCtr.
@@ -23,7 +24,8 @@ object CategoryCtr extends Controller with AuthElement with AuthConfigImpl with 
   lazy val form = Form(
     mapping(
       "_id" -> of[ObjectId],
-      "name" -> text(minLength = 3)
+      "name" -> text(minLength = 3),
+      "shortName" -> text
     )(Category.apply)(Category.unapply)
   )
 
@@ -46,7 +48,12 @@ object CategoryCtr extends Controller with AuthElement with AuthConfigImpl with 
     form.bindFromRequest.fold(
       error => renderBadRequest(admin.views.html.category.edit(error)),
       category => {
-        CategoryDao.save(category)
+        if (StringUtils.isBlank(category.shortName)) {
+          val shortName = StringUtils.stripAccents(category.name).replaceAll(" ", "_")
+          CategoryDao.save(category.copy(shortName = shortName))
+        } else {
+          CategoryDao.save(category)
+        }
         Redirect("/admin/category")
       }
     )
