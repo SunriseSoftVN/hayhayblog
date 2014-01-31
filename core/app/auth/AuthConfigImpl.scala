@@ -33,7 +33,7 @@ trait AuthConfigImpl extends AuthConfig with Rendering with AcceptExtractors {
   implicit val idTag: ClassTag[Id] = classTag[Id]
 
   def loginSucceeded(request: RequestHeader)(implicit context: ExecutionContext) = Future {
-    Redirect("/admin")
+    Redirect("/")
   }
 
   def logoutSucceeded(request: RequestHeader)(implicit context: ExecutionContext) = Future {
@@ -42,13 +42,13 @@ trait AuthConfigImpl extends AuthConfig with Rendering with AcceptExtractors {
 
   def authenticationFailed(request: RequestHeader)(implicit context: ExecutionContext) = Future {
     render {
-      case Accepts.Json() => Forbidden("Please login")
+      case Accepts.Json() => Forbidden("Forbidden")
       case _ => Redirect("/user/login")
     }(request)
   }
 
   def authorizationFailed(request: RequestHeader)(implicit context: ExecutionContext) = Future {
-    Forbidden("Please login")
+    Forbidden("Forbidden")
   }
 
   def authorize(user: User, authority: Authority)(implicit context: ExecutionContext) = Future {

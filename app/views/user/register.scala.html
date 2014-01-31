@@ -1,0 +1,28 @@
+@(registerForm: Form[(String, Option[String], String, String)])
+
+@import partials._
+@import helper._
+@import views.html.bootstrapform._
+@implicitFieldConstructor = @{FieldConstructor(bootstrapform.filedContructor.f)}
+
+<div class="col-md-3 col-md-offset-4" style="margin-top: 50px;">
+    <form action="/user/registerPost" method="post" role="form">
+        <h2 class="form-signin-heading">Register</h2>
+        @inputText(registerForm("email"), 'class -> "form-control", '_label -> Messages("lbl.email"))
+        @inputText(registerForm("fullname"), 'class -> "form-control", '_label -> Messages("lbl.fullname"))
+        @inputPassword(registerForm("password"), 'class -> "form-control", '_label -> Messages("lbl.password"))
+        @inputPassword(registerForm("rePassword"), 'class -> "form-control", '_label -> Messages("lbl.rePassword"))
+
+        @registerForm.globalError.map { error =>
+        <div class="form-group has-error">
+            <p class="help-block">
+                @Messages(error.message)
+            </p>
+        </div>
+        }
+
+        <div class="form-group">
+            <button class="btn btn-primary pull-right" type="submit">Register</button>
+        </div>
+    </form>
+</div>

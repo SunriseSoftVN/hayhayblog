@@ -1,4 +1,4 @@
-@(content: Html, title: String, description: String)
+@(content: Html, title: String, description: String, navbarHtml: Html)
 
 @import views.html.partials._
 
@@ -12,7 +12,7 @@
 <div id="wrap">
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        @navbar()
+        @navbarHtml
     </div>
 
     <!-- Begin page content -->
