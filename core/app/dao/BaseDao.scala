@@ -5,8 +5,6 @@ import scala._
 import com.mongodb.casbah.commons.MongoDBObject
 import dto.PageDto
 import org.apache.commons.lang3.StringUtils
-import org.joda.time.DateTime
-import model.BlogStatus
 
 /**
  * The Class BaseDao.
@@ -18,17 +16,6 @@ import model.BlogStatus
 trait BaseDao[ObjectType <: AnyRef, ID <: Any] extends ModelCompanion[ObjectType, ID] {
 
   def all = findAll().toList
-
-  /**
-   * Blog need to update is a feed is not updating and has last updated is 30m ago.
-   * @return
-   */
-  def needToUpdate = find(
-    MongoDBObject(
-      "status" -> MongoDBObject("$ne" -> BlogStatus.UPDATING),
-      "indexUpdated" -> MongoDBObject("$lt" -> DateTime.now.minusMinutes(30))
-    )
-  ).toList
 
   def query(pageDto: PageDto[_ <: ObjectType]) = {
     val skip = (pageDto.currentPage - 1) * pageDto.itemDisplay

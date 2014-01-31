@@ -3,8 +3,10 @@ package dao
 import org.bson.types.ObjectId
 import com.novus.salat.dao.SalatDAO
 import se.radley.plugin.salat._
-import model.Blog
+import model.{BlogStatus, Blog}
 import play.api.Play.current
+import com.mongodb.casbah.commons.MongoDBObject
+import org.joda.time.DateTime
 
 /**
  * The Class BlogDao.
@@ -15,4 +17,15 @@ import play.api.Play.current
  */
 object BlogDao extends BaseDao[Blog, ObjectId] {
   override def dao = new SalatDAO[Blog, ObjectId](collection = mongoCollection("blog")) {}
+
+  /**
+   * Blog need to update is a feed is not updating and has last updated is 30m ago.
+   * @return
+   */
+  def needToUpdate = find(
+    MongoDBObject(
+      "status" -> MongoDBObject("$ne" -> BlogStatus.UPDATING),
+      "lastUpdated" -> MongoDBObject("$lt" -> DateTime.now.minusMinutes(30))
+    )
+  ).toList
 }

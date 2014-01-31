@@ -20,7 +20,6 @@ class FeedSpout(nrOfCrawlActor: Int = 20) extends Actor {
   val crawlActor = Akka.system.actorOf(Props(new CrawlActor(httpClient))
     .withRouter(RoundRobinRouter(nrOfInstances = nrOfCrawlActor)), name = "crawlActor")
 
-
   override def receive = {
     case Start =>
       for (blog <- BlogDao.needToUpdate) {
