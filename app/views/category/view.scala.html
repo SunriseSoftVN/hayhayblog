@@ -1,3 +1,19 @@
-@(category: Category)
+@(category: Category, articles: List[Article])
 
-@category.name
+@articles.map{ article =>
+<div class="post">
+    <div class="content">
+        <a class="post-link" href="@article.url" target="_blank">
+            @article.featureImage.map{ imageUrl =>
+            <div class="post-media-container">
+                <img class="post-media" src="@imageUrl">
+            </div>
+            }
+            <h2>@article.title</h2>
+        </a>
+        <div class="blogname">
+            <a class="blog-link" href="@article.url" target="_blank">Test</a>
+        </div>
+    </div>
+</div>
+}

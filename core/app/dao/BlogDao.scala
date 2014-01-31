@@ -25,7 +25,10 @@ object BlogDao extends BaseDao[Blog, ObjectId] {
   def needToUpdate = find(
     MongoDBObject(
       "status" -> MongoDBObject("$ne" -> BlogStatus.UPDATING),
+      "isEnable" -> true,
       "lastUpdated" -> MongoDBObject("$lt" -> DateTime.now.minusMinutes(30))
     )
   ).toList
+
+  def findByCatId(id: ObjectId) = find(MongoDBObject("categoryId" -> id)).toList
 }

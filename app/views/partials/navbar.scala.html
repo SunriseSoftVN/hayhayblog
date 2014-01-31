@@ -23,9 +23,12 @@
             </li>
             <li><a href="/about">About</a></li>
         </ul>
+        <a href="http://facebook.com/#" title="Find us on Facebook" class="topmenu-social">
+            <i class="fa fa-facebook"></i>
+        </a>
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control input-sm" placeholder="Search">
             </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
@@ -42,7 +45,9 @@
                 </ul>
             </li>
             }.getOrElse {
-            <li><a href="/user/login">Login</a></li>
+            <li>
+                <a href="/user/login"><i class="fa fa-sign-in"></i> Login</a>
+            </li>
             <li><a href="/user/register">Sign up</a></li>
             }
         </ul>

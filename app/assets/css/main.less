@@ -1,15 +1,20 @@
-/* Sticky footer styles
--------------------------------------------------- */
+@import "navbar";
+@import "post";
+@bodyBackGround: #F2F2F2;
 
 html,
 body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
 }
 
 /* Wrapper for page content to push down footer */
 #wrap {
-  background: #F7F7F7;
+  background: @bodyBackGround;
   min-height: 100%;
   height: auto;
   /* Negative indent footer by its height */
