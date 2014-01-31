@@ -15,6 +15,11 @@ GET        /user/logout                controllers.UserCtr.logout
 GET        /user/profile               controllers.UserCtr.profile
 POST       /user/profilePost           controllers.UserCtr.profilePost
 
+GET        /facebook/login             controllers.FacebookCtr.login
+GET        /facebook/auth              controllers.FacebookCtr.auth
+GET        /google/login               controllers.GoogleCtr.login
+GET        /google/auth                controllers.GoogleCtr.auth
+
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file               controllers.Assets.at(path="/public", file)
 

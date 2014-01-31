@@ -136,4 +136,5 @@ object UserCtr extends Controller with OptionalAuthElement with AuthConfigImpl w
       }
     )
   })
+
 }
