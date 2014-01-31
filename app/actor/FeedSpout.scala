@@ -4,6 +4,7 @@ import akka.actor.{Props, Actor}
 import play.api.libs.concurrent.Akka
 import akka.routing.RoundRobinRouter
 import play.api.Play.current
+import dao.BlogDao
 
 /**
  * The Class FeedSpout.
@@ -21,8 +22,9 @@ class FeedSpout(nrOfCrawlActor: Int = 20) extends Actor {
 
 
   override def receive = {
-    case Start => {
-
-    }
+    case Start =>
+      for (blog <- BlogDao.needToUpdate) {
+        crawlActor ! Crawl(blog)
+      }
   }
 }

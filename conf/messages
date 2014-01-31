@@ -20,3 +20,5 @@ lbl.isEnable=Enable
 lbl.category=Category
 error.url=Invalid Url
 lbl.description=Description
+lbl.status=Status
+lbl.lastUpdated=Last Updated

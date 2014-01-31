@@ -21,7 +21,7 @@ object HttpClientBuilder {
 
   def build(pooling: Boolean = true, timeout: Int = 1000 * 60) = {
     val httpParams = new BasicHttpParams()
-    httpParams.setParameter(CoreProtocolPNames.USER_AGENT, UserAgents.random)
+    httpParams.setParameter(CoreProtocolPNames.USER_AGENT, HayHayBlogUserAgent.value)
     //Set time out 30s
     httpParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, timeout)
     httpParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, timeout)

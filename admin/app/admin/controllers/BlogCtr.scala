@@ -9,10 +9,10 @@ import dao.{CategoryDao, BlogDao}
 import play.api.data.Form
 import play.api.data.Forms._
 import com.mongodb.casbah.commons.Imports._
-import model.Blog
 import formater.ObjectIdFormat._
 import validation.Constraint._
 import model.Blog
+import org.joda.time.DateTime
 
 /**
  * The Class BlogCtr.
@@ -29,9 +29,11 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
       "name" -> text(minLength = 3),
       "url" -> nonEmptyText.verifying(urlConstraint),
       "rssUrl" -> nonEmptyText.verifying(urlConstraint),
+      "status" -> nonEmptyText,
       "description" -> optional(text),
       "isEnable" -> boolean,
-      "categoryId" -> of[ObjectId]
+      "categoryId" -> of[ObjectId],
+      "lastUpdated" -> default(jodaDate, DateTime.now)
     )(Blog.apply)(Blog.unapply)
   )
 

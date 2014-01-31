@@ -1,6 +1,5 @@
 package model
 
-import org.bson.types.ObjectId
 
 /**
  * The Class BaseModel.
@@ -9,7 +8,7 @@ import org.bson.types.ObjectId
  * @since 10/5/13 6:30 PM
  *
  */
-abstract class BaseModel(_id: ObjectId) {
+abstract class BaseModel(_id: Any) {
 
   def id = _id.toString
 

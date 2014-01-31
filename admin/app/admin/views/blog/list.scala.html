@@ -27,6 +27,7 @@
         @colHeader(pageDto, "name", "Name")
         @colHeader(pageDto, "url", "Url")
         @colHeader(pageDto, "isEnable", "Enable")
+        @colHeader(pageDto, "status", "Status")
         <th>Options</th>
     </tr>
     </thead>
@@ -37,6 +38,7 @@
         <td><a href="/admin/blog/edit/@blog.id">@blog.name</a></td>
         <td>@blog.url</td>
         <td>@blog.isEnable</td>
+        <td>@blog.status</td>
         <td>
             <a href="/admin/blog/edit/@blog.id" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i></a>
             @deleteBtn("/admin/blog/delete/"+ blog.id)

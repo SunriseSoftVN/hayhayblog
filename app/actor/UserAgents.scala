@@ -29,5 +29,5 @@ object Ie7UserAgent extends UserAgent("Mozilla/4.0 (compatible; MSIE 7.0; Window
 
 object OperaUserAgent extends UserAgent("Opera/9.20 (Windows NT 6.0; U; en)")
 
-object MyFeedUserAgent extends UserAgent("MyFeedy/1.0 (http://myfeedy.com)")
+object HayHayBlogUserAgent extends UserAgent("HayHayBlog/1.0 (http://hayhayblog.com)")
 
