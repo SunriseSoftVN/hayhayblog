@@ -34,5 +34,5 @@ case class Article(
 
   override def hashCode() = _id.hashCode
 
-  def shortDescription = description.substring(0, 100)
+  def shortDescription = if (description.length > 100) description.substring(0, 100) else description
 }

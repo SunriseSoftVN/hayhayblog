@@ -3,11 +3,6 @@
  */
 
 $(function() {
-   $('#masonry').masonry({
-       columnWidth: 400,
-       itemSelector: '.post',
-       isFitWidth: true
-   });
     var $scrolltotop = $("#scrolltotop");
     $scrolltotop.css('display', 'none');
 
