@@ -4,7 +4,7 @@ import play.api.templates.Html
 import play.api.i18n.Messages
 import play.api.mvc.{SimpleResult, Controller}
 import model.User
-import dao.CategoryDao
+import dao.{ArticleDao, CategoryDao}
 
 /**
  * The Class MainTemplate.
@@ -15,7 +15,7 @@ import dao.CategoryDao
  */
 trait MainTemplate extends Controller {
 
-  def rightSideBar = views.html.partials.rightsidebar()
+  def rightSideBar = views.html.partials.rightsidebar(ArticleDao.topTen)
 
   def navbar = views.html.partials.topmenu(CategoryDao.all)
 

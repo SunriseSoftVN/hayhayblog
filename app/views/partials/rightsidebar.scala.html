@@ -1,82 +1,26 @@
+@(articles: List[Article])
 <div class="right_box">
     <div class="hd">
-        <h2>
-            <span>/</span>Đọc nhiều</h2>
+        <h2><span>/</span>Bài đọc nhiều nhất</h2>
     </div>
     <div class="right_box_ct">
         <div class="news_lst">
             <ul>
-
-                <li><a href="/tin-tuc/24-01-2014/ho-bat-tre-em-lop-1-ky-cam-ket-that-sao/73/10084/" class="thumb">
-                    <img width="100" height="150" alt="Họ bắt trẻ em lớp 1 ký cam kết thật sao?"
-                         src="http://media.depplus.vn/Media/News/thumbs/201401/320_cam-4_thumb20140124080629.jpg"></a>
-
-                    <h3>
-                        <a href="/tin-tuc/24-01-2014/ho-bat-tre-em-lop-1-ky-cam-ket-that-sao/73/10084/">
-                            Họ bắt trẻ em lớp 1 ký cam kết thật sao?
-                        </a>
-                    </h3>
-
-                    <div class="clrb">
-                    </div>
-                </li>
-
-                <li><a href="/tin-tuc/26-01-2014/gai-e-25-va-gai-e-30/61/10176/" class="thumb">
-                    <img width="100" height="150" alt="Gái ế 25 và gái ế 30"
-                         src="http://media.depplus.vn/Media/News/thumbs/201401/320_e-2_thumb20140125162028.jpg"></a>
+                @articles.map { article =>
+                <li>
+                    @article.featureImage.map { img =>
+                    <a href="@article.url" class="thumb">
+                        <img width="100" height="100" alt="@article.title" src="@img">
+                    </a>
+                    }
 
                     <h3>
-                        <a href="/tin-tuc/26-01-2014/gai-e-25-va-gai-e-30/61/10176/">
-                            Gái ế 25 và gái ế 30
-                        </a>
+                        <a href="@article.url" target="_blank">@article.title</a>
                     </h3>
 
-                    <div class="clrb">
-                    </div>
+                    <div class="clrb"></div>
                 </li>
-
-                <li><a href="/tin-tuc/23-01-2014/chau-tinh-tri-la-mot-la-rieng-la-duy-nhat/87/10006/" class="thumb">
-                    <img width="100" height="150" alt="Châu Tinh Trì: là một, là riêng, là duy nhất"
-                         src="http://media.depplus.vn/Media/News/thumbs/201401/320_ava1_thumb20140122232149.jpg"></a>
-
-                    <h3>
-                        <a href="/tin-tuc/23-01-2014/chau-tinh-tri-la-mot-la-rieng-la-duy-nhat/87/10006/">
-                            Châu Tinh Trì: là một, là riêng, là duy nhất
-                        </a>
-                    </h3>
-
-                    <div class="clrb">
-                    </div>
-                </li>
-
-                <li><a href="/tin-tuc/27-01-2014/ron-nguoi-con-duong-len-dinh-hoa-son/31/10242/" class="thumb">
-                    <img width="100" height="150" alt="Rợn người con đường lên đỉnh Hoa Sơn"
-                         src="http://media.depplus.vn/Media/News/thumbs/201401/320_Sans-titre-2_thumb20140127111124.jpg"></a>
-
-                    <h3>
-                        <a href="/tin-tuc/27-01-2014/ron-nguoi-con-duong-len-dinh-hoa-son/31/10242/">
-                            Rợn người con đường lên đỉnh Hoa Sơn
-                        </a>
-                    </h3>
-
-                    <div class="clrb">
-                    </div>
-                </li>
-
-                <li><a href="/tin-tuc/24-01-2014/tuyet-chieu-giu-chong-cua-gai-hu/61/10073/" class="thumb">
-                    <img width="100" height="150" alt="Tuyệt chiêu giữ chồng của gái &quot;hư&quot;"
-                         src="http://media.depplus.vn/Media/News/thumbs/201401/320_hu-1_thumb20140124105906.jpg"></a>
-
-                    <h3>
-                        <a href="/tin-tuc/24-01-2014/tuyet-chieu-giu-chong-cua-gai-hu/61/10073/">
-                            Tuyệt chiêu giữ chồng của gái "hư"
-                        </a>
-                    </h3>
-
-                    <div class="clrb">
-                    </div>
-                </li>
-
+                }
             </ul>
         </div>
     </div>

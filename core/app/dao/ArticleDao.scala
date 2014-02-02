@@ -26,4 +26,6 @@ object ArticleDao extends BaseDao[Article, String] {
       .toList
   }
 
+  def topTen = find(MongoDBObject.empty).sort(MongoDBObject("publishedDate" -> -1)).take(10).toList
+
 }
