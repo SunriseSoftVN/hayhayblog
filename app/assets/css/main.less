@@ -1,18 +1,33 @@
+@import "topBanner";
+@import "topMenu";
 @import "navbar";
 @import "post";
+@import "rightsidebar";
+@import "page-content";
+@import "footer";
 @import "scrolltotop";
-@bodyBackGround: #F7F7F7;
+@bodyBackGround: #fff;
 
 html,
 body {
   height: 100%;
   /* The html and body elements cannot have any padding or margin. */
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
   line-height: 20px;
-  color: #333333;
+  color: #333;
   background: @bodyBackGround;
   margin: 0 auto;
-  padding-top: 40px;
-  min-height: 2000px;
+  font: 500 12px/18px Arial;
+}
+
+.container {
+  width: 1000px;
+  padding: 0;
+}
+
+.page-container {
+  margin-top: 20px;
+}
+
+a {
+  color: #034a82;
 }
