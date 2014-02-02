@@ -1,14 +1,14 @@
-@(categories : List[Category])
+@(data: TopMenuDto)
 <div class="nav-bar">
     <ul>
-        <li class="on">
+        <li class='@if(data.currentCat == "home") {on}'>
             <a href="/" class="home"><i></i></a>
         </li>
 
-        @categories.map { cat =>
-        <li>
-            <a href="/cat/@cat.shortName">@cat.name</a><span class="bd_r"></span></li>
-        <li>
+        @data.categories.map { cat =>
+        <li class='@if(data.currentCat == cat.shortName) {on}'>
+            <a href="/cat/@cat.shortName">@cat.name</a><span class="bd_r"></span>
+        </li>
         }
     </ul>
     <div class="clrb"></div>
