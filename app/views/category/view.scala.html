@@ -1,1 +1,26 @@
 @(category: Category, articles: List[Article])
+
+<div class="list_cate">
+    <ul>
+        @articles.map { article =>
+        <li>
+            <div class="thumb">
+                @article.featureImage.map { img =>
+                <a href="@article.url" target="_blank">
+                    <img alt="@article.title" src="@img">
+                </a>
+                }.getOrElse {
+                <p></p>
+                }
+            </div>
+
+            <div class="text">
+                <h2><a href="@article.url">@article.title</a></h2>
+                <div class="time">@article.publishedDate.toString()</div>
+                <div align="justify">@article.shortDescription</div>
+            </div>
+            <div class="clearfix"></div>
+        </li>
+        }
+    </ul>
+</div>
