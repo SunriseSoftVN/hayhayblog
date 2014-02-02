@@ -1,4 +1,4 @@
-@(content: Html, title: String, description: String, navbarHtml: Html)
+@(content: Html, title: String, description: String, _topMenu: Html, _footer: Html, _rightSideBar: Html)
 
 @import views.html.partials._
 
@@ -12,20 +12,14 @@
 
 <div class="container">
     <div id="top-banner"></div>
-    <div id="top-menu">@topmenu()</div>
+    <div id="top-menu">@_topMenu</div>
     <div id="page-container">
         <div class="row">
-            <div class="col-md-8" id="page-content">
-                @dummy()
-                @dummy()
-                @dummy()
-                @dummy()
-                @dummy()
-            </div>
-            <div class="col-md-4" id="right-side-bar">@rightsidebar()</div>
+            <div class="col-md-8" id="page-content">@content</div>
+            <div class="col-md-4" id="right-side-bar">@_rightSideBar</div>
         </div>
     </div>
-    <div id="footer">@footer()</div>
+    <div id="footer">@_footer</div>
 </div>
 
 </body>
