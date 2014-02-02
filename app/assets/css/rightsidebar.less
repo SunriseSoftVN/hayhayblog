@@ -1,80 +1,58 @@
-.col-right {
-  .news_you_care {
+#right-side-bar {
+
+  .right_box {
     margin-bottom: 10px;
-    .hd {
-      background-color: #f3f3f3;
-      border-top: 2px solid #00bbf3;
-      padding: 9px 0px 5px 10px;
-    }
+  }
 
-    ul {
-      list-style: none;
-      padding: 0px;
-      margin: 0px;
-    }
+  .hd {
+    background: url('../img/bgr_hd_right_box.jpg') no-repeat right top transparent;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    margin-bottom: 13px;
+    padding: 4px 0px;
+  }
+  .hd h2 span {
+    color: red;
+  }
 
-    li {
-      border-bottom: 1px dashed #ccc;
-      padding: 11px 0px 11px 0px;
-    }
+  .hd h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+  }
 
-    li .photo {
-      float: left;
-      width: 120px;
-      height: 90px;
-      overflow: hidden;
-      margin-right: 10px;
-    }
+  .right_box_ct .news_lst ul li {
+    border-bottom: 1px dotted #ccc;
+    padding-bottom: 11px;
+    margin-bottom: 11px;
+  }
 
-    h5 {
-      margin: 0;
-      a {
-        text-decoration: none;
-        font-weight: bold;
-        color: #00bbf3;
-      }
-    }
+  li .thumb {
+    display: inline-block;
+    width: 100px;
+    overflow: hidden;
+    float: left;
 
-    h6 {
-      max-width: 165px;
-      float: left;
-      font-size: 13px;
-      margin: 0;
-      font-weight: bold;
-    }
-
-    .clrb {
-      clear: both;
+    img {
+      max-width: 100px;
+      display: block;
     }
   }
 
-  .news_box_r {
-    margin-bottom: 20px;
+  li h3 {
+    margin: 0;
+    width: 188px;
+    float: right;
+    font-weight: normal;
 
-    .hd {
-      background-color: #f9f9f9;
-      border-bottom: 2px solid #00bbf3;
-      padding-top: 9px;
-      a.on {
-        background-color: #00bbf3;
-        color: #fff;
-        display: inline-block;
-        font-size: 14px;
-        font-weight: bold;
-        padding: 6px 15px 5px 15px;
-      }
+    a {
+      font-size: 18px;
+      color: #000;
+      text-decoration: none;
     }
 
-    ul {
-      list-style: none;
-      padding: 0px;
-      margin: 0px;
-    }
-
-    li {
-      background: url('../img/icon_list.gif') no-repeat 0 13px transparent;
-      padding: 8px 0px 7px 19px;
-      border-bottom: 1px dashed #ccc;
+    a:hover {
+      color: Red;
     }
   }
 }

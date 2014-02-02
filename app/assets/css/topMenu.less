@@ -1,39 +1,75 @@
 #top-menu {
 
-  .menubar {
-    background-color: #00bbf2;
-    border-top: 1px solid #04adde;
-    height: 31px;
-  }
-
-  ul, li {
-    list-style: none;
-    padding: 0px;
-    margin: 0px;
+  .nav-bar {
+    border-top: 1px solid #000;
+    border-bottom: 3px solid red;
   }
 
   li {
     float: left;
-    height: 31px;
+    height: 41px;
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+  }
+
+  li.on a {
+    background-color: red;
+    color: #fff;
+  }
+
+  li .home {
+    padding: 10px 10px 0px 10px;
   }
 
   li a {
-    font-size: 12px;
-    font-weight: bold;
-    color: #fff;
     display: inline-block;
-    padding: 6px 7px 0px 6px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+    padding: 10px 7px 0px 7px;
+    height: 41px;
   }
 
-  li a.on {
-    background-color: #0a86ab;
+  li .bd_r {
+    display: inline-block;
+    width: 1px;
+    height: 41px;
+    background: url('../img/bd_r_menu.png') no-repeat 0 9px transparent;
+    float: left;
   }
 
-  li a.home span {
+  li .submenu {
+    position: absolute;
+    top: 41px;
+    left: 0;
+    z-index: 1000;
+    min-width: 200px;
+    background-color: #f9f9f9;
+    border-top: 3px solid red;
+    display: none;
+  }
+  li .home {
+    padding: 10px 10px 0px 10px;
+  }
+  li .home i {
     display: inline-block;
     width: 18px;
-    height: 19px;
+    height: 17px;
+    background: url('../img/homeicon.png') no-repeat 0 -32px transparent;
+  }
+  li.on .home i {
     background: url('../img/homeicon.png') no-repeat 0 0 transparent;
-    position: relative;
+  }
+  li a:hover {
+    background-color: red;
+    color: #fff;
+  }
+  i.on a {
+    color: #fff;
+  }
+  a {
+    text-decoration: none;
   }
 }

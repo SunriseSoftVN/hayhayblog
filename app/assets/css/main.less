@@ -1,10 +1,8 @@
 @import "topBanner";
 @import "topMenu";
-@import "navbar";
-@import "post";
+@import "footer";
 @import "rightsidebar";
 @import "page-content";
-@import "footer";
 @import "scrolltotop";
 @bodyBackGround: #fff;
 
@@ -16,7 +14,12 @@ body {
   color: #333;
   background: @bodyBackGround;
   margin: 0 auto;
-  font: 500 12px/18px Arial;
+  font-family: 'Open Sans', arial, sans-serif;
+  font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', arial, sans-serif;
 }
 
 .container {
@@ -24,10 +27,20 @@ body {
   padding: 0;
 }
 
-.page-container {
+ul, li {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.clrb {
+  clear: both;
+}
+
+#page-container {
   margin-top: 20px;
 }
 
-a {
-  color: #034a82;
+a img {
+  border: 0;
 }
