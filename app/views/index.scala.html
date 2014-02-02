@@ -1,9 +1,11 @@
+@(newsBoxs: List[NewsBoxDto])
 @import views.html.partials._
 
 
 <div class="left_box_2col">
-    @newsbox()
-    @newsbox()
+    @newsBoxs.map{ box =>
+        @newsbox(box)
+    }
     <div class="clrb">
     </div>
 </div>
