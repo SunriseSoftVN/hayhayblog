@@ -2,35 +2,26 @@
 <div class="new_col">
     <div class="left_box">
         <div class="hd">
-            <h1>
-                <span>\</span><a style="text-decoration: none; color: Black;"href="/cat/@newsBox.shortName">@newsBox.title</a>
-            </h1>
-            <a href="/tin-tuc/goc-chi-em/61/" class="btn_viewmore">Xem thêm +</a>
+            <h1><span>\</span><a href="/cat/@newsBox.shortName">@newsBox.title</a></h1>
+            <a href="/cat/@newsBox.shortName" class="btn_viewmore">Xem thêm +</a>
             <div class="clrb"></div>
         </div>
         <div class="box_main">
             <div class="news_1col">
+                @newsBox.bigNews.map { news =>
                 <div class="news_big">
-                    <a href="/tin-tuc/02-02-2014/nam-moi-ban-co-dam-lam-dieu-moi/61/10466/"
-                       class="item">
-                        <img width="330" height="495" alt="Năm mới, bạn có dám làm điều mới?"
-                             src="http://media.depplus.vn/Media/News/thumbs/201402/495_xa-4_thumb20140201220747.jpg">
-
-                        <h2>
-                            Năm mới, bạn có dám làm điều mới?</h2>
+                    <a href="@news.url" class="item" target="_blank">
+                        <img alt="@news.title" src="@news.featureImage.get">
+                        <h2>@news.title</h2>
                     </a>
                 </div>
+                }
                 <ul>
+                    @newsBox.articles.map { article =>
                     <li>
-                        <a href="/tin-tuc/02-02-2014/gai-chua-chong--co-chong-va-nhung-khac-biet-thu-vi-khi-nghi-tet/61/10467/">
-                            Gái "chưa chồng - có chồng" và những khác biệt thú vị khi nghỉ Tết</a>
+                        <a href="@article.url" target="_blank">@article.title</a>
                     </li>
-
-                    <li><a href="/tin-tuc/01-02-2014/gai-khon-khong-bao-gio-so-co-don/61/10446/">
-                        Gái khôn không bao giờ sợ cô đơn!</a></li>
-                    <li>
-                        <a href="/tin-tuc/01-02-2014/10-cau-tuyet-doi-khong-nen-hoi-cac-nang-fa-ngay-tet-/61/10431/">
-                            10 câu tuyệt đối không nên hỏi các nàng FA ngày Tết </a></li>
+                    }
                 </ul>
             </div>
         </div>

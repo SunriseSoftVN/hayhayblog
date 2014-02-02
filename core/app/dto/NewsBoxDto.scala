@@ -1,6 +1,6 @@
 package dto
 
-import model.Category
+import model.{Article, Category}
 
 /**
  * The Class NewsBoxDto.
@@ -11,14 +11,22 @@ import model.Category
  */
 case class NewsBoxDto(
                        title: String,
-                       shortName: String
+                       shortName: String,
+                       bigNews: Option[Article] = None,
+                       articles: List[Article]
                        )
 
 object NewsBoxDto {
 
-  def apply(cat: Category) = new NewsBoxDto(
-    title = cat.name,
-    shortName = cat.shortName
-  )
+  def apply(cat: Category, articles: List[Article]) = {
+    val bigNews = articles.find(_.featureImage.isDefined)
+    val _articles = if (bigNews.isDefined) articles.filterNot(_ == bigNews.get) else articles
+    new NewsBoxDto(
+      title = cat.name,
+      shortName = cat.shortName,
+      bigNews = bigNews,
+      articles = _articles
+    )
+  }
 
 }

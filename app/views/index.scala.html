@@ -1,12 +1,6 @@
 @(newsBoxs: List[NewsBoxDto])
 @import views.html.partials._
+@import views.partials._
 
 
-<div class="left_box_2col">
-    @newsBoxs.map{ box =>
-        @newsbox(box)
-    }
-    <div class="clrb">
-    </div>
-</div>
-
+@NewsBoxRender(newsBoxs)

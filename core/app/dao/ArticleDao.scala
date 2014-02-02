@@ -17,11 +17,13 @@ import com.mongodb.casbah.commons.MongoDBObject
 object ArticleDao extends BaseDao[Article, String] {
   override def dao = new SalatDAO[Article, String](collection = mongoCollection("article")) {}
 
-  def findByCatId(id: ObjectId) = {
+  def findByCatId(id: ObjectId, take: Int = 10) = {
     val blogIds = BlogDao.findByCatId(id).map(_._id)
     find(
       MongoDBObject("blogId" -> MongoDBObject("$in" -> blogIds))
-    ).toList
+    ).sort(MongoDBObject("publishedDate" -> -1))
+      .take(take)
+      .toList
   }
 
 }
