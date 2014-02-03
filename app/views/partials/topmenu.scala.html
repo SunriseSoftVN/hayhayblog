@@ -1,15 +1,18 @@
 @(data: TopMenuDto)
-<div class="nav-bar">
-    <ul>
-        <li class='@if(data.currentCat == "home") {on}'>
-            <a href="/" class="home"><i></i></a>
-        </li>
+
+
+<div class="panel-menu">
+    <ul class="menu">
+        <li><a title="Trang chủ" href="/" class='@if(data.currentCat == "home") {active}'><span>Trang chủ</span></a></li>
+        <li class="menusep">&nbsp;</li>
 
         @data.categories.map { cat =>
-        <li class='@if(data.currentCat == cat.shortName) {on}'>
-            <a href="/cat/@cat.shortName">@cat.name</a><span class="bd_r"></span>
+        <li>
+            <a title="Video" href="/cat/@cat.shortName" class="@if(data.currentCat == cat.shortName) {active}">
+                <span>@cat.name</span>
+            </a>
         </li>
+        <li class="menusep">&nbsp;</li>
         }
     </ul>
-    <div class="clrb"></div>
 </div>

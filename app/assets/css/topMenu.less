@@ -1,78 +1,57 @@
-#top-menu {
+.menuwrapper {
+  width: 100%;
+  height: 33px;
+  background-position: 0 -968px;
+  background-image: url(../img/bg.gif);
+  background-repeat: repeat-x;
+  overflow: hidden;
+}
 
-  .nav-bar {
-    border-top: 1px solid #000;
-    border-bottom: 3px solid red;
-  }
+.panel-menu {
+  margin: auto;
+  width: 1016px;
+}
 
-  li {
-    float: left;
-    height: 41px;
-    position: relative;
-    padding: 0px;
-    margin: 0px;
-  }
+.menu {
+  list-style: none;
+  margin: auto;
+}
 
-  li.on a {
-    background-color: red;
-    color: #fff;
-  }
+.menu li {
+  float: left;
+  text-align: center;
+}
 
-  li .home {
-    padding: 10px 10px 0px 10px;
-  }
+.menusep {
+  background-image: url(../img/sprites.gif);
+  background-position: 0 -255px;
+  height: 33px;
+  line-height: 33px;
+  width: 2px;
+}
 
-  li a {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
-    color: #000;
-    text-transform: uppercase;
-    padding: 10px 7px 0px 7px;
-    height: 41px;
-  }
+.menu li a {
+  color: #fff;
+  text-decoration: none;
+}
 
-  li .bd_r {
-    display: inline-block;
-    width: 1px;
-    height: 41px;
-    background: url('../img/bd_r_menu.png') no-repeat 0 9px transparent;
-    float: left;
-  }
+.menu .active, .menu a:hover {
+  background-position: 0 -308px;
+  float: left;
+  background-image: url(../img/sprites.gif);
+}
 
-  li .submenu {
-    position: absolute;
-    top: 41px;
-    left: 0;
-    z-index: 1000;
-    min-width: 200px;
-    background-color: #f9f9f9;
-    border-top: 3px solid red;
-    display: none;
-  }
-  li .home {
-    padding: 10px 10px 0px 10px;
-  }
-  li .home i {
-    display: inline-block;
-    width: 18px;
-    height: 17px;
-    background: url('../img/homeicon.png') no-repeat 0 -32px transparent;
-  }
-  li.on .home i {
-    background: url('../img/homeicon.png') no-repeat 0 0 transparent;
-  }
-  li .home:hover i {
-    background: url('../img/homeicon.png') no-repeat 0 0 transparent;
-  }
-  li a:hover {
-    background-color: red;
-    color: #fff;
-  }
-  i.on a {
-    color: #fff;
-  }
-  a {
-    text-decoration: none;
-  }
+.menu .active span, .menu span:hover {
+  background-position: 100% -308px;
+  float: left;
+  line-height: 16px;
+  height: 33px;
+  background-image: url(../img/sprites.gif);
+}
+
+.menu li a span {
+  font-weight: 700;
+  display: block;
+  text-align: center;
+  padding: 7px 10px 0 10px;
 }
