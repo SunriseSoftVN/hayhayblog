@@ -21,8 +21,7 @@ GET        /google/login               controllers.GoogleCtr.login
 GET        /google/auth                controllers.GoogleCtr.auth
 
 GET        /about                      controllers.AboutCtr.index
-GET        /cat/all                    controllers.CategoryCtr.index
-GET        /cat/:shortName             controllers.CategoryCtr.view(shortName: String)
+GET        /cat/:shortName             controllers.CategoryCtr.index(shortName: String, page: Int ?= 1)
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -17,13 +17,27 @@ import com.mongodb.casbah.commons.MongoDBObject
 object ArticleDao extends BaseDao[Article, String] {
   override def dao = new SalatDAO[Article, String](collection = mongoCollection("article")) {}
 
-  def findByCatId(id: ObjectId, take: Int = 10) = {
+  def findByCatId(id: ObjectId, page: Int = 1, itemDisplay: Int = 10) = {
+    val skip = (page - 1) * itemDisplay
     val blogIds = BlogDao.findByCatId(id).map(_._id)
-    find(
-      MongoDBObject("blogId" -> MongoDBObject("$in" -> blogIds))
-    ).sort(MongoDBObject("publishedDate" -> -1))
-      .take(take)
+
+    val query = MongoDBObject("blogId" -> MongoDBObject("$in" -> blogIds))
+
+
+    val totalRow = count(query)
+
+    var totalPage = totalRow / itemDisplay
+    if (totalRow - totalPage * itemDisplay > 0) {
+      totalPage += 1
+    }
+
+    val articles =find(query)
+      .skip(skip)
+      .limit(itemDisplay)
+      .sort(MongoDBObject("publishedDate" -> -1))
       .toList
+
+    (articles, totalPage.toInt)
   }
 
   def topTen = find(MongoDBObject.empty).sort(MongoDBObject("publishedDate" -> -1)).take(10).toList

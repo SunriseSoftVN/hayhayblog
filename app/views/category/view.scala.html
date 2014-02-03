@@ -1,4 +1,4 @@
-@(category: Category, articles: List[Article])
+@(category: Category, articles: List[Article], totalPage: Int, currentPage: Int)
 
 <div class="list_cate">
     <ul>
@@ -25,10 +25,10 @@
     </ul>
 </div>
 
+@if(totalPage > 1) {
 <div class="paging">
-    <span class="on">1</span>
-    <a href="/tin-tuc/goc-chi-em/61/2/">2</a>
-    <a href="/tin-tuc/goc-chi-em/61/3/">3</a>
-    <a href="/tin-tuc/goc-chi-em/61/4/">4</a>
-    <a href="/tin-tuc/goc-chi-em/61/5/">5</a>
+    @for(i <- 1 to totalPage) {
+    <a href="?page=@i" class="@if(i == currentPage) {on}">@i</a>
+    }
 </div>
+}

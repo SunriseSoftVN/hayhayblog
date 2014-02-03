@@ -10,7 +10,7 @@ object Home extends Controller with OptionalAuthElement with AuthConfigImpl with
 
   def index = StackAction(implicit request => {
     val newsBoxs = CategoryDao.all.map(cat => {
-      val articles = ArticleDao.findByCatId(cat._id, take = 4)
+      val (articles, totalPage) = ArticleDao.findByCatId(cat._id, page = 1)
       NewsBoxDto(cat, articles)
     })
 

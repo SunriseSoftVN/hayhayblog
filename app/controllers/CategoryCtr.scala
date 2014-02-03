@@ -15,15 +15,11 @@ import dto.TopMenuDto
  */
 object CategoryCtr extends Controller with OptionalAuthElement with AuthConfigImpl with MainTemplate {
 
-  def index = StackAction(implicit request => {
-    renderOk(views.html.category.index())
-  })
-
-  def view(shortName: String) = StackAction(implicit request => {
+  def index(shortName: String, page: Int) = StackAction(implicit request => {
     CategoryDao.findByShortName(shortName).mapRender(cat => {
-      val article = ArticleDao.findByCatId(cat._id)
+      val (articles, totalPage) = ArticleDao.findByCatId(cat._id, page)
       implicit val topMenuDto =  TopMenuDto(CategoryDao.all, cat.shortName)
-      renderOk(views.html.category.view(cat, article))
+      renderOk(views.html.category.view(cat, articles, totalPage, page))
     })
   })
 
