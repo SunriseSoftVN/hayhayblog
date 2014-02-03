@@ -1,20 +1,10 @@
 @(categories : List[Category])
-<div class="menubar">
-    <ul>
-        <li><a href="/" class="home"><i></i></a></li>
-        @categories.map { cat =>
-        <li>
-            <a href="/cat/@cat.shortName">@cat.name</a><span class="bd_r"></span>
-        </li>
-        }
-    </ul>
-    <div class="clrb"></div>
-</div>
-<div class="footer_ct">
-    <div class="info">
-        <p>
-            Copyright &copy; 2014 <a href="">hayhayblog.com</a> -
-            Email: <a href="">lienhe@@hayhayblog.com</a>
-        </p>
-    </div>
+<div class="info">
+    <p>
+        Copyright &copy; 2014 <a href="http://hayhayblog.com"><strong>hayhayblog.com</strong></a> -
+        Email: <a href="mailto:lienhe@@hayhayblog.com"><strong>lienhe@@hayhayblog.com</strong></a>
+    </p>
+    <p>
+        VPĐD tại TP.HCM: <strong>354/41/5 Phan Văn Trị, P11, Q Bình Thạnh, Tp Hồ Chí Minh</strong>
+    </p>
 </div>

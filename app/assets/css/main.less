@@ -1,5 +1,7 @@
 @import "topMenu";
-@bodyBackGround: #fff;
+@import "page-content";
+@import "footer";
+@bodyBackGround: #efefef;
 
 html,
 body {
@@ -12,12 +14,8 @@ body {
   font: 500 12px/18px Arial;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: Arial, sans-serif;
-}
-
 .container {
-  width: 1020px;
+  width: 1014px;
   padding: 0;
 }
 
@@ -27,14 +25,17 @@ ul, li {
   margin: 0px;
 }
 
-.clrb {
-  clear: both;
-}
-
-#page-container {
-  margin-top: 20px;
-}
-
 a img {
   border: 0;
+}
+
+.catsep, .contentsep {
+  border: solid 1px #f1ad1e;
+  background-color: #fbc701;
+}
+
+.contentsep {
+  width: 978px;
+  height: 4px;
+  margin: auto;
 }
