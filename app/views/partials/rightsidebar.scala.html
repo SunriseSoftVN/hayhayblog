@@ -1,4 +1,4 @@
-@(articles: List[Article])
+@(articleMostReads: List[Article])
 <div class="right_box">
     <div class="hd">
         <h2><span>\</span> Bài đọc nhiều nhất</h2>
@@ -6,7 +6,7 @@
     <div class="right_box_ct">
         <div class="news_lst">
             <ul>
-                @articles.map { article =>
+                @articleMostReads.map { article =>
                 <li>
                     @article.featureImage.map { img =>
                     <a href="@article.url" class="thumb">
