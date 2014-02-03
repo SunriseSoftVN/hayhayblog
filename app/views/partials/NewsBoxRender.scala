@@ -17,20 +17,19 @@ object NewsBoxRender {
   def apply(newsBoxs: List[NewsBoxDto]) = Html(render(newsBoxs))
 
   def render(newsBoxs: List[NewsBoxDto]): String = {
-    def renderBox(html: String) = div("left_box_2col".cls)(
-      raw(html),
-      div("clearfix".cls)
-    ).toString()
+    val split = newsBoxs.length / 2
+    val (col1, col2) = newsBoxs.splitAt(split)
 
-    newsBoxs match {
-      case Nil => ""
-      case box :: Nil => renderBox(views.html.partials.newsbox(box).toString())
-      case box1 :: box2 :: rest =>
-        renderBox(
-          views.html.partials.newsbox(box1).toString()
-            + views.html.partials.newsbox(box2).toString()
-        ) + render(rest)
-    }
+    def renderBox(html: String, col2: Boolean = false) =
+      div(
+        if(col2) "col-md-6 col2".cls else "col-md-6".cls
+      )(
+        raw(html),
+        div("homepageboxlast".cls)(raw("&nbsp;"))
+      ).toString()
+
+    renderBox(col1.map(box => views.html.partials.newsbox(box).toString()).mkString) +
+      renderBox(col2.map(box => views.html.partials.newsbox(box).toString()).mkString, true)
   }
 
 }

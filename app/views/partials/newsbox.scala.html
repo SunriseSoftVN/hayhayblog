@@ -1,29 +1,31 @@
-@(newsBox: NewsBoxDto)
-<div class="new_col">
-    <div class="left_box">
-        <div class="hd">
-            <h1><span>\</span> <a href="/cat/@newsBox.shortName">@newsBox.title</a></h1>
-            <a href="/cat/@newsBox.shortName" class="btn_viewmore">Xem thêm +</a>
-            <div class="clrb"></div>
+@(box: NewsBoxDto)
+<div class="homepage-box clearfix">
+    <div class="box-title">
+        <h2><a href="/cat/@box.shortName">@box.title</a></h2>
+    </div>
+    <div class="content">
+        <div class="boxnewscategory clearfix">
+            @box.bigArticle.map { article =>
+            @article.featureImage.map { img =>
+            <a title="@article.title" class="avatar" href="@article.url" target="_blank">
+                <img src="@img" title="@article.title" alt="@article.title">
+                <span class="icon"></span>
+            </a>
+            }
+
+            <h3 class="h3title">
+                <a title="@article.title" href="@article.url" target="_blank">@article.title</a>
+            </h3>
+            <p class="sapo">@article.shortDescription</p>
+            <div class="clearfix"></div>
+            }
         </div>
-        <div class="box_main">
-            <div class="news_1col">
-                @newsBox.bigNews.map { article =>
-                <div class="news_big">
-                    <a href="/r?url=@article.url" class="item" target="_blank">
-                        <img alt="@article.title" src="@article.featureImage.get">
-                        <h2>@article.title</h2>
-                    </a>
-                </div>
-                }
-                <ul>
-                    @newsBox.articles.map { article =>
-                    <li>
-                        <a href="/r?url=@article.url" target="_blank">@article.title</a>
-                    </li>
-                    }
-                </ul>
-            </div>
-        </div>
+        <ul class="othernewscategory">
+            @box.articles.map { article =>
+            <li>
+                <a href="@article.url" title="@article.title" target="_blank">@article.title</a>
+            </li>
+            }
+        </ul>
     </div>
 </div>

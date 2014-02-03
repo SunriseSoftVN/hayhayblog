@@ -12,7 +12,7 @@ import model.{Article, Category}
 case class NewsBoxDto(
                        title: String,
                        shortName: String,
-                       bigNews: Option[Article] = None,
+                       bigArticle: Option[Article] = None,
                        articles: List[Article]
                        )
 
@@ -24,7 +24,7 @@ object NewsBoxDto {
     new NewsBoxDto(
       title = cat.name,
       shortName = cat.shortName,
-      bigNews = bigNews,
+      bigArticle = bigNews,
       articles = _articles
     )
   }
