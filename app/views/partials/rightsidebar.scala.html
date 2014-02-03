@@ -1,27 +1,106 @@
 @(articleMostReads: List[Article])
-<div class="right_box">
-    <div class="hd">
-        <h2><span>\</span> Bài đọc nhiều nhất</h2>
-    </div>
-    <div class="right_box_ct">
-        <div class="news_lst">
-            <ul>
-                @articleMostReads.map { article =>
-                <li>
-                    @article.featureImage.map { img =>
-                    <a href="@article.url" class="thumb">
-                        <img width="100" height="100" alt="@article.title" src="@img">
-                    </a>
-                    }
+<!--<div class="right_box">-->
+    <!--<div class="hd">-->
+        <!--<h2><span>\</span> Bài đọc nhiều nhất</h2>-->
+    <!--</div>-->
+    <!--<div class="right_box_ct">-->
+        <!--<div class="news_lst">-->
+            <!--<ul>-->
+                <!--@articleMostReads.map { article =>-->
+                <!--<li>-->
+                    <!--@article.featureImage.map { img =>-->
+                    <!--<a href="@article.url" class="thumb">-->
+                        <!--<img width="100" height="100" alt="@article.title" src="@img">-->
+                    <!--</a>-->
+                    <!--}-->
 
-                    <h3>
-                        <a href="@article.url" target="_blank">@article.title</a>
-                    </h3>
+                    <!--<h3>-->
+                        <!--<a href="@article.url" target="_blank">@article.title</a>-->
+                    <!--</h3>-->
 
-                    <div class="clrb"></div>
-                </li>
-                }
-            </ul>
-        </div>
-    </div>
+                    <!--<div class="clrb"></div>-->
+                <!--</li>-->
+                <!--}-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="focus-left-hot">
+    <span class="newstile">TIN MỚI TRONG NGÀY</span>
+    <ul class="ulhomefocus">
+
+        <li>
+            <h4>
+                <a title="Ngày mới &quot;tuyệt cú mèo&quot; nhờ chiêm tinh 04/02 hé lộ" target="_blank" href="http://quizz.kenh14.vn/horoscope.htm">
+                    Ngày mới "tuyệt cú mèo" nhờ chiêm tinh 04/02 hé lộ
+
+                </a>
+            </h4>
+        </li>
+
+        <li>
+            <h4>
+                <a title="Trò chơi sáng tạo không đỡ nổi của một thời đi học" target="_blank" href="/video/tro-choi-sang-tao-khong-do-noi-cua-mot-thoi-di-hoc-66524.chn">
+                    Trò chơi sáng tạo không đỡ nổi của một thời đi học
+                    <img src="http://kenh143.vcmedia.vn/skin/video.gif">
+                </a>
+            </h4>
+        </li>
+
+        <li>
+            <h4>
+                <a title="Việc nhẹ lương cao: Cho cá chình điện ăn mỗi ngày" target="_blank" href="/video/viec-nhe-luong-cao-cho-ca-chinh-dien-an-moi-ngay-66548.chn">
+                    Việc nhẹ lương cao: Cho cá chình điện ăn mỗi ngày
+                    <img src="http://kenh143.vcmedia.vn/skin/video.gif">
+                </a>
+            </h4>
+        </li>
+
+        <li>
+            <h4>
+                <a title="Câu chuyện tình yêu đồng tính của chàng trai múa cột" target="_blank" href="/video/cau-chuyen-tinh-yeu-dong-tinh-cua-chang-trai-mua-cot-66561.chn">
+                    Câu chuyện tình yêu đồng tính của chàng trai múa cột
+                    <img src="http://kenh143.vcmedia.vn/skin/video.gif">
+                </a>
+            </h4>
+        </li>
+
+        <li>
+            <h4>
+                <a title="Mỹ Tâm đáng yêu gặp fan đầu năm tại nhà riêng" href="/star/my-tam-dang-yeu-gap-fan-dau-nam-tai-nha-rieng-2014020412473784.chn">
+                    Mỹ Tâm đáng yêu gặp fan đầu năm tại nhà riêng
+
+                </a>
+            </h4>
+        </li>
+
+        <li>
+            <h4>
+                <a title="Sinh vật lạ giống rắn sở hữu hàm răng lởm chởm kỳ quái " href="/la/sinh-vat-la-giong-ran-so-huu-ham-rang-lom-chom-ky-quai-2014020412338166.chn">
+                    Sinh vật lạ giống rắn sở hữu hàm răng lởm chởm kỳ quái
+
+                </a>
+            </h4>
+        </li>
+
+        <li>
+            <h4>
+                <a title="Hài hước với chùm ảnh tưởng tượng và thực tế của những người nuôi mèo" href="/cool/hai-huoc-voi-chum-anh-tuong-tuong-va-thuc-te-cua-nhung-nguoi-nuoi-meo-20140203114046553.chn">
+                    Hài hước với chùm ảnh tưởng tượng và thực tế của những người nuôi mèo
+
+                </a>
+            </h4>
+        </li>
+
+        <li>
+            <h4>
+                <a title="Tỷ phú Hồng Kông hủy phần thưởng tuyển rể trị giá 2.800 tỷ đồng" href="/doi-song/ty-phu-hong-kong-huy-phan-thuong-tuyen-re-tri-gia-2800-ty-dong-20140203115749504.chn">
+                    Tỷ phú Hồng Kông hủy phần thưởng tuyển rể trị giá 2.800 tỷ đồng
+
+                </a>
+            </h4>
+        </li>
+
+    </ul>
 </div>
