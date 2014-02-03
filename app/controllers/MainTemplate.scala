@@ -16,7 +16,11 @@ import dto.TopMenuDto
  */
 trait MainTemplate extends Controller {
 
-  def rightSideBar = views.html.partials.rightsidebar(ArticleDao.topTenMostRead)
+  def rightSideBar(implicit dto: TopMenuDto) = CategoryDao.findByShortName(dto.currentCat).map(cat => {
+    views.html.partials.rightsidebar(ArticleDao.topTenMostRead(cat._id))
+  }).getOrElse {
+    views.html.partials.rightsidebar(ArticleDao.topTenMostRead)
+  }
 
   def topMenu(implicit dto: TopMenuDto) = views.html.partials.topmenu(dto)
 

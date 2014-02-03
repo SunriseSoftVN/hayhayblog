@@ -17,9 +17,9 @@ import com.mongodb.casbah.commons.MongoDBObject
 object ArticleDao extends BaseDao[Article, String] {
   override def dao = new SalatDAO[Article, String](collection = mongoCollection("article")) {}
 
-  def findByCatId(id: ObjectId, page: Int = 1, itemDisplay: Int = 10) = {
+  def findByCatId(catId: ObjectId, page: Int = 1, itemDisplay: Int = 10) = {
     val skip = (page - 1) * itemDisplay
-    val blogIds = BlogDao.findByCatId(id).map(_._id)
+    val blogIds = BlogDao.findByCatId(catId).map(_._id)
 
     val query = MongoDBObject("blogId" -> MongoDBObject("$in" -> blogIds))
 
@@ -41,6 +41,12 @@ object ArticleDao extends BaseDao[Article, String] {
   }
 
   def topTenMostRead = find(MongoDBObject.empty).sort(MongoDBObject("clicked" -> -1)).take(10).toList
+
+  def topTenMostRead(catId: ObjectId) = {
+    val blogIds = BlogDao.findByCatId(catId).map(_._id)
+    val query = MongoDBObject("blogId" -> MongoDBObject("$in" -> blogIds))
+    find(query).sort(MongoDBObject("clicked" -> -1)).take(10).toList
+  }
 
   def findByUrl(url: String) = findOne(MongoDBObject("url" -> url))
 
