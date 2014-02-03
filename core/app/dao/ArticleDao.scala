@@ -31,7 +31,7 @@ object ArticleDao extends BaseDao[Article, String] {
       totalPage += 1
     }
 
-    val articles =find(query)
+    val articles = find(query)
       .skip(skip)
       .limit(itemDisplay)
       .sort(MongoDBObject("publishedDate" -> -1))
@@ -40,6 +40,13 @@ object ArticleDao extends BaseDao[Article, String] {
     (articles, totalPage.toInt)
   }
 
-  def topTen = find(MongoDBObject.empty).sort(MongoDBObject("publishedDate" -> -1)).take(10).toList
+  def topTenMostRead = find(MongoDBObject.empty).sort(MongoDBObject("clicked" -> -1)).take(10).toList
 
+  def findByUrl(url: String) = findOne(MongoDBObject("url" -> url))
+
+  def updateClick(url: String) {
+    findByUrl(url).map(article => {
+      save(article.copy(clicked = article.clicked + 1))
+    })
+  }
 }

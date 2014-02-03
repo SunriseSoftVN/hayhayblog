@@ -6,7 +6,7 @@
         <li>
             <div class="thumb">
                 @article.featureImage.map { img =>
-                <a href="@article.url" target="_blank">
+                <a href="/r?url=@article.url" target="_blank">
                     <img alt="@article.title" src="@img">
                 </a>
                 }.getOrElse {
@@ -15,7 +15,7 @@
             </div>
 
             <div class="text">
-                <h2><a href="@article.url" target="_blank">@article.title</a></h2>
+                <h2><a href="/r?url=@article.url" target="_blank">@article.title</a></h2>
                 <div class="time">@article.publishedDate.toString()</div>
                 <div align="justify">@article.shortDescription</div>
             </div>

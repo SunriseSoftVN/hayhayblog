@@ -16,7 +16,7 @@ import dto.TopMenuDto
  */
 trait MainTemplate extends Controller {
 
-  def rightSideBar = views.html.partials.rightsidebar(ArticleDao.topTen)
+  def rightSideBar = views.html.partials.rightsidebar(ArticleDao.topTenMostRead)
 
   def topMenu(implicit dto: TopMenuDto) = views.html.partials.topmenu(dto)
 

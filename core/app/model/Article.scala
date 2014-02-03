@@ -3,6 +3,7 @@ package model
 import org.bson.types.ObjectId
 import org.joda.time.DateTime
 import org.apache.commons.io.IOUtils
+import org.apache.commons.lang3.StringUtils
 
 /**
  * The Class Article.
@@ -23,10 +24,11 @@ case class Article(
                     featureImage: Option[String],
                     author: Option[String],
                     tags: Option[String],
+                    clicked: Int = 0,
                     publishedDate: DateTime = DateTime.now(),
                     crawledDate: DateTime = DateTime.now()
                     ) extends BaseModel(_id) {
-  def getDescriptionHtml = if (!descriptionHtml.isEmpty) IOUtils.toString(descriptionHtml, "UTF-8") else ""
+  def getDescriptionHtml = if (!descriptionHtml.isEmpty) IOUtils.toString(descriptionHtml, "UTF-8") else StringUtils.EMPTY
 
   override def equals(obj: Any) = {
     obj.isInstanceOf[Article] && obj.asInstanceOf[Article]._id == _id

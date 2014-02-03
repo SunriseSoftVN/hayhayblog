@@ -8,18 +8,18 @@
         </div>
         <div class="box_main">
             <div class="news_1col">
-                @newsBox.bigNews.map { news =>
+                @newsBox.bigNews.map { article =>
                 <div class="news_big">
-                    <a href="@news.url" class="item" target="_blank">
-                        <img alt="@news.title" src="@news.featureImage.get">
-                        <h2>@news.title</h2>
+                    <a href="/r?url=@article.url" class="item" target="_blank">
+                        <img alt="@article.title" src="@article.featureImage.get">
+                        <h2>@article.title</h2>
                     </a>
                 </div>
                 }
                 <ul>
                     @newsBox.articles.map { article =>
                     <li>
-                        <a href="@article.url" target="_blank">@article.title</a>
+                        <a href="/r?url=@article.url" target="_blank">@article.title</a>
                     </li>
                     }
                 </ul>
