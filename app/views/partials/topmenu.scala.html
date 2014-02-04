@@ -1,31 +1,16 @@
 @(data: TopMenuDto)
 
-
-<!--<div class="panel-menu">-->
-    <!--<ul class="menu">-->
-        <!--<li><a title="Trang chủ" href="/" class='@if(data.currentCat == "home") {active}'><span>Trang chủ</span></a></li>-->
-        <!--<li class="menusep">&nbsp;</li>-->
-
-        <!--@data.categories.map { cat =>-->
-        <!--<li>-->
-            <!--<a title="Video" href="/cat/@cat.shortName" class="@if(data.currentCat == cat.shortName) {active}">-->
-                <!--<span>@cat.name</span>-->
-            <!--</a>-->
-        <!--</li>-->
-        <!--<li class="menusep">&nbsp;</li>-->
-        <!--}-->
-    <!--</ul>-->
-<!--</div>-->
-
-<div class="container">
-    <ul class="nav pkg">
-        <li class="nav-1 current" item="m" data="1"><a item="m" href="/">HayHayBlog</a>
-            <!--<li><a href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/">Sự kiện hàng ngày</a></li>-->
-            @for(i <- 1 to data.categories.length) {
-            <li>
-                <a href="/">@data.categories(i -1).name</a>
+<div id="baomoi_navigation">
+    <div class="wrap-navi">
+        <ul id="navigation">
+            <li id="home" class='@if("home" == data.currentCat) {current}'>
+                <span><a href="/">Trang chủ</a></span>
+            </li>
+            @data.categories.map{ cat =>
+            <li class='@if(cat.shortName == data.currentCat) {current}'>
+                <span><a href="/cat/@cat.shortName">@cat.name</a></span>
             </li>
             }
-        </li>
-    </ul>
+        </ul>
+    </div>
 </div>

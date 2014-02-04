@@ -1,8 +1,31 @@
+@topBannerBackground: #EAF5F8;
 #top-banner {
-  .container {
-    height: 60px;
+  text-align: center;
+  height: 49px;
+  border-bottom: solid 1px #0085b1;
+  background: @topBannerBackground;
 
-    background: #fff;
-    border: 1px solid #DFDFDF;
+}
+
+#header {
+  position: relative;
+  text-align: left;
+  margin: auto;
+
+  .logo {
+    padding-top: 7px;
+    width: 100px;
+    float: left;
+  }
+
+  .userlinks {
+    float: right;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+
+  .userlinks span {
+    margin-right: 5px;
   }
 }
