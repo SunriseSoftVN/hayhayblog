@@ -1,5 +1,5 @@
-@(box: NewsBoxDto)
-<section class="module pkg">
+@(box: NewsBoxDto, index: Int)
+<section class="module-@index pkg">
     <header class="module-heading pkg">
         <h2 class="title"><a href="/cat/@box.shortName">@box.title <span class="module-arrow"></span></a></h2>
         <!--<ul class="module-nav">-->

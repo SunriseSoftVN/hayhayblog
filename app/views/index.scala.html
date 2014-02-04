@@ -1,7 +1,6 @@
 @(newsBoxs: List[NewsBoxDto])
 @import views.html.partials._
-@import views.partials._
 
-@newsBoxs.map { box =>
-    @newsbox(box)
+@for(i <-0 until newsBoxs.length) {
+    @newsbox(newsBoxs(i), i + 1)
 }

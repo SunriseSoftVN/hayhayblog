@@ -19,16 +19,13 @@
 
 <div class="container">
     <ul class="nav pkg">
-        <li class="nav-1 current" item="m" data="1"><a item="m" href="http://www.doisongphapluat.com/tin-tuc/">Tintức</a>
-            <ul class="sub-nav">
-                <li><a href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/">Sự kiện hàng ngày</a></li>
-                <li><a href="http://www.doisongphapluat.com/xa-hoi/">Xã hội</a></li>
-                <li><a href="http://www.doisongphapluat.com/tin-tuc/the-gioi/">Thế giới</a></li>
-                <li><a href="http://www.doisongphapluat.com/cong-nghe/">Công nghệ</a></li>
-                <li><a href="http://www.doisongphapluat.com/giao-duc/">Giáo dục</a></li>
-                <li><a href="http://www.doisongphapluat.com/oto-xemay/">Ôtô - Xe máy</a></li>
-                <li><a href="http://www.doisongphapluat.com/can-biet/">Cần biết</a></li>
-            </ul>
+        <li class="nav-1 current" item="m" data="1"><a item="m" href="/">HayHayBlog</a>
+            <!--<li><a href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/">Sự kiện hàng ngày</a></li>-->
+            @for(i <- 1 to data.categories.length) {
+            <li>
+                <a href="/">@data.categories(i -1).name</a>
+            </li>
+            }
         </li>
     </ul>
 </div>
