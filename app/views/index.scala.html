@@ -2,6 +2,6 @@
 @import views.html.partials._
 @import views.partials._
 
-<div class="row">
-    @NewsBoxRender(newsBoxs)
-</div>
+@newsBoxs.map { box =>
+    @newsbox(box)
+}

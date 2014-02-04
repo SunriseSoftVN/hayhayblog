@@ -1,9 +1,8 @@
-@import "topBanner";
-@import "topMenu";
-@import "page-content";
-@import "rightsidebar";
+@import "top-menu";
+@import "page-container";
 @import "footer";
-@bodyBackGround: #efefef;
+
+@bodyBackGround: #F8F8F5;
 
 html,
 body {
@@ -18,7 +17,7 @@ body {
 }
 
 .container {
-  width: 1014px;
+  width: 1020px;
   padding: 0;
 }
 
@@ -32,19 +31,23 @@ a img {
   border: 0;
 }
 
-.catsep, .contentsep {
-  border: solid 1px #f1ad1e;
-  background-color: #fbc701;
+.pkg:after {
+  content: " ";
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0.1px;
+  font-size: 0.1em;
+  line-height: 0;
 }
 
-.contentsep {
-  height: 4px;
-  margin: auto;
-}
-
-body, table, div, form, ul, li, tr, td, a, span, p, h1, h2, h3 {
-  outline: none;
-  border: 0;
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  font-size: 12px;
+  line-height: normal;
   margin: 0;
-  padding: 0;
+}
+
+.fl-left {
+  float: left;
 }

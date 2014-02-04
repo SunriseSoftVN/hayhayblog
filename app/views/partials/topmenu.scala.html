@@ -1,18 +1,34 @@
 @(data: TopMenuDto)
 
 
-<div class="panel-menu">
-    <ul class="menu">
-        <li><a title="Trang chủ" href="/" class='@if(data.currentCat == "home") {active}'><span>Trang chủ</span></a></li>
-        <li class="menusep">&nbsp;</li>
+<!--<div class="panel-menu">-->
+    <!--<ul class="menu">-->
+        <!--<li><a title="Trang chủ" href="/" class='@if(data.currentCat == "home") {active}'><span>Trang chủ</span></a></li>-->
+        <!--<li class="menusep">&nbsp;</li>-->
 
-        @data.categories.map { cat =>
-        <li>
-            <a title="Video" href="/cat/@cat.shortName" class="@if(data.currentCat == cat.shortName) {active}">
-                <span>@cat.name</span>
-            </a>
+        <!--@data.categories.map { cat =>-->
+        <!--<li>-->
+            <!--<a title="Video" href="/cat/@cat.shortName" class="@if(data.currentCat == cat.shortName) {active}">-->
+                <!--<span>@cat.name</span>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li class="menusep">&nbsp;</li>-->
+        <!--}-->
+    <!--</ul>-->
+<!--</div>-->
+
+<div class="container">
+    <ul class="nav pkg">
+        <li class="nav-1 current" item="m" data="1"><a item="m" href="http://www.doisongphapluat.com/tin-tuc/">Tintức</a>
+            <ul class="sub-nav">
+                <li><a href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/">Sự kiện hàng ngày</a></li>
+                <li><a href="http://www.doisongphapluat.com/xa-hoi/">Xã hội</a></li>
+                <li><a href="http://www.doisongphapluat.com/tin-tuc/the-gioi/">Thế giới</a></li>
+                <li><a href="http://www.doisongphapluat.com/cong-nghe/">Công nghệ</a></li>
+                <li><a href="http://www.doisongphapluat.com/giao-duc/">Giáo dục</a></li>
+                <li><a href="http://www.doisongphapluat.com/oto-xemay/">Ôtô - Xe máy</a></li>
+                <li><a href="http://www.doisongphapluat.com/can-biet/">Cần biết</a></li>
+            </ul>
         </li>
-        <li class="menusep">&nbsp;</li>
-        }
     </ul>
 </div>

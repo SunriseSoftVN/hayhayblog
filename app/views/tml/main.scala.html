@@ -10,27 +10,16 @@
 
 <body>
 
-<div id="top-banner">
+<nav class="navigation pkg">@_topMenu</nav>
+<div id="page-container">
+    <div class="container">@content</div>
+</div>
+
+<footer class="footer">
     <div class="container">
-
+        @_footer
     </div>
-</div>
-
-<div id="top-menu" class="menuwrapper">
-    <div class="container">
-        @_topMenu
-    </div>
-</div>
-
-<div class="container">
-    <div id="page-container">
-        <div class="container">
-            <div id="page-content">@content</div>
-            <div id="right-side-bar">@_rightSideBar</div>
-        </div>
-        <div id="footer">@_footer</div>
-    </div>
-</div>
+</footer>
 
 </body>
 
