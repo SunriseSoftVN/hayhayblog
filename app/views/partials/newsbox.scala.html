@@ -1,86 +1,49 @@
 @(box: NewsBoxDto)
 <section class="module pkg">
-    <header class="module-heading pkg"><h2 class="title"><a href="http://www.doisongphapluat.com/tin-tuc/">Tin
-        tức <span class="module-arrow"></span></a></h2>
-        <ul class="module-nav">
-            <li><a href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/">Sự kiện hàng ngày</a></li>
-            <li><a href="http://www.doisongphapluat.com/xa-hoi/">Xã hội</a></li>
-            <li><a href="http://www.doisongphapluat.com/tin-tuc/the-gioi/">Thế giới</a></li>
-            <li><a href="http://www.doisongphapluat.com/cong-nghe/">Công nghệ</a></li>
-            <li><a href="http://www.doisongphapluat.com/giao-duc/">Giáo dục</a></li>
-            <li><a href="http://www.doisongphapluat.com/oto-xemay/">Ôtô - Xe máy</a></li>
-            <li><a href="http://www.doisongphapluat.com/can-biet/">Cần biết</a></li>
-        </ul>
+    <header class="module-heading pkg">
+        <h2 class="title"><a href="/cat/@box.shortName">@box.title <span class="module-arrow"></span></a></h2>
+        <!--<ul class="module-nav">-->
+        <!--<li><a href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/">Sự kiện hàng ngày</a></li>-->
+        <!--<li><a href="http://www.doisongphapluat.com/xa-hoi/">Xã hội</a></li>-->
+        <!--<li><a href="http://www.doisongphapluat.com/tin-tuc/the-gioi/">Thế giới</a></li>-->
+        <!--<li><a href="http://www.doisongphapluat.com/cong-nghe/">Công nghệ</a></li>-->
+        <!--<li><a href="http://www.doisongphapluat.com/giao-duc/">Giáo dục</a></li>-->
+        <!--<li><a href="http://www.doisongphapluat.com/oto-xemay/">Ôtô - Xe máy</a></li>-->
+        <!--<li><a href="http://www.doisongphapluat.com/can-biet/">Cần biết</a></li>-->
+        <!--</ul>-->
     </header>
     <div class="module-cnt pkg">
-        <div class="module-first-item"><a
-                href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/da-nang-tiem-son-boc-chay-du-doi-sang-mung-5-tet-a20132.html"
-                class="img" title=""><img
-                src="http://dspl-thumb.nl-img.com/thumb_x315x230/2014/02/04/chaytiemson.jpg"
-                alt="Sự kiện hàng ngày - Đà Nẵng: Tiệm sơn bốc cháy dữ dội sáng mùng 5 Tết">
+        <div class="module-first-item">
+            @box.bigArticle.map { article =>
+            @article.featureImage.map { img =>
+            <a href="@article.url" class="img" title="@article.title">
+                <img src="@img" alt="@article.title">
 
-            <h3 class="title">Đà Nẵng: Tiệm sơn bốc cháy dữ dội sáng mùng 5 Tết</h3></a>
+                <h3 class="title">@article.title</h3>
+            </a>
+            }
 
-            <p class="desc">(ĐSPL) - Ngọn lửa bốc lên vào khoảng 7h45 sáng 4/2 (mùng 5 Tết) từ tiệm sơn Hiếu
-                Nguyễn trên đường Ngô Quyền, quận Sơn Trà, Đà Nẵng. </p></div>
+            <p class="desc">@article.shortDescription</p>
+            }
+        </div>
         <!--module first item-->
         <ul class="module-item pkg">
-            <li class="pkg"><h3 class="heading"><a
-                    href="http://www.doisongphapluat.com/tin-tuc/the-gioi/nhung-ky-luc-moi-cua-olympic-sochi-2014-a20136.html"
-                    title="">Những kỷ lục mới của Olympic Sochi 2014 </a></h3>
+            @box.articles.map{ article =>
+            <li class="pkg">
+                <h3 class="heading">
+                    <a href="@article.url" title="@article.title">@article.title</a>
+                </h3>
 
-                <div class="pkg"><a
-                        href="http://www.doisongphapluat.com/tin-tuc/the-gioi/nhung-ky-luc-moi-cua-olympic-sochi-2014-a20136.html"
-                        class="img" title=""><img
-                        src="http://dspl-thumb.nl-img.com/thumb_x104x78/2014/02/04/140204_sochi_2014_olympic_winter_gam.jpg"
-                        alt="Thế giới - Những kỷ lục mới của Olympic Sochi 2014"></a>
-
-                    <p class="desc">(ĐSPL) – Tuy chưa khai mạc, nhưng Thế vận hội mùa đông Sochi 2014 (Olympic
-                        Sochi 2014) đã lập ra những kỷ lục mới.</p></div>
-                <a href="http://www.doisongphapluat.com/tin-tuc/the-gioi/" class="readmore">Xem thêm Thế giới
-                    <span class="more-arrow"></span></a></li>
-            <li class="pkg"><h3 class="heading"><a
-                    href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/nhung-hinh-anh-dang-bao-dong-ve-tngt-tet-giap-ngo-a20127.html"
-                    title="">Những hình ảnh đáng báo động về TNGT Tết Giáp Ngọ </a></h3>
-
-                <div class="pkg"><a
-                        href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/nhung-hinh-anh-dang-bao-dong-ve-tngt-tet-giap-ngo-a20127.html"
-                        class="img" title=""><img
-                        src="http://dspl-thumb.nl-img.com/thumb_x104x78/2014/02/04/otodamsapnhadan.jpg"
-                        alt="Sự kiện hàng ngày - Những hình ảnh đáng báo động về TNGT Tết Giáp Ngọ"></a>
-
-                    <p class="desc">(ĐSPL) – Trong 6 ngày Tết, từ 28 âm lịch cho đến mùng 3 Tết (từ 28/1 đến
-                        2/2) trên cả nước đã xảy ra 367 vụ TNGT, làm chết 163 người và có 388...</p></div>
-                <a href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/" class="readmore">Xem thêm Sự
-                    kiện hàng ngày <span class="more-arrow"></span></a></li>
-            <li class="pkg"><h3 class="heading"><a
-                    href="http://www.doisongphapluat.com/tin-tuc/the-gioi/phe-doi-lap-thai-lan-doi-huy-ket-qua-bau-cu-a20117.html"
-                    title="">Phe đối lập Thái Lan đòi hủy kết quả bầu cử </a></h3>
-
-                <div class="pkg"><a
-                        href="http://www.doisongphapluat.com/tin-tuc/the-gioi/phe-doi-lap-thai-lan-doi-huy-ket-qua-bau-cu-a20117.html"
-                        class="img" title=""><img
-                        src="http://dspl-thumb.nl-img.com/thumb_x104x78/2014/02/04/140203_thailand_01.jpg"
-                        alt="Thế giới - Phe đối lập Thái Lan đòi hủy kết quả bầu cử "></a>
-
-                    <p class="desc">Không chỉ tìm cách ngăn cản tổng tuyển cử, phe đối lập còn tìm cách hủy bỏ
-                        kết quả bầu cử.</p></div>
-                <a href="http://www.doisongphapluat.com/tin-tuc/the-gioi/" class="readmore">Xem thêm Thế giới
-                    <span class="more-arrow"></span></a></li>
-            <li class="pkg"><h3 class="heading"><a
-                    href="http://www.doisongphapluat.com/tin-tuc/the-gioi/bao-chi-nga-ban-ve-vu-khi-israel-o-viet-nam-a20119.html"
-                    title="">Báo chí Nga bàn về vũ khí Israel ở Việt Nam </a></h3>
-
-                <div class="pkg"><a
-                        href="http://www.doisongphapluat.com/tin-tuc/the-gioi/bao-chi-nga-ban-ve-vu-khi-israel-o-viet-nam-a20119.html"
-                        class="img" title=""><img
-                        src="http://dspl-thumb.nl-img.com/thumb_x104x78/2014/02/04/140204_Israel_Galil_ACE_03.jpg"
-                        alt="Thế giới - Báo chí Nga bàn về vũ khí Israel ở Việt Nam"></a>
-
-                    <p class="desc">(ĐSPL) - Israel thâm nhập thị trường Việt Nam sau năm 2000, khi Mỹ buộc nước
-                        này giảm mức độ hợp tác quân sự-kỹ thuật với Trung Quốc.</p></div>
-                <a href="http://www.doisongphapluat.com/tin-tuc/the-gioi/" class="readmore">Xem thêm Thế giới
-                    <span class="more-arrow"></span></a></li>
+                <div class="pkg">
+                    @article.featureImage.map { img =>
+                    <a href="@article.url" class="img" title="@article.title">
+                        <img src="@img" alt="@article.title">
+                    </a>
+                    }
+                    <p class="desc">@article.shortDescription</p>
+                </div>
+            </li>
+            }
         </ul>
     </div>
 </section>
