@@ -1,5 +1,6 @@
 @(pageDto: PageDto[Blog])
 @import boostraptable._
+@import formater.DateTimeFormat
 
 <div>
     <h3>Blog</h3>
@@ -28,6 +29,7 @@
         @colHeader(pageDto, "url", "Url")
         @colHeader(pageDto, "isEnable", "Enable")
         @colHeader(pageDto, "status", "Status")
+        @colHeader(pageDto, "lastUpdated", "Last Updated")
         <th>Options</th>
     </tr>
     </thead>
@@ -39,6 +41,7 @@
         <td>@blog.url</td>
         <td>@blog.isEnable</td>
         <td>@blog.status</td>
+        <td>@blog.lastUpdated.toString(DateTimeFormat.fmt)</td>
         <td>
             <a href="/admin/blog/edit/@blog.id" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i></a>
             @deleteBtn("/admin/blog/delete/"+ blog.id)

@@ -33,7 +33,7 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
       "description" -> optional(text),
       "isEnable" -> boolean,
       "categoryId" -> of[ObjectId],
-      "lastUpdated" -> default(jodaDate, DateTime.now)
+      "lastUpdated" -> default(jodaDate, DateTime.now.minusDays(1))
     )(Blog.apply)(Blog.unapply)
   )
 
