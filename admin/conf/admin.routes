@@ -1,5 +1,6 @@
 
-GET        /                            admin.controllers.Home.index
+GET        /                            admin.controllers.HomeCtr.index
+GET        /shutdown                    admin.controllers.HomeCtr.shutdown
 
 GET        /user                        admin.controllers.UserCtr.index
 GET        /user/create                 admin.controllers.UserCtr.create
