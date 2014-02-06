@@ -17,6 +17,8 @@ case class Article(
                     _id: String,
                     blogId: ObjectId,
                     title: String,
+                    uniqueTitle: String,
+                    domain: String,
                     url: String,
                     description: String,
                     //This form rss.

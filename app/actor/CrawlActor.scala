@@ -18,6 +18,8 @@ import org.jsoup.Jsoup
 import collection.JavaConversions._
 import url.URLCanonicalizer
 import ch.sentric.URL
+import org.apache.http.client.utils.URIUtils
+import java.net.URI
 
 /**
  * The Class CrawlActor.
@@ -106,10 +108,14 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
             val cleanAuthor = if (StringUtils.isNotBlank(syndEntry.getAuthor)) Jsoup.parse(syndEntry.getAuthor).text() else ""
             val author = if (StringUtils.isNotBlank(cleanAuthor)) Some(cleanAuthor) else None
 
+            val hostName = URIUtils.extractHost(new URI(url)).getHostName
+              .replaceAll(".", "-")
             val article = Article(
               _id = normalizationUrl,
               url = url,
               title = StringUtils.capitalize(title),
+              uniqueTitle = genUniqueTitle(title),
+              domain = hostName,
               description = des,
               featureImage = featureImage,
               author = author,
@@ -130,5 +136,9 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
       }
     }
   }
+
+  private def genUniqueTitle(title: String) = StringUtils.stripAccents(title)
+    .replaceAll(" ", "-")
+    .toUpperCase
 
 }
