@@ -1,5 +1,8 @@
 #page-container {
   margin-top: 10px;
+  .col-md-3 {
+    padding: 0;
+  }
 }
 
 .box {
@@ -136,5 +139,48 @@
   }
   li {
     margin: 10px 0;
+  }
+}
+
+.top-stories {
+  background: #e1eaed;
+  padding: 5px;
+  margin-bottom: 14px;
+
+  .title {
+    margin: 5px 0 10px 5px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .content {
+    padding: 5px;
+    background: #fff;
+    li {
+      border-bottom: solid 1px #efefef;
+      margin: 10px 0;
+    }
+    .rank {
+      float: left;
+      width: 15%;
+      font-size: 3em;
+      font-weight: bold;
+      color: #ccc;
+      padding-top: 7px;
+    }
+    a {
+      width: 85%;
+      float: left;
+    }
+  }
+}
+
+.top-tags {
+  .title {
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+    border-top: solid 2px #ccc;
+    border-bottom: solid 1px #efefef;
   }
 }
