@@ -5,9 +5,9 @@
 @import views.html.bootstrapform._
 @implicitFieldConstructor = @{FieldConstructor(bootstrapform.filedContructor.f)}
 
-<div class="col-md-3 col-md-offset-4">
+<div class="col-md-3 col-md-offset-4" style="height: 500px;">
     <form action="/user/registerPost" method="post" role="form">
-        <h2 class="form-signin-heading">Register</h2>
+        <h2 class="form-signin-heading">Đăng ký</h2>
         @inputText(registerForm("email"), 'class -> "form-control", '_label -> Messages("lbl.email"))
         @inputText(registerForm("fullname"), 'class -> "form-control", '_label -> Messages("lbl.fullname"))
         @inputPassword(registerForm("password"), 'class -> "form-control", '_label -> Messages("lbl.password"))
