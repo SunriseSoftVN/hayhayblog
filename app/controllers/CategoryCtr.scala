@@ -18,8 +18,9 @@ object CategoryCtr extends Controller with OptionalAuthElement with AuthConfigIm
   def index(shortName: String, page: Int) = StackAction(implicit request => {
     CategoryDao.findByShortName(shortName).mapRender(cat => {
       val (articles, totalPage) = ArticleDao.findByCatId(cat._id, page)
-      implicit val topMenuDto =  TopMenuDto(CategoryDao.all, cat.shortName)
-      renderOk(views.html.category.view(cat, articles, totalPage, page))
+      val articlesNextPage = if(page < totalPage) ArticleDao.findByCatId(cat._id, page + 1)._1 else Nil
+      implicit val topMenuDto = TopMenuDto(CategoryDao.all, cat.shortName)
+      renderOk(views.html.category.view(articles, ArticleDao.mostRead(cat._id, 5), articlesNextPage, totalPage, page))
     })
   })
 

@@ -1,98 +1,48 @@
-@(category: Category, articles: List[Article], totalPage: Int, currentPage: Int)
+@(articles: List[Article], articleMostReads: List[Article], articlesNextPage: List[Article], totalPage: Int, currentPage: Int)
 
 <div class="row">
     <div class="col-md-9">
+        @articles.map { article =>
         <div class="small-article">
             <div class="col-md-3">
-                <img class="img" src="http://images3.baomoi.com/226/148/13035035.aspx" alt=""/>
+                @article.featureImage.map { img =>
+                <img class="img" src="@img" alt="@article.title"/>
+                }
             </div>
             <div class="col-md-9">
-                <h2 class="title"><a href="">EU vừa tìm cách trừng phạt vừa hỗ trợ tài chính Ukraine</a></h2>
-                <p>
-                    Ngày 6/2, Nghị viện Liên minh châu Âu (EP) đưa ra xem xét dự thảo nghị quyết về
-                    tình hình tại Ukraine, trong đó đề xuất thành lập phái bộ thường trực của EP
-                    tại nước này và áp án phạt đích danh đối với một số chính trị gia…
+                <h2 class="title"><a href="@article.url" target="_blank">@article.title</a></h2>
+                <p>@article.shortDescription</p>
+                @if(!article.tagList.isEmpty) {
+                <p class="keywords">
+                    Từ khóa:&nbsp;
+                    @article.tagList.map { tag =>
+                    <a href="/tag/@tag" rel="tag">@tag</a>
+                    }
                 </p>
-                <p class="keywords">Từ khóa:&nbsp;
-                    <a href="http://www.baomoi.com/Tag/Ủy-ban-Châu-Âu.epi" rel="tag">Ủy ban Châu Âu</a>
-                    <a href="http://www.baomoi.com/Tag/người-biểu-tình.epi" rel="tag">người biểu tình</a>
-                    <a href="http://www.baomoi.com/Tag/Đảng-Dân-Chủ.epi" rel="tag">Đảng Dân Chủ</a>
-                    <a href="http://www.baomoi.com/Tag/giải-tán.epi" rel="tag">giải tán</a>
-                    <a href="http://www.baomoi.com/Tag/biểu-tình.epi" rel="tag">biểu tình</a>
-                </p>
+                }
             </div>
             <div class="clearfix"></div>
         </div>
-
-        <div class="small-article">
-            <div class="col-md-3">
-                <img class="img" src="http://images3.baomoi.com/226/148/13035035.aspx" alt=""/>
-            </div>
-            <div class="col-md-9">
-                <h2 class="title"><a href="">EU vừa tìm cách trừng phạt vừa hỗ trợ tài chính Ukraine</a></h2>
-
-                <p>
-                    Ngày 6/2, Nghị viện Liên minh châu Âu (EP) đưa ra xem xét dự thảo nghị quyết về
-                    tình hình tại Ukraine, trong đó đề xuất thành lập phái bộ thường trực của EP
-                    tại nước này và áp án phạt đích danh đối với một số chính trị gia…
-                </p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="small-article">
-            <div class="col-md-3">
-                <img class="img" src="http://images3.baomoi.com/226/148/13035035.aspx" alt=""/>
-            </div>
-            <div class="col-md-9">
-                <h2 class="title"><a href="">EU vừa tìm cách trừng phạt vừa hỗ trợ tài chính Ukraine</a></h2>
-
-                <p>
-                    Ngày 6/2, Nghị viện Liên minh châu Âu (EP) đưa ra xem xét dự thảo nghị quyết về
-                    tình hình tại Ukraine, trong đó đề xuất thành lập phái bộ thường trực của EP
-                    tại nước này và áp án phạt đích danh đối với một số chính trị gia…
-                </p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-
-        <div class="small-article">
-            <div class="col-md-3">
-                <img class="img" src="http://images3.baomoi.com/226/148/13035035.aspx" alt=""/>
-            </div>
-            <div class="col-md-9">
-                <h2 class="title"><a href="">EU vừa tìm cách trừng phạt vừa hỗ trợ tài chính Ukraine</a></h2>
-
-                <p>
-                    Ngày 6/2, Nghị viện Liên minh châu Âu (EP) đưa ra xem xét dự thảo nghị quyết về
-                    tình hình tại Ukraine, trong đó đề xuất thành lập phái bộ thường trực của EP
-                    tại nước này và áp án phạt đích danh đối với một số chính trị gia…
-                </p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+        }
 
         <div class="paging">
             <span>
-                <a class="current">1</a>
-                <a href="/Home/TheGioi/p/2.epi">2</a>
-                <a href="/Home/TheGioi/p/3.epi">3</a>
-                <a href="/Home/TheGioi/p/4.epi">4</a>
-                <a href="/Home/TheGioi/p/5.epi">5</a>
-                <a href="/Home/TheGioi/p/6.epi">...</a>
-                <a href="/Home/TheGioi/p/10000.epi">10000</a>
+                @for(i <- 1 to totalPage) {
+                <a href="?page=@i" class="@if(i == currentPage) {current}">@i</a>
+                }
             </span>
         </div>
 
+        @if(!articlesNextPage.isEmpty) {
         <div class="more-stories">
-            <h2 class="title">Các tin khác</h2>
+            <h2 class="title">Các tin khác:</h2>
             <ul>
-                <li><a href="">Bão tuyết bất thường tấn công Mỹ</a></li>
-                <li><a href="">Bão tuyết bất thường tấn công Mỹ</a></li>
-                <li><a href="">Bão tuyết bất thường tấn công Mỹ</a></li>
-                <li><a href="">Bão tuyết bất thường tấn công Mỹ</a></li>
+                @articlesNextPage.map{ article =>
+                <li><a href="@article.url" target="_blank">@article.title</a></li>
+                }
             </ul>
         </div>
+        }
 
     </div>
     <div class="col-md-3">
@@ -100,43 +50,25 @@
             <h3 class="title">Nổi bật trong tuần</h3>
             <div class="content">
                 <ul>
+                    @for(i <- 0 until articleMostReads.length) {
                     <li>
-                        <span class="rank">1</span>
-                        <a href="">Tòa án Thái Lan thông qua lệnh bắt các thủ lĩnh biểu tình</a>
+                        <span class="rank">@{i+1}</span>
+                        <a href="@articleMostReads(i).url" target="_blank">@articleMostReads(i).title</a>
                         <div class="clearfix"></div>
                     </li>
-                    <li>
-                        <span class="rank">2</span>
-                        <a href="">Tòa án Thái Lan thông qua lệnh bắt các thủ lĩnh biểu tình</a>
-                        <div class="clearfix"></div>
-                    </li>
-                    <li>
-                        <span class="rank">3</span>
-                        <a href="">Tòa án Thái Lan thông qua lệnh bắt các thủ lĩnh biểu tình</a>
-                        <div class="clearfix"></div>
-                    </li>
-                    <li>
-                        <span class="rank">4</span>
-                        <a href="">Tòa án Thái Lan thông qua lệnh bắt các thủ lĩnh biểu tình</a>
-                        <div class="clearfix"></div>
-                    </li>
-                    <li>
-                        <span class="rank">5</span>
-                        <a href="">Tòa án Thái Lan thông qua lệnh bắt các thủ lĩnh biểu tình</a>
-                        <div class="clearfix"></div>
-                    </li>
+                    }
                 </ul>
             </div>
         </div>
-        <div class="top-tags">
-            <h3 class="title">Xu hướng đọc</h3>
-            <ul>
-                <li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>
-                <li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>
-                <li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>
-                <li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>
-                <li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>
-            </ul>
-        </div>
+        <!--<div class="top-tags">-->
+            <!--<h3 class="title">Xu hướng đọc</h3>-->
+            <!--<ul>-->
+                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
+                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
+                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
+                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
+                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
     </div>
 </div>
