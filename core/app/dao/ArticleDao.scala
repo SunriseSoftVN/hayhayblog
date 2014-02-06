@@ -40,12 +40,12 @@ object ArticleDao extends BaseDao[Article, String] {
     (articles, totalPage.toInt)
   }
 
-  def topTenMostRead = find(MongoDBObject.empty).sort(MongoDBObject("clicked" -> -1)).take(10).toList
+  def mostRead(take: Int = 6) = find(MongoDBObject.empty).sort(MongoDBObject("clicked" -> -1)).take(take).toList
 
-  def topTenMostRead(catId: ObjectId) = {
+  def mostRead(catId: ObjectId, take: Int) = {
     val blogIds = BlogDao.findByCatId(catId).map(_._id)
     val query = MongoDBObject("blogId" -> MongoDBObject("$in" -> blogIds))
-    find(query).sort(MongoDBObject("clicked" -> -1)).take(10).toList
+    find(query).sort(MongoDBObject("clicked" -> -1)).take(take).toList
   }
 
   def findByUrl(url: String) = findOne(MongoDBObject("url" -> url))

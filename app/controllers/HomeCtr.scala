@@ -6,7 +6,7 @@ import auth.AuthConfigImpl
 import dao.{ArticleDao, CategoryDao}
 import dto.NewsBoxDto
 
-object Home extends Controller with OptionalAuthElement with AuthConfigImpl with MainTemplate {
+object HomeCtr extends Controller with OptionalAuthElement with AuthConfigImpl with MainTemplate {
 
   def index = StackAction(implicit request => {
     val newsBoxs = CategoryDao.all.map(cat => {
@@ -14,7 +14,7 @@ object Home extends Controller with OptionalAuthElement with AuthConfigImpl with
       NewsBoxDto(cat, articles)
     })
 
-    renderOk(views.html.index(newsBoxs))
+    renderOk(views.html.index(newsBoxs, ArticleDao.mostRead(6)))
   })
 
 }

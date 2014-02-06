@@ -4,7 +4,7 @@ import play.api.templates.Html
 import play.api.i18n.Messages
 import play.api.mvc.{SimpleResult, Controller}
 import model.User
-import dao.{ArticleDao, CategoryDao}
+import dao.CategoryDao
 import dto.TopMenuDto
 
 /**
@@ -16,11 +16,6 @@ import dto.TopMenuDto
  */
 trait MainTemplate extends Controller {
 
-  def rightSideBar(implicit dto: TopMenuDto) = CategoryDao.findByShortName(dto.currentCat).map(cat => {
-    views.html.partials.rightsidebar(ArticleDao.topTenMostRead(cat._id))
-  }).getOrElse {
-    views.html.partials.rightsidebar(ArticleDao.topTenMostRead)
-  }
 
   def topMenu(implicit dto: TopMenuDto) = views.html.partials.topmenu(dto)
 
@@ -31,7 +26,7 @@ trait MainTemplate extends Controller {
                description: String = Messages("application.description"))
               (implicit user: Option[User],
                dto: TopMenuDto = TopMenuDto(CategoryDao.all, "home")) = Ok(
-    views.html.tml.main(content, title, description, topMenu, footer, rightSideBar)
+    views.html.tml.main(content, title, description, topMenu, footer)
   )
 
   def renderBadRequest(content: Html,
@@ -39,7 +34,7 @@ trait MainTemplate extends Controller {
                        description: String = Messages("application.description"))
                       (implicit user: Option[User],
                        dto: TopMenuDto = TopMenuDto(CategoryDao.all, "home")) = BadRequest(
-    views.html.tml.main(content, title, description, topMenu, footer, rightSideBar)
+    views.html.tml.main(content, title, description, topMenu, footer)
   )
 
   implicit class RichOption[E](op: Option[E]) {

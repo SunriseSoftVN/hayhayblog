@@ -1,4 +1,4 @@
-@(newsBoxs: List[NewsBoxDto])
+@(newsBoxs: List[NewsBoxDto], articleMostReads: List[Article])
 @import views.html.partials._
 
 
@@ -7,30 +7,14 @@
         <h2><a href="">Bài nên đọc <i class="fa fa-thumbs-up"></i></a></h2>
     </div>
     <div class="box-content">
+        @articleMostReads.map { article =>
         <div class="col-md-2 hot-article">
-            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
-            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
+            @article.featureImage.map { img =>
+            <a href="@article.url" target="_blank"><img src="@img" alt="@article.title"/></a>
+            }
+            <h2 class="title"><a href="@article.url" target="_blank">@article.title</a></h2>
         </div>
-        <div class="col-md-2 hot-article">
-            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/ho_quang_hieu_con_buom_xuan.jpg" alt=""/>
-            <h2 class="title"><a href="">Con bướm Xuân" - Hồ Quang Hiếu live Top h...</a></h2>
-        </div>
-        <div class="col-md-2 hot-article">
-            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
-            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
-        </div>
-        <div class="col-md-2 hot-article">
-            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
-            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
-        </div>
-        <div class="col-md-2 hot-article">
-            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
-            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
-        </div>
-        <div class="col-md-2 hot-article">
-            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
-            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
-        </div>
+        }
         <div class="clearfix"></div>
     </div>
 </div>
