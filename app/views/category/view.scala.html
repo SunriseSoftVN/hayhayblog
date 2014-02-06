@@ -10,7 +10,7 @@
                 }
             </div>
             <div class="col-md-9">
-                <h2 class="title"><a href="@article.url" target="_blank">@article.title</a></h2>
+                <h2 class="title"><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></h2>
                 <p>@article.shortDescription</p>
                 @if(!article.tagList.isEmpty) {
                 <p class="keywords">
@@ -38,7 +38,7 @@
             <h2 class="title">Các tin khác:</h2>
             <ul>
                 @articlesNextPage.map{ article =>
-                <li><a href="@article.url" target="_blank">@article.title</a></li>
+                <li><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></li>
                 }
             </ul>
         </div>
@@ -53,7 +53,7 @@
                     @for(i <- 0 until articleMostReads.length) {
                     <li>
                         <span class="rank">@{i+1}</span>
-                        <a href="@articleMostReads(i).url" target="_blank">@articleMostReads(i).title</a>
+                        <a href="/r/@articleMostReads(i).domain/@articleMostReads(i).uniqueTitle" target="_blank">@articleMostReads(i).title</a>
                         <div class="clearfix"></div>
                     </li>
                     }

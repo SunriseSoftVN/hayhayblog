@@ -101,9 +101,11 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
             syndEntry.getCategories.foreach {
               case sCat: SyndCategory =>
                 if (StringUtils.isNotBlank(sCat.getName)) {
-                  tags += ", " + StringUtils.trimToEmpty(sCat.getName)
+                  tags += ", " + StringUtils.stripAccents(StringUtils.trimToEmpty(sCat.getName)).toLowerCase
                 }
             }
+
+            tags.replaceFirst(",", "")
 
             val cleanAuthor = if (StringUtils.isNotBlank(syndEntry.getAuthor)) Jsoup.parse(syndEntry.getAuthor).text() else ""
             val author = if (StringUtils.isNotBlank(cleanAuthor)) Some(cleanAuthor) else None
@@ -120,9 +122,7 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
               description = des,
               featureImage = featureImage,
               author = author,
-              tags = if (StringUtils.isNotBlank(tags)) {
-                Some(tags.replaceFirst(", ", ""))
-              } else None,
+              tags = if (StringUtils.isNotBlank(tags)) Some(tags) else None,
               descriptionHtml = rssHtml.getBytes("UTF-8"),
               blogId = blog._id,
               publishedDate = pubDate.getOrElse(DateTime.now())
