@@ -10,9 +10,9 @@
         @articleMostReads.map { article =>
         <div class="col-md-2 hot-article">
             @article.featureImage.map { img =>
-            <a href="@article.url" target="_blank"><img src="@img" alt="@article.title"/></a>
+            <a href="/r/@article.domain/@article.uniqueTitle" target="_blank"><img src="@img" alt="@article.title"/></a>
             }
-            <h2 class="title"><a href="@article.url" target="_blank">@article.title</a></h2>
+            <h2 class="title"><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></h2>
         </div>
         }
         <div class="clearfix"></div>

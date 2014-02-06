@@ -12,9 +12,11 @@ import dao.ArticleDao
  */
 object CounterCtr extends Controller {
 
-  def count(url: String) = Action {
-    ArticleDao.updateClick(url)
-    Redirect(url)
+  def count(domain: String, uniqueTitle: String) = Action {
+    ArticleDao.findByUniqueTitleAndDomain(domain, uniqueTitle).map(article => {
+      ArticleDao.save(article.copy(clicked = article.clicked + 1))
+      Redirect(article.url)
+    }).getOrElse(NotFound)
   }
 
 }

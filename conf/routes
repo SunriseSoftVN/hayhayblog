@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET        /                           controllers.Home.index
+GET        /                           controllers.HomeCtr.index
 
 GET        /user/login                 controllers.UserCtr.login
 GET        /user/register              controllers.UserCtr.register
@@ -23,7 +23,7 @@ GET        /google/auth                controllers.GoogleCtr.auth
 GET        /about                      controllers.AboutCtr.index
 GET        /cat/:shortName             controllers.CategoryCtr.index(shortName: String, page: Int ?= 1)
 
-GET        /r                          controllers.CounterCtr.count(url: String)
+GET        /r/:domain/:title           controllers.CounterCtr.count(domain, title)
 
 
 # Map static resources from the /public folder to the /assets URL path

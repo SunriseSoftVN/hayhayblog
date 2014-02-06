@@ -108,8 +108,9 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
             val cleanAuthor = if (StringUtils.isNotBlank(syndEntry.getAuthor)) Jsoup.parse(syndEntry.getAuthor).text() else ""
             val author = if (StringUtils.isNotBlank(cleanAuthor)) Some(cleanAuthor) else None
 
-            val hostName = URIUtils.extractHost(new URI(url)).getHostName
-              .replaceAll(".", "-")
+            val hostName = URIUtils.extractHost(new URI(url))
+              .getHostName
+              .replaceAll("[^a-zA-Z\\d\\s:]", "")
             val article = Article(
               _id = normalizationUrl,
               url = url,
@@ -138,7 +139,8 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
   }
 
   private def genUniqueTitle(title: String) = StringUtils.stripAccents(title)
+    .replaceAll("[^a-zA-Z\\d\\s:]", "")
     .replaceAll(" ", "-")
-    .toUpperCase
+    .toLowerCase
 
 }
