@@ -1,6 +1,45 @@
 @(newsBoxs: List[NewsBoxDto])
 @import views.html.partials._
 
-@for(i <-0 until newsBoxs.length) {
-    @newsbox(newsBoxs(i), i + 1)
+
+<div class="box">
+    <div class="box-header">
+        <h2><a href="">Bài nên đọc <i class="fa fa-thumbs-up"></i></a></h2>
+    </div>
+    <div class="box-content">
+        <div class="col-md-2 hot-article">
+            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
+            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
+        </div>
+        <div class="col-md-2 hot-article">
+            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/ho_quang_hieu_con_buom_xuan.jpg" alt=""/>
+            <h2 class="title"><a href="">Con bướm Xuân" - Hồ Quang Hiếu live Top h...</a></h2>
+        </div>
+        <div class="col-md-2 hot-article">
+            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
+            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
+        </div>
+        <div class="col-md-2 hot-article">
+            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
+            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
+        </div>
+        <div class="col-md-2 hot-article">
+            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
+            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
+        </div>
+        <div class="col-md-2 hot-article">
+            <img src="http://dspl-thumb.nl-img.com/thumb_x145x110/2014/02/05/duong_tu_trong_lam_tho.jpg" alt=""/>
+            <h2 class="title"><a href="">"Nghệ sĩ" Dương Tự Trọng và những bài thơ ...</a></h2>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+@newsBoxs.map { box =>
+<div class="row">
+    <div class="col-md-12">
+        @newsbox(box)
+    </div>
+</div>
 }
+

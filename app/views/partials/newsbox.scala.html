@@ -1,49 +1,65 @@
-@(box: NewsBoxDto, index: Int)
-<section class="module-@index pkg">
-    <header class="module-heading pkg">
-        <h2 class="title"><a href="/cat/@box.shortName">@box.title <span class="module-arrow"></span></a></h2>
-        <!--<ul class="module-nav">-->
-        <!--<li><a href="http://www.doisongphapluat.com/tin-tuc/su-kien-hang-ngay/">Sự kiện hàng ngày</a></li>-->
-        <!--<li><a href="http://www.doisongphapluat.com/xa-hoi/">Xã hội</a></li>-->
-        <!--<li><a href="http://www.doisongphapluat.com/tin-tuc/the-gioi/">Thế giới</a></li>-->
-        <!--<li><a href="http://www.doisongphapluat.com/cong-nghe/">Công nghệ</a></li>-->
-        <!--<li><a href="http://www.doisongphapluat.com/giao-duc/">Giáo dục</a></li>-->
-        <!--<li><a href="http://www.doisongphapluat.com/oto-xemay/">Ôtô - Xe máy</a></li>-->
-        <!--<li><a href="http://www.doisongphapluat.com/can-biet/">Cần biết</a></li>-->
-        <!--</ul>-->
-    </header>
-    <div class="module-cnt pkg">
-        <div class="module-first-item">
-            @box.bigArticle.map { article =>
-            @article.featureImage.map { img =>
-            <a href="@article.url" class="img" title="@article.title">
-                <img src="@img" alt="@article.title">
-
-                <h3 class="title">@article.title</h3>
-            </a>
-            }
-
-            <p class="desc">@article.shortDescription</p>
-            }
-        </div>
-        <!--module first item-->
-        <ul class="module-item pkg">
-            @box.articles.map{ article =>
-            <li class="pkg">
-                <h3 class="heading">
-                    <a href="@article.url" title="@article.title">@article.title</a>
-                </h3>
-
-                <div class="pkg">
-                    @article.featureImage.map { img =>
-                    <a href="@article.url" class="img" title="@article.title">
-                        <img src="@img" alt="@article.title">
-                    </a>
-                    }
-                    <p class="desc">@article.shortDescription</p>
-                </div>
-            </li>
-            }
-        </ul>
+@(box: NewsBoxDto)
+<div class="box">
+    <div class="box-header">
+        <h2><a href="">Thế giới <i class="fa fa-chevron-circle-right"></i></a></h2>
     </div>
-</section>
+    <div class="box-content">
+        <div class="col-md-4">
+            <div class="big-article">
+                <div class="img">
+                    <img src="http://dspl-thumb.nl-img.com/thumb_x315x230/2014/02/05/bao_mau.jpg" alt=""/>
+                </div>
+                <h2 class="title"><a href="">Năm mới, bàn về 18 năm tù của Dương Tự Trọng</a></h2>
+                <div class="description">
+                    (ĐSPL) - Bị "người yêu" từ chối tình cảm, Lương Hoàng (30 tuổi, Đài Loan ) đã rải những tấm ảnh thân mật chụp cùng bạn gái khắp đường Tân Bắc, Đài Loan.
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-4">
+            <div class="article">
+                <h2 class="title"><a href="">Ngày Tết, rải ảnh nhạy cảm chụp với người yêu khắp phố</a></h2>
+                <div class="img col-md-4">
+                    <img src="http://dspl-thumb.nl-img.com/thumb_x104x78/2014/02/05/anh_sex.jpg" alt=""/>
+                </div>
+                <div class="description col-md-8">
+                    (ĐSPL) - Bị "người yêu" từ chối tình cảm, Lương Hoàng (30 tuổi, Đài Loan ) đã rải những tấm ảnh
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="article">
+                <h2 class="title"><a href="">Ngày Tết, rải ảnh nhạy cảm chụp với người yêu khắp phố</a></h2>
+                <div class="img col-md-4">
+                    <img src="http://dspl-thumb.nl-img.com/thumb_x104x78/2014/02/05/anh_sex.jpg" alt=""/>
+                </div>
+                <div class="description col-md-8">
+                    (ĐSPL) - Bị "người yêu" từ chối tình cảm, Lương Hoàng (30 tuổi, Đài Loan ) đã rải những tấm ảnh
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="article">
+                <h2 class="title"><a href="">Ngày Tết, rải ảnh nhạy cảm chụp với người yêu khắp phố</a></h2>
+                <div class="img col-md-4">
+                    <img src="http://dspl-thumb.nl-img.com/thumb_x104x78/2014/02/05/anh_sex.jpg" alt=""/>
+                </div>
+                <div class="description col-md-8">
+                    (ĐSPL) - Bị "người yêu" từ chối tình cảm, Lương Hoàng (30 tuổi, Đài Loan ) đã rải những tấm ảnh
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="article">
+                <h2 class="title"><a href="">Ngày Tết, rải ảnh nhạy cảm chụp với người yêu khắp phố</a></h2>
+                <div class="img col-md-4">
+                    <img src="http://dspl-thumb.nl-img.com/thumb_x104x78/2014/02/05/anh_sex.jpg" alt=""/>
+                </div>
+                <div class="description col-md-8">
+                    (ĐSPL) - Bị "người yêu" từ chối tình cảm, Lương Hoàng (30 tuổi, Đài Loan ) đã rải những tấm ảnh
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
