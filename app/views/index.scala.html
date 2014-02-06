@@ -11,6 +11,8 @@
         <div class="col-md-2 hot-article">
             @article.featureImage.map { img =>
             <a href="/r/@article.domain/@article.uniqueTitle" target="_blank"><img src="@img" alt="@article.title"/></a>
+            }.getOrElse {
+            <div style="height: 108px;"></div>
             }
             <h2 class="title"><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></h2>
         </div>

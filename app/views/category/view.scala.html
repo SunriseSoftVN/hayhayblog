@@ -6,7 +6,9 @@
         <div class="small-article">
             <div class="col-md-3">
                 @article.featureImage.map { img =>
-                <img class="img" src="@img" alt="@article.title"/>
+                <a href="/r/@article.domain/@article.uniqueTitle" target="_blank">
+                    <img class="img" src="@img" alt="@article.title"/>
+                </a>
                 }
             </div>
             <div class="col-md-9">
