@@ -1,49 +1,99 @@
 @(category: Category, articles: List[Article], totalPage: Int, currentPage: Int)
 
-<div class="maincontent">
-    <div class="left_content">
-        <div class="newslistpannel">
-            <ul>
-                @articles.map { article =>
-                <li class="item clearfix">
-                    <div class="img">
-                        @article.featureImage.map {img =>
-                        <a title="@article.title" href="@article.url">
-                            <img class="avatar" title="@article.title" alt="@article.title" src="@img">
-                            <span class="icon"></span>
-                        </a>
-                        }
-                    </div>
-                    <div class="postcontent">
-                        <div class="subtitle fl">
-                            <a href="#">android</a>
-                        </div>
-                        <div title="03/02/2014 00:01:30" class="meta">@article.publishedDate</div>
-                        <h4 class="title">
-                            <a href="@article.url">@article.title</a>
-                        </h4>
-
-                        <div class="sapo">@article.shortDescription</div>
-                    </div>
-                </li>
-                }
-            </ul>
-            @if(totalPage > 1) {
-            <div class="pagercontainer clearfix">
-                <ul>
-                    @for(i <- 1 to totalPage) {
-                    <li class="@if(i == currentPage) {currentpage}">
-                        @if(i == currentPage) {
-                        @i
-                        } else {
-                        <a href="?page=@i">@i</a>
-                        }
-                    </li>
-                    }
-                </ul>
+<div class="row">
+    <div class="col-md-9">
+        <div class="small-article">
+            <div class="col-md-3">
+                <img class="img" src="http://images3.baomoi.com/226/148/13035035.aspx" alt=""/>
             </div>
-            }
-
+            <div class="col-md-9">
+                <h2 class="title"><a href="">EU vừa tìm cách trừng phạt vừa hỗ trợ tài chính Ukraine</a></h2>
+                <p>
+                    Ngày 6/2, Nghị viện Liên minh châu Âu (EP) đưa ra xem xét dự thảo nghị quyết về
+                    tình hình tại Ukraine, trong đó đề xuất thành lập phái bộ thường trực của EP
+                    tại nước này và áp án phạt đích danh đối với một số chính trị gia…
+                </p>
+                <p class="keywords">Từ khóa:&nbsp;
+                    <a href="http://www.baomoi.com/Tag/Ủy-ban-Châu-Âu.epi" rel="tag">Ủy ban Châu Âu</a>
+                    <a href="http://www.baomoi.com/Tag/người-biểu-tình.epi" rel="tag">người biểu tình</a>
+                    <a href="http://www.baomoi.com/Tag/Đảng-Dân-Chủ.epi" rel="tag">Đảng Dân Chủ</a>
+                    <a href="http://www.baomoi.com/Tag/giải-tán.epi" rel="tag">giải tán</a>
+                    <a href="http://www.baomoi.com/Tag/biểu-tình.epi" rel="tag">biểu tình</a>
+                </p>
+            </div>
+            <div class="clearfix"></div>
         </div>
+
+        <div class="small-article">
+            <div class="col-md-3">
+                <img class="img" src="http://images3.baomoi.com/226/148/13035035.aspx" alt=""/>
+            </div>
+            <div class="col-md-9">
+                <h2 class="title"><a href="">EU vừa tìm cách trừng phạt vừa hỗ trợ tài chính Ukraine</a></h2>
+
+                <p>
+                    Ngày 6/2, Nghị viện Liên minh châu Âu (EP) đưa ra xem xét dự thảo nghị quyết về
+                    tình hình tại Ukraine, trong đó đề xuất thành lập phái bộ thường trực của EP
+                    tại nước này và áp án phạt đích danh đối với một số chính trị gia…
+                </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="small-article">
+            <div class="col-md-3">
+                <img class="img" src="http://images3.baomoi.com/226/148/13035035.aspx" alt=""/>
+            </div>
+            <div class="col-md-9">
+                <h2 class="title"><a href="">EU vừa tìm cách trừng phạt vừa hỗ trợ tài chính Ukraine</a></h2>
+
+                <p>
+                    Ngày 6/2, Nghị viện Liên minh châu Âu (EP) đưa ra xem xét dự thảo nghị quyết về
+                    tình hình tại Ukraine, trong đó đề xuất thành lập phái bộ thường trực của EP
+                    tại nước này và áp án phạt đích danh đối với một số chính trị gia…
+                </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="small-article">
+            <div class="col-md-3">
+                <img class="img" src="http://images3.baomoi.com/226/148/13035035.aspx" alt=""/>
+            </div>
+            <div class="col-md-9">
+                <h2 class="title"><a href="">EU vừa tìm cách trừng phạt vừa hỗ trợ tài chính Ukraine</a></h2>
+
+                <p>
+                    Ngày 6/2, Nghị viện Liên minh châu Âu (EP) đưa ra xem xét dự thảo nghị quyết về
+                    tình hình tại Ukraine, trong đó đề xuất thành lập phái bộ thường trực của EP
+                    tại nước này và áp án phạt đích danh đối với một số chính trị gia…
+                </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="paging">
+            <span>
+                <a class="current">1</a>
+                <a href="/Home/TheGioi/p/2.epi">2</a>
+                <a href="/Home/TheGioi/p/3.epi">3</a>
+                <a href="/Home/TheGioi/p/4.epi">4</a>
+                <a href="/Home/TheGioi/p/5.epi">5</a>
+                <a href="/Home/TheGioi/p/6.epi">...</a>
+                <a href="/Home/TheGioi/p/10000.epi">10000</a>
+            </span>
+        </div>
+
+        <div class="more-stories">
+            <h2 class="title">Các tin khác</h2>
+            <ul>
+                <li><a href="">Bão tuyết bất thường tấn công Mỹ</a></li>
+                <li><a href="">Bão tuyết bất thường tấn công Mỹ</a></li>
+                <li><a href="">Bão tuyết bất thường tấn công Mỹ</a></li>
+                <li><a href="">Bão tuyết bất thường tấn công Mỹ</a></li>
+            </ul>
+        </div>
+
     </div>
+    <div class="col-md-3">Col 4</div>
 </div>
