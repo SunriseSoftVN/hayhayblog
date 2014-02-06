@@ -13,6 +13,8 @@ import formater.ObjectIdFormat._
 import validation.Constraint._
 import model.Blog
 import org.joda.time.DateTime
+import org.apache.http.client.utils.URIUtils
+import java.net.URI
 
 /**
  * The Class BlogCtr.
@@ -28,6 +30,7 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
       "_id" -> of[ObjectId],
       "name" -> text(minLength = 3),
       "url" -> nonEmptyText.verifying(urlConstraint),
+      "domain" -> text,
       "rssUrl" -> nonEmptyText.verifying(urlConstraint),
       "status" -> nonEmptyText,
       "description" -> optional(text),
@@ -61,7 +64,10 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
     editForm.bindFromRequest.fold(
       error => renderBadRequest(admin.views.html.blog.edit(error, categories)),
       blog => {
-        BlogDao.save(blog)
+        val hostName = URIUtils.extractHost(new URI(blog.url))
+          .getHostName
+          .replaceAll("[^a-zA-Z\\d\\s:]", "")
+        BlogDao.save(blog.copy(domain = hostName))
         Redirect("/admin/blog")
       }
     )

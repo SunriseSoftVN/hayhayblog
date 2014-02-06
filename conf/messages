@@ -25,3 +25,4 @@ lbl.description=Description
 lbl.status=Status
 lbl.lastUpdated=Last Updated
 lbl.rePassword=Nhập lại mật khẩu
+lbl.domain=Domain

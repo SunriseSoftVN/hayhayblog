@@ -49,7 +49,7 @@ object CategoryCtr extends Controller with AuthElement with AuthConfigImpl with 
       error => renderBadRequest(admin.views.html.category.edit(error)),
       category => {
         if (StringUtils.isBlank(category.shortName)) {
-          val shortName = StringUtils.stripAccents(category.name).replaceAll(" ", "_")
+          val shortName = StringUtils.stripAccents(category.name).replaceAll(" ", "_").toLowerCase
           CategoryDao.save(category.copy(shortName = shortName))
         } else {
           CategoryDao.save(category)

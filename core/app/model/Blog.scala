@@ -14,6 +14,7 @@ case class Blog(
                  _id: ObjectId = new ObjectId(),
                  name: String,
                  url: String,
+                 domain: String,
                  rssUrl: String,
                  status: String = BlogStatus.UPDATED,
                  description: Option[String] = None,

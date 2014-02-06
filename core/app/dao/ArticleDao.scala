@@ -40,6 +40,28 @@ object ArticleDao extends BaseDao[Article, String] {
     (articles, totalPage.toInt)
   }
 
+  def findByBlogId(blogId: ObjectId, page: Int = 1, itemDisplay: Int = 10) = {
+    val skip = (page - 1) * itemDisplay
+
+    val query = MongoDBObject("blogId" -> blogId)
+
+    val totalRow = count(query)
+
+    var totalPage = totalRow / itemDisplay
+    if (totalRow - totalPage * itemDisplay > 0) {
+      totalPage += 1
+    }
+
+    val articles = find(query)
+      .skip(skip)
+      .limit(itemDisplay)
+      .sort(MongoDBObject("publishedDate" -> -1))
+      .toList
+
+    (articles, totalPage.toInt)
+  }
+
+
   def mostRead(take: Int = 6) = find(MongoDBObject.empty)
     .sort(MongoDBObject("clicked" -> -1))
     .take(take)
@@ -56,4 +78,5 @@ object ArticleDao extends BaseDao[Article, String] {
   def findByUniqueTitleAndDomain(domain: String, uniqueTitle: String) = findOne(
     MongoDBObject("uniqueTitle" -> uniqueTitle, "domain" -> domain)
   )
+
 }
