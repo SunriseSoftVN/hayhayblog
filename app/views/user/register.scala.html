@@ -5,7 +5,7 @@
 @import views.html.bootstrapform._
 @implicitFieldConstructor = @{FieldConstructor(bootstrapform.filedContructor.f)}
 
-<div class="col-md-3 col-md-offset-4" style="margin-top: 50px;">
+<div class="col-md-3 col-md-offset-4">
     <form action="/user/registerPost" method="post" role="form">
         <h2 class="form-signin-heading">Register</h2>
         @inputText(registerForm("email"), 'class -> "form-control", '_label -> Messages("lbl.email"))
@@ -22,7 +22,7 @@
         }
 
         <div class="form-group">
-            <button class="btn btn-primary pull-right" type="submit">Register</button>
+            <button class="btn btn-default pull-right" type="submit">Register</button>
         </div>
     </form>
 </div>
