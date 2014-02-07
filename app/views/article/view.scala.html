@@ -3,6 +3,7 @@ articlesNextPage: List[Article], blogs: List[Blog], tags: List[Tag],
 totalPage: Int, currentPage: Int)
 
 @import partials.smallarticle
+@import partials.facebookPlugin
 
 <div class="row">
     <div class="col-md-9">
@@ -23,7 +24,7 @@ totalPage: Int, currentPage: Int)
             <h2 class="title">Các bài khác:</h2>
             <ul>
                 @articlesNextPage.map{ article =>
-                <li><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></li>
+                <li><a href="/r/@article.blogName/@article.uniqueTitle" target="_blank">@article.title</a></li>
                 }
             </ul>
         </div>
@@ -39,7 +40,7 @@ totalPage: Int, currentPage: Int)
                     @for(i <- 0 until articleMostReads.length) {
                     <li>
                         <span class="rank">@{i+1}</span>
-                        <a href="/r/@articleMostReads(i).domain/@articleMostReads(i).uniqueTitle" target="_blank">@articleMostReads(i).title</a>
+                        <a href="/r/@articleMostReads(i).blogName/@articleMostReads(i).uniqueTitle" target="_blank">@articleMostReads(i).title</a>
                         <div class="clearfix"></div>
                     </li>
                     }
@@ -75,5 +76,8 @@ totalPage: Int, currentPage: Int)
             </ul>
         </div>
         }
+        <br/>
+        <!--Facebook plugin-->
+        @facebookPlugin()
     </div>
 </div>
