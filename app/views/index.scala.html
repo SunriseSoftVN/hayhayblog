@@ -25,13 +25,13 @@
                 <div class="hot-article">
                     <div class="col-md-5">
                         @article.featureImage.map { img =>
-                        <a href="/r/@article.domain/@article.uniqueTitle" target="_blank"><img src="@img" alt="@article.title"/></a>
+                        <a href="/r/@article.blogName/@article.uniqueTitle" target="_blank"><img src="@img" alt="@article.title"/></a>
                         }.getOrElse {
                         <div style="height: 108px;"></div>
                         }
                     </div>
                     <div class="col-md-7">
-                        <h2 class="title"><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></h2>
+                        <h2 class="title"><a href="/r/@article.blogName/@article.uniqueTitle" target="_blank">@article.title</a></h2>
                         <p class="description">@article.shortDescription()</p>
                     </div>
                     <div class="clearfix"></div>
@@ -63,6 +63,11 @@
                 </div>
             </div>
         </div>
+        <br/>
+        <!--Facebook plugin-->
+        <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FHayhayblog%2F230571323793343&amp;width=300px&amp;height=420&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=true&amp;show_border=true&amp;appId=710328198998370"
+                scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:420px;" allowTransparency="true">
+        </iframe>
     </div>
 </div>
 
