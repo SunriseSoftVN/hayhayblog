@@ -4,11 +4,11 @@
     <div class="wrap-navi">
         <ul id="navigation">
             <li id="home" class='@if("home" == data.currentCat) {current}'>
-                <span><a href="/">Trang chủ</a></span>
+                <span><a href="/"><i class="fa fa-home"></i></a></span>
             </li>
             @data.categories.map{ cat =>
             <li class='parent @if(cat.shortName == data.currentCat) {current}'>
-                <span><a href="/cat/@cat.shortName">Blog @cat.name</a></span>
+                <span><a href="/cat/@cat.shortName">@cat.name</a></span>
                 <ul class="subcat">
                     @cat.blogs.map { blog =>
                     <li>

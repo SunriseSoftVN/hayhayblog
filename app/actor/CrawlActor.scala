@@ -103,7 +103,7 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
                 if (StringUtils.isNotBlank(sCat.getName)) {
                   val tagName = StringUtils.stripAccents(StringUtils.trimToEmpty(sCat.getName)).toLowerCase
                   tags += "," + tagName
-                  val tag = TagDao.findOrCreate(tags)
+                  val tag = TagDao.findOrCreate(tagName)
                   TagDao.save(tag.copy(count = tag.count + 1))
                 }
             }
