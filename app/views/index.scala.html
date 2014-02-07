@@ -2,27 +2,29 @@
 @import views.html.partials._
 
 
-<div class="col-md-3">
-    @newsBoxs.map{ box =>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">@box.title</h3>
-        </div>
-        <div class="panel-body">
-            <ul class="nav nav-pills nav-stacked">
-                @box.blogs.map { blog =>
-                <li>
-                    <a href="/blog/@blog.domain">
-                        <img src="https://www.google.com/s2/favicons?domain=@blog.url&alt=feed" alt="@blog.name"/>
-                        @blog.name
-                    </a>
-                </li>
-                }
-            </ul>
-        </div>
+<div class="box">
+    <div class="box-header">
+        <h2><a href="#">Bài nên đọc <i class="fa fa-thumbs-up"></i></a></h2>
     </div>
-    }
+    <div class="box-content">
+        @articleMostReads.map { article =>
+        <div class="col-md-2 hot-article">
+            @article.featureImage.map { img =>
+            <a href="/r/@article.domain/@article.uniqueTitle" target="_blank"><img src="@img" alt="@article.title"/></a>
+            }.getOrElse {
+            <div style="height: 108px;"></div>
+            }
+            <h2 class="title"><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></h2>
+        </div>
+        }
+        <div class="clearfix"></div>
+    </div>
 </div>
-<div class="col-md-6">col6</div>
-<div class="col-md-3">col3</div>
 
+@newsBoxs.map { box =>
+<div class="row">
+    <div class="col-md-12">
+        @newsbox(box)
+    </div>
+</div>
+}

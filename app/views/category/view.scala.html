@@ -13,7 +13,7 @@
             </div>
             <div class="col-md-9">
                 <h2 class="title"><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></h2>
-                <p>@article.shortDescription</p>
+                <p>@article.shortDescription(200)</p>
                 @if(!article.tagList.isEmpty) {
                 <p class="keywords">
                     Từ khóa:&nbsp;
@@ -37,7 +37,7 @@
 
         @if(!articlesNextPage.isEmpty) {
         <div class="more-stories">
-            <h2 class="title">Các tin khác:</h2>
+            <h2 class="title">Các bài khác:</h2>
             <ul>
                 @articlesNextPage.map{ article =>
                 <li><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></li>

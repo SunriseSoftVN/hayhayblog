@@ -8,7 +8,7 @@
             </li>
             @data.categories.map{ cat =>
             <li class='@if(cat.shortName == data.currentCat) {current}'>
-                <span><a href="/cat/@cat.shortName">@cat.name</a></span>
+                <span><a href="/cat/@cat.shortName">Blog @cat.name</a></span>
             </li>
             }
         </ul>
