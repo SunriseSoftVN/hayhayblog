@@ -29,6 +29,7 @@
 
     </div>
     <div class="col-md-3">
+        @if(!articleMostReads.isEmpty){
         <div class="top-stories">
             <h3 class="title">Nổi bật trong tuần</h3>
             <div class="content">
@@ -43,6 +44,8 @@
                 </ul>
             </div>
         </div>
+        }
+        @if(!blogs.isEmpty){
         <div class="top-blogs">
             <h3 class="title">Blog cùng chủ đề</h3>
             <ul>
@@ -54,5 +57,6 @@
                 }
             </ul>
         </div>
+        }
     </div>
 </div>

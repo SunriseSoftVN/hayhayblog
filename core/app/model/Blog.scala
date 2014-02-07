@@ -2,6 +2,7 @@ package model
 
 import org.bson.types.ObjectId
 import org.joda.time.DateTime
+import dao.CategoryDao
 
 /**
  * The Class Blog.
@@ -22,7 +23,9 @@ case class Blog(
                  categoryId: ObjectId,
                  read: Int = 0,
                  lastUpdated: DateTime = DateTime.now
-                 ) extends BaseModel(_id)
+                 ) extends BaseModel(_id) {
+  def category = CategoryDao.findOneById(categoryId)
+}
 
 object BlogStatus {
   lazy val UPDATED = "updated"

@@ -29,14 +29,18 @@ object CategoryCtr extends Controller with OptionalAuthElement with AuthConfigIm
     BlogDao.findByDomain(domain).mapRender(blog => {
       val (articles, totalPage) = ArticleDao.findByBlogId(blog._id, page)
       val articlesNextPage = if (page < totalPage) ArticleDao.findByBlogId(blog._id, page + 1)._1 else Nil
-      implicit val topMenuDto = TopMenuDto(CategoryDao.all, "")
+      val catName = blog.category.map(_.shortName).getOrElse("")
+      implicit val topMenuDto = TopMenuDto(CategoryDao.all, catName)
       val blogs = BlogDao.findByCatId(blog.categoryId).filterNot(_._id == blog._id)
       renderOk(views.html.category.view(articles, ArticleDao.mostReadByBlogId(blog._id, 5), articlesNextPage, blogs, totalPage, page))
     })
   })
 
   def tag(tagName: String, page: Int) = StackAction(implicit request => {
-    Ok
+    val (articles, totalPage) = ArticleDao.findByTag(tagName, page)
+    val articlesNextPage = if (page < totalPage) ArticleDao.findByTag(tagName, page + 1)._1 else Nil
+    implicit val topMenuDto = TopMenuDto(CategoryDao.all, "none")
+    renderOk(views.html.category.view(articles, Nil, articlesNextPage, Nil, totalPage, page))
   })
 
 }
