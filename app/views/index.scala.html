@@ -52,7 +52,10 @@
                         <li>
                             <a href="/blog/@blog.domain">
                                 <img src="https://www.google.com/s2/favicons?domain=@blog.url&alt=feed" alt="@blog.name"/>
-                                @blog.name - <span class="meta">@blog.read lượt xem</span>
+                                @blog.name
+                                @if(blog.read > 0) {
+                                - <span class="meta">@blog.read lượt xem</span>
+                                }
                             </a>
                         </li>
                         }
