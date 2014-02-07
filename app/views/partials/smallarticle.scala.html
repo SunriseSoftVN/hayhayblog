@@ -16,6 +16,9 @@
                 <a href="/blog/@_blog.domain" class="blog-name">@_blog.name</a>
                 }
                 - <span class="time">@DateTimeFormat.prettyDate(article.publishedDate)</span>
+                @if(article.clicked > 0) {
+                - <span class="views">@article.clicked lượt xem</span>
+                }
             </span>
         </div>
         <p>@article.shortDescription(200)</p>

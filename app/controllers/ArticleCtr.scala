@@ -22,7 +22,7 @@ object ArticleCtr extends Controller with OptionalAuthElement with AuthConfigImp
       implicit val topMenuDto = TopMenuDto(CategoryDao.all, cat.shortName)
       val blogs = BlogDao.findByCatId(cat._id)
       val tags = TagDao.top
-      renderOk(views.html.category.view(articles, ArticleDao.mostReadByCatId(cat._id, 5), articlesNextPage, blogs, tags, totalPage, page))
+      renderOk(views.html.article.view(articles, ArticleDao.mostReadByCatId(cat._id, 5), articlesNextPage, blogs, tags, totalPage, page))
     })
   })
 
@@ -34,7 +34,7 @@ object ArticleCtr extends Controller with OptionalAuthElement with AuthConfigImp
       implicit val topMenuDto = TopMenuDto(CategoryDao.all, catName)
       val blogs = BlogDao.findByCatId(blog.categoryId).filterNot(_._id == blog._id)
       val tags = TagDao.top
-      renderOk(views.html.category.view(articles, ArticleDao.mostReadByBlogId(blog._id, 5), articlesNextPage, blogs, tags, totalPage, page))
+      renderOk(views.html.article.view(articles, ArticleDao.mostReadByBlogId(blog._id, 5), articlesNextPage, blogs, tags, totalPage, page))
     })
   })
 
@@ -43,7 +43,7 @@ object ArticleCtr extends Controller with OptionalAuthElement with AuthConfigImp
     val articlesNextPage = if (page < totalPage) ArticleDao.findByTag(tagName, page + 1)._1 else Nil
     implicit val topMenuDto = TopMenuDto(CategoryDao.all, "none")
     val tags = TagDao.top
-    renderOk(views.html.category.view(articles, Nil, articlesNextPage, Nil, tags, totalPage, page))
+    renderOk(views.html.article.view(articles, Nil, articlesNextPage, Nil, tags, totalPage, page))
   })
 
 }

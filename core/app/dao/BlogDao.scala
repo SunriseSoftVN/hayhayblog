@@ -37,4 +37,6 @@ object BlogDao extends BaseDao[Blog, ObjectId] {
   def increaseRead(id: ObjectId) = findOneById(id).map(blog => {
     save(blog.copy(read = blog.read + 1))
   })
+
+  def top = find(MongoDBObject.empty).sort(MongoDBObject("read" -> -1)).take(10).toList
 }
