@@ -56,11 +56,16 @@ object ArticleDao extends BaseDao[Article, String] {
       .skip(skip)
       .limit(itemDisplay)
       .sort(MongoDBObject("publishedDate" -> -1))
+
       .toList
 
     (articles, totalPage.toInt)
   }
 
+  def latest(take: Int = 10) = find(MongoDBObject.empty)
+    .sort(MongoDBObject("publishedDate" -> -1))
+    .take(take)
+    .toList
 
   def mostRead(take: Int = 6) = find(MongoDBObject.empty)
     .sort(MongoDBObject("clicked" -> -1))

@@ -15,7 +15,7 @@ object HomeCtr extends Controller with OptionalAuthElement with AuthConfigImpl w
       NewsBoxDto(cat, blogs, articles)
     })
 
-    renderOk(views.html.index(newsBoxs, ArticleDao.mostRead(6)))
+    renderOk(views.html.index(newsBoxs, ArticleDao.mostRead(6), ArticleDao.latest()))
   })
 
 }
