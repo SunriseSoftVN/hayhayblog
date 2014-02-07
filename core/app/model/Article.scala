@@ -4,6 +4,7 @@ import org.bson.types.ObjectId
 import org.joda.time.DateTime
 import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.StringUtils
+import dao.BlogDao
 
 /**
  * The Class Article.
@@ -40,5 +41,7 @@ case class Article(
 
   def shortDescription(maxLength: Int = 100) = if (description.length > maxLength) description.substring(0, maxLength) + "..." else description
 
-  def tagList = tags.getOrElse("").split(",")
+  def tagList = tags.getOrElse("").split(",").map(StringUtils.trimToEmpty)
+
+  def blog = BlogDao.findOneById(blogId)
 }

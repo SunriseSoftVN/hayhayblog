@@ -30,9 +30,13 @@ object CategoryCtr extends Controller with OptionalAuthElement with AuthConfigIm
       val (articles, totalPage) = ArticleDao.findByBlogId(blog._id, page)
       val articlesNextPage = if (page < totalPage) ArticleDao.findByBlogId(blog._id, page + 1)._1 else Nil
       implicit val topMenuDto = TopMenuDto(CategoryDao.all, "")
-      val blogs = BlogDao.findByCatId(blog.categoryId)
+      val blogs = BlogDao.findByCatId(blog.categoryId).filterNot(_._id == blog._id)
       renderOk(views.html.category.view(articles, ArticleDao.mostReadByBlogId(blog._id, 5), articlesNextPage, blogs, totalPage, page))
     })
+  })
+
+  def tag(tagName: String, page: Int) = StackAction(implicit request => {
+    Ok
   })
 
 }

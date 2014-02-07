@@ -9,10 +9,15 @@
     </div>
     <div class="col-md-9">
         <h2 class="title"><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></h2>
-        <p>@article.shortDescription(200)</p>
+        <p>
+            @article.blog.map { _blog =>
+            <a href="/blog/@_blog.domain" class="blog-name">@_blog.name</a>
+            }
+            - @article.shortDescription(200)
+        </p>
         @if(!article.tagList.isEmpty) {
         <p class="keywords">
-            Từ khóa:&nbsp;
+            Từ khóa:
             @article.tagList.map { tag =>
             <a href="/tag/@tag" rel="tag">@tag</a>
             }
