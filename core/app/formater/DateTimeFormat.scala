@@ -2,6 +2,7 @@ package formater
 
 import org.joda.time.DateTime
 import org.ocpsoft.prettytime.PrettyTime
+import java.util.Locale
 
 
 /**
@@ -13,7 +14,7 @@ import org.ocpsoft.prettytime.PrettyTime
  */
 object DateTimeFormat {
 
-  val prettyTime = new PrettyTime()
+  val prettyTime = new PrettyTime(new Locale("vi"))
 
   def fmt = org.joda.time.format.DateTimeFormat.forPattern("dd/MM/yyyy")
 

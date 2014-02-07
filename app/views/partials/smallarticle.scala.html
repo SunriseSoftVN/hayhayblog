@@ -1,4 +1,5 @@
 @(article: Article)
+@import formater._
 <div class="small-article">
     <div class="col-md-3">
         @article.featureImage.map { img =>
@@ -9,12 +10,15 @@
     </div>
     <div class="col-md-9">
         <h2 class="title"><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></h2>
-        <p>
-            @article.blog.map { _blog =>
-            <a href="/blog/@_blog.domain" class="blog-name">@_blog.name</a>
-            }
-            - @article.shortDescription(200)
-        </p>
+        <div class="meta">
+            <span class="source">
+                @article.blog.map { _blog =>
+                <a href="/blog/@_blog.domain" class="blog-name">@_blog.name</a>
+                }
+                - <span class="time">@DateTimeFormat.prettyDate(article.publishedDate)</span>
+            </span>
+        </div>
+        <p>@article.shortDescription(200)</p>
         @if(!article.tagList.isEmpty) {
         <p class="keywords">
             Từ khóa:
