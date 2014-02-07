@@ -4,7 +4,7 @@ import akka.actor.Actor
 import org.apache.http.client.HttpClient
 import parser.{NewsParser, RssParser}
 import org.apache.commons.validator.routines.UrlValidator
-import dao.{ArticleDao, BlogDao}
+import dao.{TagDao, ArticleDao, BlogDao}
 import org.joda.time.DateTime
 import model.{Article, Blog, BlogStatus}
 import org.apache.http.client.methods.HttpGet
@@ -101,7 +101,10 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
             syndEntry.getCategories.foreach {
               case sCat: SyndCategory =>
                 if (StringUtils.isNotBlank(sCat.getName)) {
-                  tags += ", " + StringUtils.stripAccents(StringUtils.trimToEmpty(sCat.getName)).toLowerCase
+                  val tagName = StringUtils.stripAccents(StringUtils.trimToEmpty(sCat.getName)).toLowerCase
+                  tags += "," + tagName
+                  val tag = TagDao.findOrCreate(tags)
+                  TagDao.save(tag.copy(count = tag.count + 1))
                 }
             }
 

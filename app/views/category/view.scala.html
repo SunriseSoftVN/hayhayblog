@@ -1,4 +1,6 @@
-@(articles: List[Article], articleMostReads: List[Article], articlesNextPage: List[Article], blogs: List[Blog], totalPage: Int, currentPage: Int)
+@(articles: List[Article], articleMostReads: List[Article],
+articlesNextPage: List[Article], blogs: List[Blog], tags: List[Tag],
+totalPage: Int, currentPage: Int)
 
 @import partials.smallarticle
 
@@ -54,6 +56,16 @@
                     <img src="https://www.google.com/s2/favicons?domain=@blog.url&alt=feed" alt="@blog.name"/>
                     <a href="/blog/@blog.domain">@blog.name</a>
                 </li>
+                }
+            </ul>
+        </div>
+        }
+        @if(!tags.isEmpty){
+        <div class="top-tags">
+            <h3 class="title">Chủ đề hot</h3>
+            <ul>
+                @tags.map{ tag =>
+                <li><a href="/tag/@tag.name">@tag.name</a></li>
                 }
             </ul>
         </div>

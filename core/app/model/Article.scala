@@ -41,7 +41,7 @@ case class Article(
 
   def shortDescription(maxLength: Int = 100) = if (description.length > maxLength) description.substring(0, maxLength) + "..." else description
 
-  def tagList = tags.getOrElse("").split(",").map(StringUtils.trimToEmpty)
+  def tagList = tags.getOrElse("").split(",").map(StringUtils.trimToEmpty).filterNot(StringUtils.isBlank)
 
   def blog = BlogDao.findOneById(blogId)
 }

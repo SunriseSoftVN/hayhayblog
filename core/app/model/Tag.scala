@@ -12,5 +12,6 @@ import org.bson.types.ObjectId
 case class Tag(
                 _id: ObjectId = new ObjectId(),
                 name: String,
-                count: Long
+                count: Long = 0,
+                read: Long = 0
                 )
