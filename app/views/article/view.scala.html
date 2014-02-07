@@ -54,7 +54,7 @@ totalPage: Int, currentPage: Int)
                 @blogs.map { blog =>
                 <li>
                     <img src="https://www.google.com/s2/favicons?domain=@blog.url&alt=feed" alt="@blog.name"/>
-                    <a href="/blog/@blog.domain">
+                    <a href="/blog/@blog.uniqueName">
                         @blog.name
                         @if(blog.read > 0) {
                         - <span class="meta">@blog.read lượt xem</span>

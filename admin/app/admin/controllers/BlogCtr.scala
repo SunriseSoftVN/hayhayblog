@@ -13,8 +13,7 @@ import formater.ObjectIdFormat._
 import validation.Constraint._
 import model.Blog
 import org.joda.time.DateTime
-import org.apache.http.client.utils.URIUtils
-import java.net.URI
+import org.apache.commons.lang3.StringUtils
 
 /**
  * The Class BlogCtr.
@@ -30,7 +29,7 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
       "_id" -> of[ObjectId],
       "name" -> text(minLength = 3),
       "url" -> nonEmptyText.verifying(urlConstraint),
-      "domain" -> text,
+      "uniqueName" -> text,
       "rssUrl" -> nonEmptyText.verifying(urlConstraint),
       "status" -> nonEmptyText,
       "description" -> optional(text),
@@ -63,14 +62,22 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
   })
 
   def update = StackAction(AuthorityKey -> Administrator)(implicit request => {
-    editForm.bindFromRequest.fold(
+    val bindForm = editForm.bindFromRequest
+    bindForm.fold(
       error => renderBadRequest(admin.views.html.blog.edit(error, categories)),
       blog => {
-        val hostName = URIUtils.extractHost(new URI(blog.url))
-          .getHostName
-          .replaceAll("[^a-zA-Z\\d\\s:]", "")
-        BlogDao.save(blog.copy(domain = hostName))
-        Redirect("/admin/blog")
+        val _blog = BlogDao.findByName(blog.name)
+        if ((_blog.isDefined && _blog.get._id == blog._id) || _blog.isEmpty) {
+          val uniqueName = StringUtils.stripAccents(blog.name)
+            .replaceAll("[^a-zA-Z\\d\\s:]", "")
+            .replaceAll(" ", "-")
+            .toLowerCase
+
+          BlogDao.save(blog.copy(uniqueName = uniqueName))
+          Redirect("/admin/blog")
+        } else {
+          renderBadRequest(admin.views.html.blog.edit(bindForm.withError("name", "name.exist"), categories))
+        }
       }
     )
   })

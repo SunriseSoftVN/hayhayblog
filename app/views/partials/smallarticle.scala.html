@@ -13,7 +13,7 @@
         <div class="meta">
             <span class="source">
                 @article.blog.map { _blog =>
-                <a href="/blog/@_blog.domain" class="blog-name">@_blog.name</a>
+                <a href="/blog/@_blog.uniqueName" class="blog-name">@_blog.name</a>
                 }
                 - <span class="time">@DateTimeFormat.prettyDate(article.publishedDate)</span>
                 @if(article.clicked > 0) {

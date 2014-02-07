@@ -12,7 +12,7 @@
                 <ul class="subcat">
                     @cat.blogs.map { blog =>
                     <li>
-                        <a href="/blog/@blog.domain">
+                        <a href="/blog/@blog.uniqueName">
                             <img src="https://www.google.com/s2/favicons?domain=@blog.url&alt=feed" alt="@blog.name"/>
                             @blog.name
                         </a>
