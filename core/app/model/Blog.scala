@@ -20,6 +20,7 @@ case class Blog(
                  description: Option[String] = None,
                  isEnable: Boolean = false,
                  categoryId: ObjectId,
+                 read: Int = 0,
                  lastUpdated: DateTime = DateTime.now
                  ) extends BaseModel(_id)
 

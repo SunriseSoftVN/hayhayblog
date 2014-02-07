@@ -1,7 +1,7 @@
 package controllers
 
 import play.api.mvc.{Action, Controller}
-import dao.ArticleDao
+import dao.{BlogDao, ArticleDao}
 
 /**
  * The Class CounterCtr.
@@ -15,6 +15,7 @@ object CounterCtr extends Controller {
   def count(domain: String, uniqueTitle: String) = Action {
     ArticleDao.findByUniqueTitleAndDomain(domain, uniqueTitle).map(article => {
       ArticleDao.save(article.copy(clicked = article.clicked + 1))
+      BlogDao.increaseRead(article.blogId)
       Redirect(article.url)
     }).getOrElse(NotFound)
   }
