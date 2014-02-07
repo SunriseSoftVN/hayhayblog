@@ -3,7 +3,7 @@ articlesNextPage: List[Article], blogs: List[Blog], tags: List[Tag],
 totalPage: Int, currentPage: Int)
 
 @import partials.smallarticle
-@import partials.facebookPlugin
+@import partials.facebookLikeBox
 
 <div class="row">
     <div class="col-md-9">
@@ -78,6 +78,6 @@ totalPage: Int, currentPage: Int)
         }
         <br/>
         <!--Facebook plugin-->
-        @facebookPlugin()
+        @facebookLikeBox()
     </div>
 </div>
