@@ -19,7 +19,7 @@ case class Article(
                     blogId: ObjectId,
                     title: String,
                     uniqueTitle: String,
-                    domain: String,
+                    blogName: String,
                     url: String,
                     description: String,
                     //This form rss.

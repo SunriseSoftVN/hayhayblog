@@ -109,8 +109,8 @@ object ArticleDao extends BaseDao[Article, String] {
   def findByUrl(url: String) = findOne(MongoDBObject("url" -> url))
 
 
-  def findByUniqueTitleAndDomain(domain: String, uniqueTitle: String) = findOne(
-    MongoDBObject("uniqueTitle" -> uniqueTitle, "domain" -> domain)
+  def findByUniqueTitleAndBlogName(blogName: String, uniqueTitle: String) = findOne(
+    MongoDBObject("uniqueTitle" -> uniqueTitle, "blogName" -> blogName)
   )
 
   def removeByBlogId(blogId: ObjectId) = remove(MongoDBObject("blogId" -> blogId))

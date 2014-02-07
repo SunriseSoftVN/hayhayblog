@@ -22,10 +22,10 @@ GET        /google/auth                controllers.GoogleCtr.auth
 
 GET        /about                      controllers.AboutCtr.index
 GET        /cat/:shortName             controllers.ArticleCtr.index(shortName: String, page: Int ?= 1)
-GET        /blog/:domain               controllers.ArticleCtr.blog(domain: String, page: Int ?= 1)
+GET        /blog/:blogName             controllers.ArticleCtr.blog(blogName: String, page: Int ?= 1)
 GET        /tag/:tagName               controllers.ArticleCtr.tag(tagName: String, page: Int ?= 1)
 
-GET        /r/:domain/:title           controllers.CounterCtr.count(domain, title)
+GET        /r/:blogName/:title         controllers.CounterCtr.count(blogName, title)
 
 
 # Map static resources from the /public folder to the /assets URL path

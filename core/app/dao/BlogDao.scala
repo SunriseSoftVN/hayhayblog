@@ -32,7 +32,7 @@ object BlogDao extends BaseDao[Blog, ObjectId] {
 
   def findByCatId(id: ObjectId) = find(MongoDBObject("categoryId" -> id)).sort(MongoDBObject("read" -> -1)).toList
 
-  def findByDomain(domain: String) = findOne(MongoDBObject("domain" -> domain))
+  def findByBlogName(blogName: String) = findOne(MongoDBObject("uniqueName" -> blogName))
 
   def increaseRead(id: ObjectId) = findOneById(id).map(blog => {
     save(blog.copy(read = blog.read + 1))

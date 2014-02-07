@@ -26,8 +26,8 @@ object ArticleCtr extends Controller with OptionalAuthElement with AuthConfigImp
     })
   })
 
-  def blog(domain: String, page: Int) = StackAction(implicit request => {
-    BlogDao.findByDomain(domain).mapRender(blog => {
+  def blog(blogName: String, page: Int) = StackAction(implicit request => {
+    BlogDao.findByBlogName(blogName).mapRender(blog => {
       val (articles, totalPage) = ArticleDao.findByBlogId(blog._id, page)
       val articlesNextPage = if (page < totalPage) ArticleDao.findByBlogId(blog._id, page + 1)._1 else Nil
       val catName = blog.category.map(_.shortName).getOrElse("")

@@ -13,8 +13,8 @@ import org.apache.commons.lang3.StringUtils
  */
 object CounterCtr extends Controller {
 
-  def count(domain: String, uniqueTitle: String) = Action {
-    ArticleDao.findByUniqueTitleAndDomain(domain, uniqueTitle).map(article => {
+  def count(blogName: String, uniqueTitle: String) = Action {
+    ArticleDao.findByUniqueTitleAndBlogName(blogName, uniqueTitle).map(article => {
       article.tagList.foreach(tagName => {
         if(StringUtils.isNotBlank(tagName)) {
           val tag = TagDao.findOrCreate(tagName)
