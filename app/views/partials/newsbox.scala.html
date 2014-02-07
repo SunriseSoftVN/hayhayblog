@@ -20,19 +20,19 @@
     </div>
     <div class="box-content">
         <div class="col-md-4">
-            @box.bigArticle.map { article =>
             <div class="big-article">
                 <div class="img">
-                    @article.featureImage.map { img =>
-                    <a href="/r/@article.domain/@article.uniqueTitle" target="_blank">
-                        <img src="@img" alt="@article.title"/>
+                    @box.bigArticle.featureImage.map { img =>
+                    <a href="/r/@box.bigArticle.domain/@box.bigArticle.uniqueTitle" target="_blank">
+                        <img src="@img" alt="@box.bigArticle.title"/>
                     </a>
                     }
                 </div>
-                <h2 class="title"><a href="/r/@article.domain/@article.uniqueTitle" target="_blank">@article.title</a></h2>
-                <div class="description">@article.shortDescription()</div>
+                <h2 class="title" style='@if(box.bigArticle.featureImage.isEmpty) {padding: 0 0 10px 0}'>
+                    <a href="/r/@box.bigArticle.domain/@box.bigArticle.uniqueTitle" target="_blank">@box.bigArticle.title</a>
+                </h2>
+                <div class="description">@box.bigArticle.shortDescription(200)</div>
             </div>
-            }
             <div class="clearfix"></div>
         </div>
         <div class="col-md-4">

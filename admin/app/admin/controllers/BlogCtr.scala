@@ -5,7 +5,7 @@ import jp.t2v.lab.play2.auth.AuthElement
 import auth.AuthConfigImpl
 import dto.PageDto
 import model.Administrator
-import dao.{CategoryDao, BlogDao}
+import dao.{ArticleDao, CategoryDao, BlogDao}
 import play.api.data.Form
 import play.api.data.Forms._
 import com.mongodb.casbah.commons.Imports._
@@ -58,6 +58,7 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
 
   def delete(id: ObjectId) = StackAction(AuthorityKey -> Administrator)(implicit request => {
     BlogDao.removeById(id)
+    ArticleDao.removeByBlogId(id)
     Redirect("/admin/blog")
   })
 

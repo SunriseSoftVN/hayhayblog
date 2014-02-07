@@ -113,4 +113,6 @@ object ArticleDao extends BaseDao[Article, String] {
     MongoDBObject("uniqueTitle" -> uniqueTitle, "domain" -> domain)
   )
 
+  def removeByBlogId(blogId: ObjectId) = remove(MongoDBObject("blogId" -> blogId))
+
 }
