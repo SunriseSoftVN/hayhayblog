@@ -18,18 +18,20 @@ object CategoryCtr extends Controller with OptionalAuthElement with AuthConfigIm
   def index(shortName: String, page: Int) = StackAction(implicit request => {
     CategoryDao.findByShortName(shortName).mapRender(cat => {
       val (articles, totalPage) = ArticleDao.findByCatId(cat._id, page)
-      val articlesNextPage = if(page < totalPage) ArticleDao.findByCatId(cat._id, page + 1)._1 else Nil
+      val articlesNextPage = if (page < totalPage) ArticleDao.findByCatId(cat._id, page + 1)._1 else Nil
       implicit val topMenuDto = TopMenuDto(CategoryDao.all, cat.shortName)
-      renderOk(views.html.category.view(articles, ArticleDao.mostRead(cat._id, 5), articlesNextPage, totalPage, page))
+      val blogs = BlogDao.findByCatId(cat._id)
+      renderOk(views.html.category.view(articles, ArticleDao.mostReadByCatId(cat._id, 5), articlesNextPage, blogs, totalPage, page))
     })
   })
 
   def blog(domain: String, page: Int) = StackAction(implicit request => {
     BlogDao.findByDomain(domain).mapRender(blog => {
       val (articles, totalPage) = ArticleDao.findByBlogId(blog._id, page)
-      val articlesNextPage = if(page < totalPage) ArticleDao.findByBlogId(blog._id, page + 1)._1 else Nil
+      val articlesNextPage = if (page < totalPage) ArticleDao.findByBlogId(blog._id, page + 1)._1 else Nil
       implicit val topMenuDto = TopMenuDto(CategoryDao.all, "")
-      renderOk(views.html.category.view(articles, Nil, articlesNextPage, totalPage, page))
+      val blogs = BlogDao.findByCatId(blog.categoryId)
+      renderOk(views.html.category.view(articles, ArticleDao.mostReadByBlogId(blog._id, 5), articlesNextPage, blogs, totalPage, page))
     })
   })
 

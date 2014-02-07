@@ -1,4 +1,4 @@
-@(articles: List[Article], articleMostReads: List[Article], articlesNextPage: List[Article], totalPage: Int, currentPage: Int)
+@(articles: List[Article], articleMostReads: List[Article], articlesNextPage: List[Article], blogs: List[Blog], totalPage: Int, currentPage: Int)
 
 <div class="row">
     <div class="col-md-9">
@@ -62,15 +62,16 @@
                 </ul>
             </div>
         </div>
-        <!--<div class="top-tags">-->
-            <!--<h3 class="title">Xu hướng đọc</h3>-->
-            <!--<ul>-->
-                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
-                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
-                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
-                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
-                <!--<li><a href="http://www.baomoi.com/Tag/119/Abe-Shinzō.epi" rel="tag">Abe Shinzō</a></li>-->
-            <!--</ul>-->
-        <!--</div>-->
+        <div class="top-blogs">
+            <h3 class="title">Blog cùng chủ đề</h3>
+            <ul>
+                @blogs.map { blog =>
+                <li>
+                    <img src="https://www.google.com/s2/favicons?domain=@blog.url&alt=feed" alt="@blog.name"/>
+                    <a href="/blog/@blog.domain">@blog.name</a>
+                </li>
+                }
+            </ul>
+        </div>
     </div>
 </div>

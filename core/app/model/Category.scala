@@ -1,6 +1,7 @@
 package model
 
 import org.bson.types.ObjectId
+import dao.BlogDao
 
 /**
  * The Class Category.
@@ -13,4 +14,8 @@ case class Category(
                      _id: ObjectId = new ObjectId(),
                      name: String,
                      shortName: String
-                     ) extends BaseModel(_id)
+                     ) extends BaseModel(_id) {
+
+  def blogs = BlogDao.findByCatId(_id)
+
+}

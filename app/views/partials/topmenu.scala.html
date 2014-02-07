@@ -7,10 +7,32 @@
                 <span><a href="/">Trang chủ</a></span>
             </li>
             @data.categories.map{ cat =>
-            <li class='@if(cat.shortName == data.currentCat) {current}'>
+            <li class='parent @if(cat.shortName == data.currentCat) {current}'>
                 <span><a href="/cat/@cat.shortName">Blog @cat.name</a></span>
+                <ul class="subcat">
+                    @cat.blogs.map { blog =>
+                    <li>
+                        <a href="/blog/@blog.domain">
+                            <img src="https://www.google.com/s2/favicons?domain=@blog.url&alt=feed" alt="@blog.name"/>
+                            @blog.name
+                        </a>
+                    </li>
+                    }
+                </ul>
             </li>
             }
         </ul>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#navigation").find(".parent").on("mouseover", function () {
+            $(this).find(".subcat").show();
+        });
+
+        $("#navigation").find(".parent").on("mouseout", function () {
+            $(this).find(".subcat").hide();
+        });
+    })
+</script>

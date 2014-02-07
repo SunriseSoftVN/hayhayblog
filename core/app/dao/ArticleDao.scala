@@ -67,9 +67,14 @@ object ArticleDao extends BaseDao[Article, String] {
     .take(take)
     .toList
 
-  def mostRead(catId: ObjectId, take: Int) = {
+  def mostReadByCatId(catId: ObjectId, take: Int) = {
     val blogIds = BlogDao.findByCatId(catId).map(_._id)
     val query = MongoDBObject("blogId" -> MongoDBObject("$in" -> blogIds))
+    find(query).sort(MongoDBObject("clicked" -> -1)).take(take).toList
+  }
+
+  def mostReadByBlogId(blogId: ObjectId, take: Int) = {
+    val query = MongoDBObject("blogId" -> blogId)
     find(query).sort(MongoDBObject("clicked" -> -1)).take(take).toList
   }
 
