@@ -27,6 +27,7 @@
         <th>#</th>
         @colHeader(pageDto, "name", "Name")
         @colHeader(pageDto, "url", "Url")
+        @colHeader(pageDto, "categoryId", "Category")
         @colHeader(pageDto, "isEnable", "Enable")
         @colHeader(pageDto, "status", "Status")
         @colHeader(pageDto, "lastUpdated", "Last Updated")
@@ -39,6 +40,7 @@
         <td>@{pageDto.items.indexOf(blog) + ((pageDto.currentPage - 1) * pageDto.itemDisplay) + 1}</td>
         <td><a href="/admin/blog/edit/@blog.id">@blog.name</a></td>
         <td>@blog.url</td>
+        <td>@blog.category.map{cat => @cat.name }</td>
         <td>@blog.isEnable</td>
         <td>@blog.status</td>
         <td>@blog.lastUpdated.toString(DateTimeFormat.fmt)</td>

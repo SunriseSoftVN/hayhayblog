@@ -15,8 +15,7 @@ object HomeCtr extends Controller with OptionalAuthElement with AuthConfigImpl w
       NewsBoxDto(cat, blogs, articles)
     })
 
-    val blogs = BlogDao.all
-
+    val blogs = BlogDao.top
     renderOk(views.html.index(newsBoxs, ArticleDao.mostRead(6), ArticleDao.latest(), blogs))
   })
 

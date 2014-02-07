@@ -12,23 +12,32 @@ import model.{Blog, Article, Category}
 case class NewsBoxDto(
                        title: String,
                        shortName: String,
-                       bigArticle: Article,
+                       bigArticle: Option[Article] = None,
                        blogs: List[Blog] = Nil,
-                       articles: List[Article]
+                       articles: List[Article] = Nil
                        )
 
 object NewsBoxDto {
 
   def apply(cat: Category, blogs: List[Blog], articles: List[Article]) = {
-    val bigArticle = articles.head
-    val _articles = articles.filterNot(_ == bigArticle)
-    new NewsBoxDto(
-      title = cat.name,
-      shortName = cat.shortName,
-      bigArticle = bigArticle,
-      articles = _articles,
-      blogs = blogs
-    )
+    if (!articles.isEmpty) {
+      val bigArticle = articles.find(_.featureImage.isDefined).orElse(articles.headOption)
+      val _articles = if (bigArticle.isDefined) articles.filterNot(_ == bigArticle.get) else articles.take(4)
+      new NewsBoxDto(
+        title = cat.name,
+        shortName = cat.shortName,
+        bigArticle = bigArticle,
+        articles = _articles,
+        blogs = blogs
+      )
+    } else {
+      new NewsBoxDto(
+        title = cat.name,
+        shortName = cat.shortName,
+        blogs = blogs
+      )
+    }
+
   }
 
 }
