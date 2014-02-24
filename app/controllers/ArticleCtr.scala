@@ -39,7 +39,7 @@ object ArticleCtr extends Controller with OptionalAuthElement with AuthConfigImp
   })
 
   def tag(tagName: String, page: Int) = StackAction(implicit request => {
-    val (articles, totalPage) = ArticleDao.findByTag(tagName, page)
+    val (articles, totalPage) = ArticleDao.findByTag(tagName.replaceAll("_", ".*"), page)
     val articlesNextPage = if (page < totalPage) ArticleDao.findByTag(tagName, page + 1)._1 else Nil
     implicit val topMenuDto = TopMenuDto(CategoryDao.all, "none")
     val tags = TagDao.top

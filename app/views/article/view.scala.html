@@ -71,7 +71,7 @@ totalPage: Int, currentPage: Int)
             <h3 class="title">Chủ đề hot</h3>
             <ul>
                 @tags.map{ tag =>
-                <li><a href="/tag/@tag.name">@tag.name</a></li>
+                <li><a href='/tag/@tag.name.replaceAll(" ", "_")'>@tag.name</a></li>
                 }
             </ul>
         </div>
