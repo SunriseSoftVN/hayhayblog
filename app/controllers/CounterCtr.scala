@@ -27,7 +27,7 @@ object CounterCtr extends Controller with IFrameTemplate {
       if (article.url.contains("youtube.com")) {
         Redirect(article.url)
       } else {
-        renderOk(views.html.article.embed(article.url))
+        renderOk(views.html.article.embed(article.url), description = article.shortDescription(200), title = article.title)
       }
 
     }).getOrElse(NotFound)
