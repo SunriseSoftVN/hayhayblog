@@ -5,15 +5,15 @@ import dao.{TagDao, BlogDao, ArticleDao}
 import org.apache.commons.lang3.StringUtils
 
 /**
- * The Class CounterCtr.
+ * The Class DetailCtr.
  *
  * @author Nguyen Duc Dung
  * @since 2/3/14 2:48 PM
  *
  */
-object CounterCtr extends Controller with IFrameTemplate {
+object DetailCtr extends Controller with IFrameTemplate {
 
-  def count(blogName: String, uniqueTitle: String) = Action {
+  def view(blogName: String, uniqueTitle: String) = Action {
     ArticleDao.findByUniqueTitleAndBlogName(blogName, uniqueTitle).map(article => {
       article.tagList.foreach(tagName => {
         if (StringUtils.isNotBlank(tagName)) {
