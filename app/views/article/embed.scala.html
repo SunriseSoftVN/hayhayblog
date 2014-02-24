@@ -1,10 +1,10 @@
-@(url: String)
+@(article: Article)
 @import views.html.partials._
 
 <div id='toolbar'>
-    @toolbar()
+    @toolbar(article)
 </div>
 
 <div id='iframe'>
-    <iframe src="@url" frameborder="0" width="100%"></iframe>
+    <iframe src="@article.url" frameborder="0" width="100%"></iframe>
 </div>
