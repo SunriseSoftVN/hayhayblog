@@ -7,7 +7,7 @@
 <meta name="keywords" content="blog, blog tong hop, blog hay, blog du lich, blog thoi trang, blog cong nghe, blog radio, vlog, blog kinh doanh"/>
 @article.map{ _article =>
 <meta property="og:title" content="@_article.title"/>
-<meta property="og:description" content="@_article.shortDescription()"/>
+<meta property="og:description" content="@_article.shortDescription(200)"/>
 @_article.featureImage.map{ img =>
 <meta property="og:image" content="@img"/>
 }
