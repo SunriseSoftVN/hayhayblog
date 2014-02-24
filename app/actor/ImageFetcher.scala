@@ -20,24 +20,32 @@ import scala.util.control.Breaks._
  */
 class ImageFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
-  val prefer_size = 300
+  // youtube thumb image size
+  val best_size = 900
+  val min_size = 200
 
   override def receive = {
     case article: Article =>
       var bestImage: Option[String] = None
+      var bestSize: Int = 0
       breakable {
         article.potentialImages.foreach(url => {
-          fetch(url).map(_bestImage => {
-            bestImage = Some(_bestImage)
-            break()
+          fetch(url).map(tuple => {
+            if (bestSize < tuple._2) {
+              bestImage = Some(tuple._1)
+              bestSize = tuple._2
+              if (bestSize >= best_size) {
+                break()
+              }
+            }
           })
         })
       }
       persistent ! article.copy(featureImage = bestImage)
   }
 
-  def fetch(url: String): Option[String] = {
-    var result: Option[String] = None
+  def fetch(url: String): Option[(String, Int)] = {
+    var result: Option[(String, Int)] = None
     try {
       val response = httpClient.execute(new HttpGet(url))
       Logger.info(s"Download ${response.getStatusLine.getStatusCode} : $url")
@@ -51,8 +59,8 @@ class ImageFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
             val width = image.getWidth
             val height = image.getHeight
             val size = width + height
-            if (size >= prefer_size) {
-              result = Some(url)
+            if (size >= min_size) {
+              result = Some(url, size)
             }
           }
           input.close()
