@@ -14,3 +14,10 @@ case object Start
 case object Clean
 
 case class Crawl(blog: Blog)
+
+case class Fetch(url: String)
+
+case class Image(url: String)
+
+case class FetchResult(image: Option[Image])
+
