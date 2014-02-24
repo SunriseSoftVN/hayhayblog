@@ -1,4 +1,4 @@
-@(content: Html, title: String, description: String)
+@(content: Html, title: String, description: String, article: Option[Article] = None)
 
 @import views.html.partials._
 @import play._
@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @header(title, description)
+    @header(title, description, article)
     <link rel="stylesheet" media="screen" href="/assets/css/iframe.min.css">
 </head>
 

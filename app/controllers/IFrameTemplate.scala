@@ -3,6 +3,7 @@ package controllers
 import play.api.templates.Html
 import play.api.i18n.Messages
 import play.api.mvc.Controller
+import model.Article
 
 /**
  * The Class IFrameTemplate.
@@ -15,9 +16,10 @@ trait IFrameTemplate extends Controller {
 
 
   def renderOk(content: Html,
+               article: Option[Article] = None,
                title: String = Messages("application.title"),
                description: String = Messages("application.description")) = Ok(
-    views.html.tml.iframe(content, title, description)
+    views.html.tml.iframe(content, title, description, article)
   )
 
 

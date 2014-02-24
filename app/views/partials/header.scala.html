@@ -1,10 +1,18 @@
-@(title: String, description: String)
+@(title: String, description: String, article: Option[Article] = None)
 
 <title>@title</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="maximum-scale=1.0,width=device-width,initial-scale=1.0,user-scalable=0">
 <meta name="description" content='@description'/>
 <meta name="keywords" content="blog, blog tong hop, blog hay, blog du lich, blog thoi trang, blog cong nghe, blog radio, vlog, blog kinh doanh"/>
+@article.map{ _article =>
+<meta property="og:title" content="@_article.title"/>
+<meta property="og:description" content="@_article.shortDescription()"/>
+@_article.featureImage.map{ img =>
+<meta property="og:image" content="@img"/>
+}
+}
+
 <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
 <link rel="stylesheet" media="screen" href="/assets/css/bootstrap.min.css">
 <link rel="stylesheet" media="screen" href="/assets/css/bootstrap-theme.min.css">
