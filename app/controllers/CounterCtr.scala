@@ -23,7 +23,7 @@ object CounterCtr extends Controller {
       })
       ArticleDao.save(article.copy(clicked = article.clicked + 1))
       BlogDao.increaseRead(article.blogId)
-      Redirect(article.url)
+      Ok(views.html.article.embed(article.url))
     }).getOrElse(NotFound)
   }
 
