@@ -13,17 +13,19 @@ import dao.BlogDao
  * @since 1/31/14 4:38 AM
  *
  */
-class FeedSpout(nrOfCrawlActor: Int = 20) extends Actor {
+class FeedSpout(nrOfActor: Int = 20) extends Actor {
 
   val httpClient = HttpClientBuilder.build()
 
-  val crawlActor = Akka.system.actorOf(Props(new CrawlActor(httpClient))
-    .withRouter(RoundRobinRouter(nrOfInstances = nrOfCrawlActor)), name = "crawlActor")
+  val persistent = Akka.system.actorOf(Props[Persistent], name = "persistent")
+
+  val rssFetcher = Akka.system.actorOf(Props(new RssFetcher(httpClient, persistent))
+    .withRouter(RoundRobinRouter(nrOfInstances = nrOfActor)), name = "rssFetcher")
 
   override def receive = {
     case Start =>
       for (blog <- BlogDao.needToUpdate) {
-        crawlActor ! Crawl(blog)
+        rssFetcher ! Crawl(blog)
       }
   }
 }

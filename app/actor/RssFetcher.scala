@@ -1,6 +1,6 @@
 package actor
 
-import akka.actor.Actor
+import akka.actor.{ActorRef, Props, Actor}
 import org.apache.http.client.HttpClient
 import parser.{NewsParser, RssParser}
 import org.apache.commons.validator.routines.UrlValidator
@@ -18,19 +18,24 @@ import org.jsoup.Jsoup
 import collection.JavaConversions._
 import url.URLCanonicalizer
 import ch.sentric.URL
+import play.api.libs.concurrent.Akka
+import akka.routing.RoundRobinRouter
 
 /**
- * The Class CrawlActor.
+ * The Class RssFetcher.
  *
  * @author Nguyen Duc Dung
  * @since 1/31/14 4:45 AM
  *
  */
-class CrawlActor(httpClient: HttpClient) extends Actor {
+class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
   val parser = new RssParser
   val newsParser = new NewsParser
   val urlValidator = new UrlValidator
+
+  val contentFetcher = Akka.system.actorOf(Props(new ContentFetcher(httpClient, persistent))
+    .withRouter(RoundRobinRouter(nrOfInstances = 10)), name = "contentFetcher")
 
   override def receive = {
     case Crawl(blog) =>
@@ -118,7 +123,6 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
               uniqueTitle = genUniqueTitle(title),
               blogName = blog.uniqueName,
               description = des,
-              featureImage = featureImage,
               author = author,
               tags = if (StringUtils.isNotBlank(tags)) Some(tags) else None,
               descriptionHtml = rssHtml.getBytes("UTF-8"),
@@ -126,10 +130,7 @@ class CrawlActor(httpClient: HttpClient) extends Actor {
               publishedDate = pubDate.getOrElse(DateTime.now())
             )
 
-            val exist = ArticleDao.findOne(MongoDBObject("description" -> article.description))
-            if (exist.isEmpty) {
-              ArticleDao.save(article)
-            }
+            contentFetcher ! article
           }
         }
       }

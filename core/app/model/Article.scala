@@ -24,13 +24,16 @@ case class Article(
                     description: String,
                     //This form rss.
                     descriptionHtml: Array[Byte] = Array.empty,
-                    featureImage: Option[String],
+                    featureImage: Option[String] = None,
                     author: Option[String],
                     tags: Option[String],
                     clicked: Int = 0,
                     publishedDate: DateTime = DateTime.now(),
                     crawledDate: DateTime = DateTime.now()
                     ) extends BaseModel(_id) {
+
+  var potentialImages: List[String] = Nil
+
   def getDescriptionHtml = if (!descriptionHtml.isEmpty) IOUtils.toString(descriptionHtml, "UTF-8") else StringUtils.EMPTY
 
   override def equals(obj: Any) = {
