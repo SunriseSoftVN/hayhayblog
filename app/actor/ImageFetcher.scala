@@ -21,7 +21,7 @@ import scala.util.control.Breaks._
 class ImageFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
   // youtube thumb image size
-  val best_size = 900
+  val best_size = 800
   val min_size = 200
 
   override def receive = {

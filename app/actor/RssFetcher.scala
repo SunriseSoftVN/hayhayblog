@@ -21,6 +21,7 @@ import ch.sentric.URL
 import play.api.libs.concurrent.Akka
 import akka.routing.RoundRobinRouter
 import play.api.Play.current
+import scala.collection.mutable
 
 /**
  * The Class RssFetcher.
@@ -101,18 +102,19 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
             val rssHtml = extractor._2.getOrElse("")
             val potentialImages = extractor._3
 
-            var tags = ""
+            val tagSet = new mutable.HashSet[String]()
             syndEntry.getCategories.foreach {
               case sCat: SyndCategory =>
                 if (StringUtils.isNotBlank(sCat.getName)) {
-                  val tagName = StringUtils.stripAccents(StringUtils.trimToEmpty(sCat.getName)).toLowerCase
-                  tags += "," + tagName
+                  val tagName = clean(StringUtils.stripAccents(StringUtils.trimToEmpty(sCat.getName)).toLowerCase)
+                  tagSet += tagName
                   val tag = TagDao.findOrCreate(tagName)
                   TagDao.save(tag.copy(count = tag.count + 1))
                 }
+              case _ => //ignore
             }
 
-            tags.replaceFirst(",", "")
+            val tags = tagSet.mkString("", ",", "")
 
             val cleanAuthor = if (StringUtils.isNotBlank(syndEntry.getAuthor)) Jsoup.parse(syndEntry.getAuthor).text() else ""
             val author = if (StringUtils.isNotBlank(cleanAuthor)) Some(cleanAuthor) else None
@@ -142,6 +144,10 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
   private def genUniqueTitle(title: String) = StringUtils.stripAccents(title)
     .replaceAll("[^a-zA-Z\\d\\s:]", "")
     .replaceAll(" ", "-")
+    .replaceAll(":", "-")
     .toLowerCase
+
+  private def clean(title: String) = title
+    .replaceAll("\"", "")
 
 }
