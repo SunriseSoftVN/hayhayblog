@@ -12,6 +12,7 @@ import org.jsoup.Jsoup
 import java.io.ByteArrayInputStream
 import play.api.libs.concurrent.Akka
 import akka.routing.RoundRobinRouter
+import play.api.Play.current
 
 /**
  * The Class ContentFetcher.
@@ -23,7 +24,7 @@ import akka.routing.RoundRobinRouter
 class ContentFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
   val imageFetcher = Akka.system.actorOf(Props(new ImageFetcher(httpClient, persistent))
-    .withRouter(RoundRobinRouter(nrOfInstances = 10)), name = "imageFetcher")
+    .withRouter(RoundRobinRouter(nrOfInstances = 10)))
 
   override def receive = {
     case article: Article =>
@@ -37,8 +38,7 @@ class ContentFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor
           val input = new ByteArrayInputStream(content)
           val doc = Jsoup.parse(input, null, article.url)
           htmlExtractor.extract(doc)
-          article.potentialImages = htmlExtractor.images.toList
-
+          article.potentialImages ++= htmlExtractor.images.toList
           imageFetcher ! article
         }
         EntityUtils.consume(response.getEntity)

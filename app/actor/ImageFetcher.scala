@@ -40,19 +40,20 @@ class ImageFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
     var result: Option[String] = None
     try {
       val response = httpClient.execute(new HttpGet(url))
+      Logger.info(s"Download ${response.getStatusLine.getStatusCode} : $url")
       if (response.getStatusLine.getStatusCode == HttpStatus.SC_OK) {
         val entity = response.getEntity
         val content = EntityUtils.toByteArray(entity)
         if (content != null && content.length > 0) {
           val input = new ByteArrayInputStream(content)
           val image = ImageIO.read(input)
-          val width = image.getWidth
-          val height = image.getHeight
-          val size = width + height
-          if (size >= prefer_size) {
-            result = Some(url)
-          } else {
-            result = None
+          if (image != null) {
+            val width = image.getWidth
+            val height = image.getHeight
+            val size = width + height
+            if (size >= prefer_size) {
+              result = Some(url)
+            }
           }
           input.close()
         }

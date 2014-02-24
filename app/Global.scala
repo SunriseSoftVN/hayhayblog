@@ -26,7 +26,7 @@ object Global extends WithFilters(HTMLCompressorFilter()) {
 
   val devConfFilePath = "conf/dev.conf"
   val prodConfFilePath = "prod.conf"
-  lazy val feedSpout = Akka.system.actorOf(Props(new FeedSpout(nrOfActor = 100)), name = "feedSpout")
+  lazy val feedSpout = Akka.system.actorOf(Props(new FeedSpout(nrOfActor = 10)), name = "feedSpout")
 
   override def onStart(app: Application) {
     Logger.info("Starting...")

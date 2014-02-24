@@ -5,6 +5,7 @@ import org.joda.time.DateTime
 import org.apache.commons.io.IOUtils
 import org.apache.commons.lang3.StringUtils
 import dao.BlogDao
+import scala.collection.mutable.ListBuffer
 
 /**
  * The Class Article.
@@ -32,7 +33,7 @@ case class Article(
                     crawledDate: DateTime = DateTime.now()
                     ) extends BaseModel(_id) {
 
-  var potentialImages: List[String] = Nil
+  val potentialImages = new ListBuffer[String]
 
   def getDescriptionHtml = if (!descriptionHtml.isEmpty) IOUtils.toString(descriptionHtml, "UTF-8") else StringUtils.EMPTY
 

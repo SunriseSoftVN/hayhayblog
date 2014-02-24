@@ -20,6 +20,7 @@ import url.URLCanonicalizer
 import ch.sentric.URL
 import play.api.libs.concurrent.Akka
 import akka.routing.RoundRobinRouter
+import play.api.Play.current
 
 /**
  * The Class RssFetcher.
@@ -35,7 +36,7 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
   val urlValidator = new UrlValidator
 
   val contentFetcher = Akka.system.actorOf(Props(new ContentFetcher(httpClient, persistent))
-    .withRouter(RoundRobinRouter(nrOfInstances = 10)), name = "contentFetcher")
+    .withRouter(RoundRobinRouter(nrOfInstances = 10)))
 
   override def receive = {
     case Crawl(blog) =>
@@ -98,7 +99,7 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
             }
             val des = extractor._1.getOrElse("")
             val rssHtml = extractor._2.getOrElse("")
-            val featureImage = extractor._3.headOption
+            val potentialImages = extractor._3
 
             var tags = ""
             syndEntry.getCategories.foreach {
@@ -130,6 +131,7 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
               publishedDate = pubDate.getOrElse(DateTime.now())
             )
 
+            article.potentialImages ++= potentialImages
             contentFetcher ! article
           }
         }
