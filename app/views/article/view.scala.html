@@ -24,7 +24,7 @@ totalPage: Int, currentPage: Int)
             <h2 class="title">Các bài khác:</h2>
             <ul>
                 @articlesNextPage.map{ article =>
-                <li><a href="/r/@article.blogName/@article.uniqueTitle" target="_blank">@article.title</a></li>
+                <li><a href="/r/@article.blogName/@article.uniqueTitle">@article.title</a></li>
                 }
             </ul>
         </div>
@@ -40,7 +40,7 @@ totalPage: Int, currentPage: Int)
                     @for(i <- 0 until articleMostReads.length) {
                     <li>
                         <span class="rank">@{i+1}</span>
-                        <a href="/r/@articleMostReads(i).blogName/@articleMostReads(i).uniqueTitle" target="_blank">@articleMostReads(i).title</a>
+                        <a href="/r/@articleMostReads(i).blogName/@articleMostReads(i).uniqueTitle">@articleMostReads(i).title</a>
                         <div class="clearfix"></div>
                     </li>
                     }
