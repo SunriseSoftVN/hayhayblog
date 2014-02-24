@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils
  * @since 2/3/14 2:48 PM
  *
  */
-object CounterCtr extends Controller {
+object CounterCtr extends Controller with IFrameTemplate {
 
   def count(blogName: String, uniqueTitle: String) = Action {
     ArticleDao.findByUniqueTitleAndBlogName(blogName, uniqueTitle).map(article => {
@@ -27,7 +27,7 @@ object CounterCtr extends Controller {
       if (article.url.contains("youtube.com")) {
         Redirect(article.url)
       } else {
-        Ok(views.html.article.embed(article.url))
+        renderOk(views.html.article.embed(article.url))
       }
 
     }).getOrElse(NotFound)
