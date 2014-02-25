@@ -14,6 +14,7 @@ GET        /category/delete/:id         admin.controllers.CategoryCtr.delete(id:
 POST       /category/update             admin.controllers.CategoryCtr.update
 
 GET        /blog                        admin.controllers.BlogCtr.index
+GET        /blog/showAll                admin.controllers.BlogCtr.showAll
 GET        /blog/create                 admin.controllers.BlogCtr.create
 POST       /blog/update                 admin.controllers.BlogCtr.update
 GET        /blog/edit/:id               admin.controllers.BlogCtr.edit(id: ObjectId)

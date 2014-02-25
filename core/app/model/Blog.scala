@@ -20,6 +20,7 @@ case class Blog(
                  status: String = BlogStatus.UPDATED,
                  description: Option[String] = None,
                  isEnable: Boolean = false,
+                 homePage: Boolean = false,
                  categoryId: ObjectId,
                  read: Int = 0,
                  lastUpdated: DateTime = DateTime.now

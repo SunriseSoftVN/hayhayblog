@@ -19,7 +19,12 @@ object ArticleDao extends BaseDao[Article, String] {
 
   def findByCatId(catId: ObjectId, page: Int = 1, itemDisplay: Int = 10) = {
     val skip = (page - 1) * itemDisplay
-    val blogIds = BlogDao.findByCatId(catId).map(_._id)
+    val blogIds = BlogDao.find(
+      MongoDBObject(
+        "categoryId" -> catId,
+        "homePage" -> true
+      )
+    ).sort(MongoDBObject("read" -> -1)).toList.map(_._id)
 
     val query = MongoDBObject("blogId" -> MongoDBObject("$in" -> blogIds))
 
@@ -85,10 +90,13 @@ object ArticleDao extends BaseDao[Article, String] {
   }
 
 
-  def latest(take: Int = 10) = find(MongoDBObject.empty)
-    .sort(MongoDBObject("publishedDate" -> -1))
-    .take(take)
-    .toList
+  def latest(take: Int = 10) = {
+    val blogIds = BlogDao.canShowInHomePage.map(_._id)
+    find(MongoDBObject("blogId" -> MongoDBObject("$in" -> blogIds)))
+      .sort(MongoDBObject("publishedDate" -> -1))
+      .take(take)
+      .toList
+  }
 
   def mostRead(take: Int = 6) = find(MongoDBObject.empty)
     .sort(MongoDBObject("clicked" -> -1))

@@ -34,6 +34,7 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
       "status" -> nonEmptyText,
       "description" -> optional(text),
       "isEnable" -> boolean,
+      "homePage" -> boolean,
       "categoryId" -> of[ObjectId],
       "read" -> number,
       "lastUpdated" -> default(jodaDate, DateTime.now.minusDays(1))
@@ -80,6 +81,11 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
         }
       }
     )
+  })
+
+  def showAll = StackAction(AuthorityKey -> Administrator)(implicit request => {
+    BlogDao.showAll()
+    Redirect("/admin/blog")
   })
 
   private def categories = CategoryDao.all.map(cat => cat.id -> cat.name)

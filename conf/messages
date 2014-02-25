@@ -20,6 +20,7 @@ lbl.registerDate=Ngày đăng ký
 lbl.url=Url
 lbl.rssUrl=Rss Url
 lbl.isEnable=Enable
+lbl.homePage=Show on homepage
 lbl.category=Category
 error.url=Invalid Url
 lbl.description=Description
