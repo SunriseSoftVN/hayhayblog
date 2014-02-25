@@ -48,4 +48,6 @@ case class Article(
   def tagList = tags.getOrElse("").split(",").map(StringUtils.trimToEmpty).filterNot(StringUtils.isBlank)
 
   def blog = BlogDao.findOneById(blogId)
+
+  def shortTitle(maxLength: Int = 50) = if (title.length > maxLength) title.substring(0, maxLength) + "..." else title
 }

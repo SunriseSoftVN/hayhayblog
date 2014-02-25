@@ -24,8 +24,16 @@
                 </ul>
             </li>
             @article.map { _article =>
+            @_article.blog.map { _blog =>
             <li>
-                <a href="@_article.url" title="@_article.title"><i class="fa fa-chevron-circle-right"></i> @_article.title</a>
+                <a href="/blog/@_blog.uniqueName" title="@_blog.name">
+                    <img src="https://www.google.com/s2/favicons?domain=@_blog.url&alt=feed" alt="@_blog.name"/>
+                    @_blog.name
+                </a>
+            </li>
+            }
+            <li>
+                <a href="@_article.url" title="@_article.title"><i class="fa fa-chevron-circle-right"></i> @_article.shortTitle()</a>
             </li>
             <li>
                 <a href="#">
