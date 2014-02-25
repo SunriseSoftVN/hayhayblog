@@ -3,76 +3,14 @@
 
 
 <div class="row">
-    <div class="col-md-8">
-        <div class="box">
-            <div class="box-header">
-                <h2><a href="#">Bài mới nhất <i class="fa fa-chevron-circle-right"></i></a></h2>
-            </div>
-            <div class="box-content">
-                @latestArticles.map { article =>
-                @smallarticle(article)
-                }
-            </div>
+    <div class="box">
+        <div class="box-header">
+            <h3><a href="#">Bài mới nhất <i class="fa fa-chevron-circle-right"></i></a></h3>
         </div>
-    </div>
-    <div class="col-md-4">
-        <div class="box">
-            <div class="box-header">
-                <h2><a href="#">Bài nên đọc <i class="fa fa-chevron-circle-right"></i></a></h2>
-            </div>
-            <div class="box-content">
-                @articleMostReads.map { article =>
-                <div class="hot-article">
-                    <div class="col-md-5">
-                        @article.featureImage.map { img =>
-                        <a href="/r/@article.blogName/@article.uniqueTitle"><img src="@img" alt="@article.title"/></a>
-                        }.getOrElse {
-                        <div style="height: 108px;"></div>
-                        }
-                    </div>
-                    <div class="col-md-7">
-                        <h2 class="title"><a href="/r/@article.blogName/@article.uniqueTitle">@article.title</a></h2>
-                        <p class="description">@article.shortDescription()</p>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                }
-                <div class="clearfix"></div>
-            </div>
+        <div class="box-content">
+            @latestArticles.map { article =>
+            @smallarticle(article)
+            }
         </div>
-        <!--top blog-->
-        <div class="box">
-            <div class="box-header">
-                <h2><a href="#">Blog nên đọc <i class="fa fa-chevron-circle-right"></i></a></h2>
-            </div>
-            <div class="box-content">
-                <div class="top-blogs">
-                    <ul>
-                        @blogs.map{ blog =>
-                        <li>
-                            <a href="/blog/@blog.uniqueName">
-                                <img src="https://www.google.com/s2/favicons?domain=@blog.url&alt=feed" alt="@blog.name"/>
-                                @blog.name
-                                @if(blog.read > 0) {
-                                - <span class="meta">@blog.read lượt xem</span>
-                                }
-                            </a>
-                        </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <br/>
-        <!--Facebook plugin-->
-        @facebookLikeBox()
     </div>
 </div>
-
-@newsBoxs.map { box =>
-<div class="row">
-    <div class="col-md-8">
-        @newsbox(box)
-    </div>
-</div>
-}
