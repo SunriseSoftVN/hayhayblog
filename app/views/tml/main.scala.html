@@ -1,4 +1,4 @@
-@(content: Html, title: String, description: String, _topMenu: Html, _footer: Html)
+@(content: Html, title: String, description: String, _navBar: Html, _footer: Html)
 
 @import views.html.partials._
 @import play._
@@ -10,7 +10,33 @@
 </head>
 <body>
 
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    @_navBar
+</div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="blog-menu">
+                <h3>Du Lich</h3>
+                <ul>
+                    <li><a href="">Blog 1</a></li>
+                    <li><a href="">Blog 2</a></li>
+                    <li><a href="">Blog 3</a></li>
+                </ul>
+            </div>
+            <div class="blog-menu">
+                <h3>Lap Trinh</h3>
+                <ul>
+                    <li><a href="">Blog 1</a></li>
+                    <li><a href="">Blog 2</a></li>
+                    <li><a href="">Blog 3</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">Col2</div>
+    </div>
+</div>
 
 
 @if(Play.isProd) {
