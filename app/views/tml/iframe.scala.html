@@ -1,4 +1,4 @@
-@(content: Html, title: String, description: String, article: Option[Article] = None)
+@(content: Html, title: String, description: String, _navBar: Html, article: Option[Article] = None)
 
 @import views.html.partials._
 @import play._
@@ -23,6 +23,10 @@
 }(document, 'script', 'facebook-jssdk'));
 </script>
 <!--end-->
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    @_navBar
+</div>
 
 @content
 

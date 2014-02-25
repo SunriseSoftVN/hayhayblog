@@ -1,5 +1,5 @@
-@(data: TopMenuDto)
-
+@(data: TopMenuDto, article: Option[Article] = None)
+@import partials._
 <div class="container">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -23,6 +23,23 @@
                     }
                 </ul>
             </li>
+            @article.map { _article =>
+            <li>
+                <a href="@_article.url" title="@_article.title"><i class="fa fa-chevron-circle-right"></i> @_article.title</a>
+            </li>
+            <li>
+                <a href="#">
+                    @facebookLikeBtn(_article.url)
+                </a>
+            </li>
+            }
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            @article.map { _article =>
+            <li>
+                <a href="@_article.url" title="Về trang gốc"><i class="fa fa-times-circle"></i></a>
+            </li>
+            }
         </ul>
     </div><!--/.nav-collapse -->
 </div>
