@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET        /                           controllers.HomeCtr.index
+GET        /                           controllers.HomeCtr.index(page: Int ?= 1)
 
 GET        /user/login                 controllers.UserCtr.login
 GET        /user/register              controllers.UserCtr.register

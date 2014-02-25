@@ -1,12 +1,28 @@
-@(latestArticles: List[Article])
+@(latestArticles: List[Article], totalPage: Long)
 @import views.html.partials._
 
 <div class="row">
     <div class="box">
-        <div class="box-content">
+        <div id="aticle-container" class="box-content">
             @latestArticles.map { article =>
                 @smallarticle(article)
             }
         </div>
     </div>
 </div>
+
+<div class="navigation">
+    @for(i <- 1l to totalPage) {
+    <a href="?page=@i">@i</a>
+    }
+</div>
+
+<script type="text/javascript">
+    $(function() {
+       $('#aticle-container').infinitescroll({
+           navSelector: 'div.navigation',
+           nextSelector : "div.navigation a:first",
+           itemSelector : "#content div.small-article"
+       });
+    });
+</script>

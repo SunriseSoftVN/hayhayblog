@@ -9,12 +9,22 @@
     @header(title, description)
 </head>
 <body>
+<!--facebook sdk-->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=710328198998370";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!--end-->
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     @_navBar
 </div>
 
-<div class="container">
+<div id="content" class="container">
     <div class="col-md-9">
         @content
     </div>
@@ -35,7 +45,6 @@
     ga('create', 'UA-47866360-1', 'hayhayblog.com');
     ga('send', 'pageview');
 </script>
-}
 
 <!-- UserVoice JavaScript SDK (only needed once on a page) -->
 <script>(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/tkDlHzDDexsU7TyrTLOerw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})()</script>
@@ -54,6 +63,8 @@
         tab_inverted: false
     }]);
 </script>
+}
+
 
 </body>
 
