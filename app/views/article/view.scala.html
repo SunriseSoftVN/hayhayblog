@@ -1,83 +1,10 @@
-@(articles: List[Article], articleMostReads: List[Article],
-articlesNextPage: List[Article], blogs: List[Blog], tags: List[Tag],
-totalPage: Int, currentPage: Int)
+@(articles: List[Article], totalPage: Int, currentPage: Int)
 
 @import partials.smallarticle
 @import partials.facebookLikeBox
 
 <div class="row">
-    <div class="col-md-9">
-        @articles.map { article =>
-            @smallarticle(article)
-        }
-
-        <div class="paging">
-            <span>
-                @for(i <- 1 to totalPage) {
-                <a href="?page=@i" class="@if(i == currentPage) {current}">@i</a>
-                }
-            </span>
-        </div>
-
-        @if(!articlesNextPage.isEmpty) {
-        <div class="more-stories">
-            <h2 class="title">Các bài khác:</h2>
-            <ul>
-                @articlesNextPage.map{ article =>
-                <li><a href="/r/@article.blogName/@article.uniqueTitle">@article.title</a></li>
-                }
-            </ul>
-        </div>
-        }
-
-    </div>
-    <div class="col-md-3">
-        @if(!articleMostReads.isEmpty){
-        <div class="top-stories">
-            <h3 class="title">Nổi bật trong tuần</h3>
-            <div class="content">
-                <ul>
-                    @for(i <- 0 until articleMostReads.length) {
-                    <li>
-                        <span class="rank">@{i+1}</span>
-                        <a href="/r/@articleMostReads(i).blogName/@articleMostReads(i).uniqueTitle">@articleMostReads(i).title</a>
-                        <div class="clearfix"></div>
-                    </li>
-                    }
-                </ul>
-            </div>
-        </div>
-        }
-        @if(!blogs.isEmpty){
-        <div class="top-blogs">
-            <h3 class="title">Blog cùng chủ đề</h3>
-            <ul>
-                @blogs.map { blog =>
-                <li>
-                    <img src="https://www.google.com/s2/favicons?domain=@blog.url&alt=feed" alt="@blog.name"/>
-                    <a href="/blog/@blog.uniqueName">
-                        @blog.name
-                        @if(blog.read > 0) {
-                        - <span class="meta">@blog.read lượt xem</span>
-                        }
-                    </a>
-                </li>
-                }
-            </ul>
-        </div>
-        }
-        @if(!tags.isEmpty){
-        <div class="top-tags">
-            <h3 class="title">Chủ đề hot</h3>
-            <ul>
-                @tags.map{ tag =>
-                <li><a href='/tag/@tag.name.replaceAll(" ", "_")'>@tag.name</a></li>
-                }
-            </ul>
-        </div>
-        }
-        <br/>
-        <!--Facebook plugin-->
-        @facebookLikeBox()
-    </div>
+    @articles.map { article =>
+        @smallarticle(article)
+    }
 </div>
