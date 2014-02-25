@@ -1,10 +1,28 @@
-@(articles: List[Article], totalPage: Int, currentPage: Int)
+@(articles: List[Article], totalPage: Int)
 
 @import partials.smallarticle
 @import partials.facebookLikeBox
 
 <div class="row">
-    @articles.map { article =>
-        @smallarticle(article)
+    <div id="article-container">
+        @articles.map { article =>
+            @smallarticle(article)
+        }
+    </div>
+</div>
+
+<div class="navigation">
+    @for(i <- 1l to totalPage) {
+    <a href="?page=@i">@i</a>
     }
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#article-container').infinitescroll({
+            navSelector: '.navigation',
+            nextSelector: ".navigation a:first",
+            itemSelector: "#article-container div.small-article"
+        });
+    });
+</script>

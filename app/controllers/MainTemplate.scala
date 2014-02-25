@@ -21,7 +21,7 @@ trait MainTemplate extends Controller {
 
   def sideBar(implicit dto: TopMenuDto) = views.html.partials.sidebar(dto)
 
-  def footer = views.html.partials.footer(CategoryDao.all)
+  def footer = views.html.partials.footer()
 
   def renderOk(content: Html,
                title: String = Messages("application.title"),

@@ -2,12 +2,10 @@
 @import views.html.partials._
 
 <div class="row">
-    <div class="box">
-        <div id="aticle-container" class="box-content">
-            @latestArticles.map { article =>
-                @smallarticle(article)
-            }
-        </div>
+    <div id="article-container">
+        @latestArticles.map { article =>
+            @smallarticle(article)
+        }
     </div>
 </div>
 
@@ -18,11 +16,11 @@
 </div>
 
 <script type="text/javascript">
-    $(function() {
-       $('#aticle-container').infinitescroll({
-           navSelector: 'div.navigation',
-           nextSelector : "div.navigation a:first",
-           itemSelector : "#content div.small-article"
-       });
+    $(function () {
+        $('#article-container').infinitescroll({
+            navSelector: '.navigation',
+            nextSelector: ".navigation a:first",
+            itemSelector: "#article-container div.small-article"
+        });
     });
 </script>
