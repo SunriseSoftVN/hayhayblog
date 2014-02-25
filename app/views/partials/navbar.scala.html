@@ -14,7 +14,15 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/">Trang chủ</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Danh mục<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    @data.categories.map { cat =>
+                    <li><a href="/cat/@cat.shortName">@cat.name</a></li>
+                    }
+                </ul>
+            </li>
         </ul>
     </div><!--/.nav-collapse -->
 </div>
