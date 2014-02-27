@@ -1,5 +1,7 @@
 package utils
 
+import org.apache.commons.lang3.StringUtils
+
 /**
  * The Class StringToIntConverter.
  *
@@ -9,7 +11,7 @@ package utils
  */
 object String2Int {
   def unapply(s : String) : Option[Int] = try {
-    Some(s.toInt)
+    Some(StringUtils.trimToEmpty(s).toInt)
   } catch {
     case _ : java.lang.NumberFormatException => None
   }

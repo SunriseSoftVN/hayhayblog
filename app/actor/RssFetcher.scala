@@ -25,6 +25,8 @@ import scala.collection.mutable
 import org.rometools.feed.module.mediarss.{MediaEntryModuleImpl, MediaModule}
 import org.rometools.feed.module.slash.Slash
 import org.rometools.feed.module.feedburner.FeedBurner
+import utils.Options._
+import utils.String2Int
 
 /**
  * The Class RssFetcher.
@@ -132,6 +134,18 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
               commentTotal = slashModule.asInstanceOf[Slash].getComments
             }
 
+            //get number of comments with feedbuner
+            var commentRss: Option[String] = None
+            syndEntry.getForeignMarkup.foreach(markup => {
+              if (markup.getName == "commentrss"
+                && markup.getNamespaceURI == "http://wellformedweb.org/CommentAPI/") {
+                commentRss = markup.getValue
+              } else if (markup.getName == "total"
+                && markup.getNamespaceURI == "http://purl.org/syndication/thread/1.0") {
+                commentTotal = String2Int.unapply(markup.getValue).getOrElse(0)
+              }
+            })
+
             val tagSet = new mutable.HashSet[String]()
             syndEntry.getCategories.foreach {
               case sCat: SyndCategory =>
@@ -162,6 +176,7 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
               descriptionHtml = rssHtml.getBytes("UTF-8"),
               blogId = blog._id,
               commentTotal = commentTotal,
+              commentRss = commentRss,
               publishedDate = pubDate.getOrElse(DateTime.now())
             )
 

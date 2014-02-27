@@ -19,4 +19,6 @@ object Options {
     }
   })
 
+  implicit def string2Option(st: String): Option[String] = if (StringUtils.isNotBlank(st)) Some(StringUtils.trimToEmpty(st)) else None
+
 }
