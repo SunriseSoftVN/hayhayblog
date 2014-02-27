@@ -5,7 +5,7 @@ import org.apache.commons.io.IOUtils
 import parser.RssParser
 import collection.JavaConversions._
 import com.sun.syndication.feed.synd.SyndEntry
-import com.sun.syndication.feed.module.mediarss.{MediaEntryModuleImpl, MediaModule}
+import org.rometools.feed.module.mediarss.{MediaEntryModuleImpl, MediaModule}
 
 /**
  * The Class RssParser.
