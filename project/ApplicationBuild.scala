@@ -8,6 +8,7 @@ object ApplicationBuild extends Build {
   val appVersion = "0.0.1"
 
   val parserDependencies = Seq(
+    "com.rometools" % "rome" % "2.0.0-SNAPSHOT",
     "org.jsoup" % "jsoup" % "1.7.3",
     "org.scalanlp" %% "breeze-process" % "0.3",
     "com.googlecode.juniversalchardet" % "juniversalchardet" % "1.0.3"
@@ -50,16 +51,6 @@ object ApplicationBuild extends Build {
     "t2v.jp repo" at "http://www.t2v.jp/maven-repo/"
   )
 
-  val romeDependencies = Seq(
-    "org.apache.commons" % "commons-lang3" % "3.1",
-    "com.rometools" % "rome" % "2.0.0-SNAPSHOT",
-    "junit" % "junit" % "4.11" % "test"
-  )
-
-  val romeModules = Project("rome-modules", file("rome-modules")).settings(
-    libraryDependencies ++= romeDependencies
-  )
-
   val core = play.Project(appName + "-core", appVersion, appDependencies, path = file("core")).settings(
     templatesImport ++= Seq(
       "org.bson.types.ObjectId",
@@ -91,6 +82,6 @@ object ApplicationBuild extends Build {
       "dto._"
     ),
     resolvers ++= appResolvers
-  ).dependsOn(admin, romeModules).aggregate(core, admin, romeModules)
+  ).dependsOn(admin).aggregate(core, admin)
 
 }

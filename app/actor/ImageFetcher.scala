@@ -26,22 +26,26 @@ class ImageFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
   override def receive = {
     case article: Article =>
-      var bestImage: Option[String] = None
-      var bestSize: Int = 0
-      breakable {
-        article.potentialImages.foreach(url => {
-          fetch(url).map(tuple => {
-            if (bestSize < tuple._2) {
-              bestImage = Some(tuple._1)
-              bestSize = tuple._2
-              if (bestSize >= best_size) {
-                break()
+      if (article.featureImage.isEmpty) {
+        var bestImage: Option[String] = None
+        var bestSize: Int = 0
+        breakable {
+          article.potentialImages.foreach(url => {
+            fetch(url).map(tuple => {
+              if (bestSize < tuple._2) {
+                bestImage = Some(tuple._1)
+                bestSize = tuple._2
+                if (bestSize >= best_size) {
+                  break()
+                }
               }
-            }
+            })
           })
-        })
+        }
+        persistent ! article.copy(featureImage = bestImage)
+      } else {
+        persistent ! article
       }
-      persistent ! article.copy(featureImage = bestImage)
   }
 
   def fetch(url: String): Option[(String, Int)] = {

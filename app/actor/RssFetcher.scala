@@ -22,6 +22,7 @@ import play.api.libs.concurrent.Akka
 import akka.routing.RoundRobinRouter
 import play.api.Play.current
 import scala.collection.mutable
+import org.rometools.feed.module.mediarss.{MediaEntryModuleImpl, MediaModule}
 
 /**
  * The Class RssFetcher.
@@ -102,6 +103,17 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
             val rssHtml = extractor._2.getOrElse("")
             val potentialImages = extractor._3
 
+            //get thumbnail by rome module
+            var featureImage: Option[String] = None
+            val mediaModule = syndEntry.getModule(MediaModule.URI)
+            if (mediaModule != null) {
+              val mediaModuleImpl = mediaModule.asInstanceOf[MediaEntryModuleImpl]
+              if (mediaModuleImpl.getMetadata != null) {
+                val thumbnails = mediaModuleImpl.getMetadata.getThumbnail
+                featureImage = thumbnails.headOption.map(_.getUrl.toString)
+              }
+            }
+
             val tagSet = new mutable.HashSet[String]()
             syndEntry.getCategories.foreach {
               case sCat: SyndCategory =>
@@ -126,6 +138,7 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
               uniqueTitle = genUniqueTitle(title),
               blogName = blog.uniqueName,
               description = des,
+              featureImage = featureImage,
               author = author,
               tags = if (StringUtils.isNotBlank(tags)) Some(tags) else None,
               descriptionHtml = rssHtml.getBytes("UTF-8"),
