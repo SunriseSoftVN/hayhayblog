@@ -22,7 +22,7 @@ class ImageFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
   // youtube thumb image size
   val best_size = 500
-  val min_size = 200
+  val min_size = 150
 
   override def receive = {
     case article: Article =>
