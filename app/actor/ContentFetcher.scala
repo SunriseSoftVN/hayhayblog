@@ -28,7 +28,7 @@ class ContentFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor
 
   override def receive = {
     case article: Article =>
-      var commentRss: Option[String] = None
+      var commentRss: Option[String] = article.commentRss
       if (article.commentRss.isEmpty) {
         try {
           val response = httpClient.execute(new HttpGet(article.url))
