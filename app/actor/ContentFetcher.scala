@@ -4,7 +4,6 @@ import akka.actor.{ActorRef, Props, Actor}
 import model.Article
 import org.apache.http.client.HttpClient
 import play.api.libs.concurrent.Akka
-import akka.routing.RoundRobinRouter
 import play.api.Play.current
 import org.apache.http.client.methods.HttpGet
 import play.api.Logger
@@ -25,8 +24,7 @@ import utils.Options._
  */
 class ContentFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
-  val imageFetcher = Akka.system.actorOf(Props(new ImageFetcher(httpClient, persistent))
-    .withRouter(RoundRobinRouter(nrOfInstances = 10)))
+  val imageFetcher = Akka.system.actorOf(Props(new ImageFetcher(httpClient, persistent)))
 
   override def receive = {
     case article: Article =>
@@ -48,6 +46,7 @@ class ContentFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor
                 commentRss = href
               }
             })
+            input.close()
           }
           EntityUtils.consume(response.getEntity)
         } catch {
@@ -56,6 +55,8 @@ class ContentFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor
         }
       }
 
-      imageFetcher ! article.copy(commentRss = commentRss)
+      val copyArticle = article.copy(commentRss = commentRss)
+      copyArticle.potentialImages ++= article.potentialImages
+      imageFetcher ! copyArticle
   }
 }

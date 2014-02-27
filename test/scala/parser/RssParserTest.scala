@@ -20,7 +20,7 @@ class RssParserTest {
 
   @Test
   def test1() {
-    val input = this.getClass.getClassLoader.getResourceAsStream("rss3.xml")
+    val input = this.getClass.getClassLoader.getResourceAsStream("rss4.xml")
     val bytes = IOUtils.toByteArray(input)
     parser.parse(bytes, "http://eatingandgettingfattogether.wordpress.com/").map(feed => {
       feed.getEntries.foreach(entry => {
@@ -68,5 +68,15 @@ class RssParserTest {
     })
   }
 
+  @Test
+  def test4() {
+    val input = this.getClass.getClassLoader.getResourceAsStream("rss4.xml")
+    val bytes = IOUtils.toByteArray(input)
+    parser.parse(bytes, "http://hocthenao.vn/").map(feed => {
+      feed.getEntries.foreach(entry => {
+        println(entry.getContents)
+      })
+    })
+  }
 
 }

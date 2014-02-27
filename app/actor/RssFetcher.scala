@@ -78,7 +78,7 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
   }
 
 
-  private def parse(syndEntry: SyndEntry, blog: Blog): Any = {
+  private def parse(syndEntry: SyndEntry, blog: Blog) {
     var url = URLCanonicalizer.getCanonicalURL(StringUtils.trimToEmpty(syndEntry.getLink), blog.url)
 
     //get number of comments with feed bunner
