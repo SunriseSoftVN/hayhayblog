@@ -12,7 +12,8 @@ object ApplicationBuild extends Build {
     "org.scalanlp" %% "breeze-process" % "0.3",
     "com.googlecode.juniversalchardet" % "juniversalchardet" % "1.0.3",
     "rome" % "rome" % "1.0" exclude("jdom", "jdom"),
-    "org.jdom" % "jdom" % "1.1.3"
+    "org.jdom" % "jdom" % "1.1.3",
+    "org.rometools" % "rome-modules" % "1.0"
   )
 
   val templateEngine = Seq(
