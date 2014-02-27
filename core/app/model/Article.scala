@@ -29,6 +29,8 @@ case class Article(
                     author: Option[String],
                     tags: Option[String],
                     clicked: Int = 0,
+                    commentTotal: Int = 0,
+                    commentRss: Option[String] = None,
                     publishedDate: DateTime = DateTime.now(),
                     crawledDate: DateTime = DateTime.now()
                     ) extends BaseModel(_id) {

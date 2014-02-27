@@ -18,14 +18,28 @@ class RssParserTest {
   val parser = new RssParser
 
   @Test
-  def test() {
-    val input = this.getClass.getClassLoader.getResourceAsStream("rss1.xml")
+  def test1() {
+    val input = this.getClass.getClassLoader.getResourceAsStream("rss3.xml")
     val bytes = IOUtils.toByteArray(input)
     parser.parse(bytes, "http://eatingandgettingfattogether.wordpress.com/").map(feed => {
       feed.getEntries.foreach(entry => {
         val syndEntry = entry
         val media = syndEntry.getModule(MediaModule.URI).asInstanceOf[MediaEntryModuleImpl]
-        media.getMediaContents.headOption.map(media => println(media.getReference))
+        if (media != null && media.getMetadata != null) {
+          media.getMetadata.getThumbnail.foreach(println)
+        }
+      })
+    })
+  }
+
+  @Test
+  def test2() {
+    val input = this.getClass.getClassLoader.getResourceAsStream("rss2.xml")
+    val bytes = IOUtils.toByteArray(input)
+    parser.parse(bytes, "http://hocthenao.vn/").map(feed => {
+      feed.getEntries.foreach(entry => {
+        val syndEntry = entry
+        syndEntry.getContents.foreach(content => println(content.getValue))
       })
     })
   }

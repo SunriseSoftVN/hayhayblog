@@ -25,13 +25,12 @@ class NewsParser {
 
   private def getHtml(item: SyndEntry) = {
     var html = ""
-    item.getContents.foreach(content => content match {
-      case c: SyndContent => {
+    item.getContents.foreach {
+      case c: SyndContent =>
         if (StringUtils.isNotBlank(c.getValue)) {
           html += c.getValue
         }
-      }
-    })
+    }
 
     if (StringUtils.isBlank(html) && item.getDescription != null
       && StringUtils.isNotBlank(item.getDescription.getValue)) {

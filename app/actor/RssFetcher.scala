@@ -23,6 +23,8 @@ import akka.routing.RoundRobinRouter
 import play.api.Play.current
 import scala.collection.mutable
 import org.rometools.feed.module.mediarss.{MediaEntryModuleImpl, MediaModule}
+import org.rometools.feed.module.slash.Slash
+import org.rometools.feed.module.feedburner.FeedBurner
 
 /**
  * The Class RssFetcher.
@@ -75,7 +77,16 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
 
   private def parse(syndEntry: SyndEntry, blog: Blog): Any = {
-    val url = URLCanonicalizer.getCanonicalURL(StringUtils.trimToEmpty(syndEntry.getLink), blog.url)
+    var url = URLCanonicalizer.getCanonicalURL(StringUtils.trimToEmpty(syndEntry.getLink), blog.url)
+
+    //check feedbunner link
+    val feedBunnerModule = syndEntry.getModule(FeedBurner.URI)
+    if (feedBunnerModule != null) {
+      val origLink = feedBunnerModule.asInstanceOf[FeedBurner].getOrigLink
+      if (StringUtils.isNotEmpty(origLink)) {
+        url = URLCanonicalizer.getCanonicalURL(StringUtils.trimToEmpty(origLink), blog.url)
+      }
+    }
 
     if (urlValidator.isValid(url)) {
       val normalizationUrl = new URL(url).getNormalizedUrl
@@ -114,6 +125,13 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
               }
             }
 
+            //get number of comments
+            val slashModule = syndEntry.getModule(Slash.URI)
+            var commentTotal = 0
+            if (slashModule != null && slashModule.asInstanceOf[Slash].getComments != null) {
+              commentTotal = slashModule.asInstanceOf[Slash].getComments
+            }
+
             val tagSet = new mutable.HashSet[String]()
             syndEntry.getCategories.foreach {
               case sCat: SyndCategory =>
@@ -143,6 +161,7 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
               tags = if (StringUtils.isNotBlank(tags)) Some(tags) else None,
               descriptionHtml = rssHtml.getBytes("UTF-8"),
               blogId = blog._id,
+              commentTotal = commentTotal,
               publishedDate = pubDate.getOrElse(DateTime.now())
             )
 
