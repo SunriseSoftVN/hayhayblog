@@ -81,14 +81,23 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
   private def parse(syndEntry: SyndEntry, blog: Blog): Any = {
     var url = URLCanonicalizer.getCanonicalURL(StringUtils.trimToEmpty(syndEntry.getLink), blog.url)
 
-    //check feedbunner link
-    val feedBunnerModule = syndEntry.getModule(FeedBurner.URI)
-    if (feedBunnerModule != null) {
-      val origLink = feedBunnerModule.asInstanceOf[FeedBurner].getOrigLink
-      if (StringUtils.isNotEmpty(origLink)) {
-        url = URLCanonicalizer.getCanonicalURL(StringUtils.trimToEmpty(origLink), blog.url)
+    //get number of comments with feed bunner
+    var commentRss: Option[String] = None
+    var commentTotal = 0
+    syndEntry.getForeignMarkup.foreach(markup => {
+      if (markup.getName == "commentrss"
+        && markup.getNamespaceURI == "http://wellformedweb.org/CommentAPI/") {
+        commentRss = markup.getValue
+      } else if (markup.getName == "total"
+        && markup.getNamespaceURI == "http://purl.org/syndication/thread/1.0") {
+        commentTotal = String2Int.unapply(markup.getValue).getOrElse(0)
+      } else if (markup.getName == "origlink" && markup.getNamespaceURI == FeedBurner.URI) {
+        if (StringUtils.isNotEmpty(markup.getValue)) {
+          //check feedbunner link
+          url = URLCanonicalizer.getCanonicalURL(StringUtils.trimToEmpty(markup.getValue), blog.url)
+        }
       }
-    }
+    })
 
     if (urlValidator.isValid(url)) {
       val normalizationUrl = new URL(url).getNormalizedUrl
@@ -129,22 +138,9 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
             //get number of comments
             val slashModule = syndEntry.getModule(Slash.URI)
-            var commentTotal = 0
             if (slashModule != null && slashModule.asInstanceOf[Slash].getComments != null) {
               commentTotal = slashModule.asInstanceOf[Slash].getComments
             }
-
-            //get number of comments with feedbuner
-            var commentRss: Option[String] = None
-            syndEntry.getForeignMarkup.foreach(markup => {
-              if (markup.getName == "commentrss"
-                && markup.getNamespaceURI == "http://wellformedweb.org/CommentAPI/") {
-                commentRss = markup.getValue
-              } else if (markup.getName == "total"
-                && markup.getNamespaceURI == "http://purl.org/syndication/thread/1.0") {
-                commentTotal = String2Int.unapply(markup.getValue).getOrElse(0)
-              }
-            })
 
             val tagSet = new mutable.HashSet[String]()
             syndEntry.getCategories.foreach {

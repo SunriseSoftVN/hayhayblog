@@ -5,6 +5,7 @@ import org.apache.commons.io.IOUtils
 import parser.RssParser
 import collection.JavaConversions._
 import org.rometools.feed.module.mediarss.{MediaEntryModuleImpl, MediaModule}
+import org.rometools.feed.module.feedburner.FeedBurner
 
 /**
  * The Class RssParser.
@@ -26,6 +27,12 @@ class RssParserTest {
         val media = entry.getModule(MediaModule.URI).asInstanceOf[MediaEntryModuleImpl]
         if (media != null && media.getMetadata != null) {
           media.getMetadata.getThumbnail.foreach(println)
+        }
+
+        val feedBunnerModule = entry.getModule(FeedBurner.URI)
+        if (feedBunnerModule != null) {
+          val origLink = feedBunnerModule.asInstanceOf[FeedBurner].getOrigLink
+          println(origLink)
         }
       })
     })
