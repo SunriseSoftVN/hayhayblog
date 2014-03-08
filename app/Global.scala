@@ -6,7 +6,6 @@ import dao.UserDao
 import filter.HTMLCompressorFilter
 import java.io.File
 import model.{Administrator, User}
-import org.apache.commons.codec.digest.DigestUtils
 import play.api._
 import play.api.libs.concurrent.Akka
 import play.api.mvc.WithFilters
@@ -34,7 +33,7 @@ object Global extends WithFilters(HTMLCompressorFilter()) {
     if (UserDao.findByEmail("dungvn3000@gmail.com").isEmpty) {
       UserDao.save(User(
         email = "dungvn3000@gmail.com",
-        password = DigestUtils.md5Hex("Nevergiveup2512"),
+        password = "a17b76ab0f69faf9ba22449b6a5abb88",
         role = Administrator.value
       ))
     }
