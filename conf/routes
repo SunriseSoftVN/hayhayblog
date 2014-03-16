@@ -31,5 +31,8 @@ GET        /r/:blogName/:title         controllers.DetailCtr.view(blogName, titl
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file               controllers.Assets.at(path="/public", file)
 
+# For verify domain
+GET        /1394956754hayhayblog.com_traodoilienket.txt               controllers.Assets.at(path="/public", file="1394956754hayhayblog.com_traodoilienket.txt")
+
 # Import admin module
 ->         /admin                      admin.Routes
