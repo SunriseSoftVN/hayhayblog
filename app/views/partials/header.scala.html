@@ -4,11 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="maximum-scale=1.0,width=device-width,initial-scale=1.0,user-scalable=0">
 <meta name="description" content='@description'/>
-<meta name="keywords" content="blog, blog tong hop, blog hay, blog du lich, blog thoi trang, blog cong nghe, blog radio, vlog, blog kinh doanh"/>
+<meta name="keywords"
+      content="blog, blog tong hop, blog nen doc, blog hay, blog hay ve du lich,
+      blog hay ve tinh yeu, blog hay ve giao duc,
+      blog hay ve thoi trang, blog hay ve cong nghe, blog hay ve radio, vlog, blog hay ve kinh doanh"/>
+
 @article.map{ _article =>
 <meta property="og:title" content="@_article.title"/>
 <meta property="og:description" content="@_article.shortDescription(200)"/>
-<meta rel=“canonical” href="@_article.url" />
+<meta rel=“canonical” href="@_article.url"/>
 @_article.featureImage.map{ img =>
 <meta property="og:image" content="@img"/>
 }
