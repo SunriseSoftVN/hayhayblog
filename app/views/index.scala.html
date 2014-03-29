@@ -2,12 +2,7 @@
 @import views.html.partials._
 
 <div class="row">
-    <div class="news-filter">
-        <h3>
-            <a class='@if(SortMode.newest == sortMode) {active}' href="?sort=newest">Bài mới nhất</a> |
-            <a class="@if(SortMode.hottest == sortMode) {active}" href="?sort=hottest">Đọc nhiều nhất</a>
-        </h3>
-    </div>
+    @newsFilter(sortMode)
     <div id="article-container">
         @latestArticles.map { article =>
             @smallarticle(article)
@@ -17,7 +12,7 @@
 
 <div class="navigation">
     @for(i <- 1l to totalPage) {
-    <a href="?sortMode=@sortMode&page=@i">@i</a>
+    <a href="?sort=@sortMode&page=@i">@i</a>
     }
 </div>
 

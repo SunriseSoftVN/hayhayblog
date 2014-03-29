@@ -1,9 +1,11 @@
-@(articles: List[Article], totalPage: Int)
+@(articles: List[Article], totalPage: Int, sortMode: String)
 
 @import partials.smallarticle
+@import partials.newsFilter
 @import partials.facebookLikeBox
 
 <div class="row">
+    @newsFilter(sortMode)
     <div id="article-container">
         @articles.map { article =>
             @smallarticle(article)
@@ -13,7 +15,7 @@
 
 <div class="navigation">
     @for(i <- 1l to totalPage) {
-    <a href="?page=@i">@i</a>
+    <a href="?sort=@sortMode&page=@i">@i</a>
     }
 </div>
 

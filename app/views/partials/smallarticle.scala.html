@@ -22,6 +22,9 @@
                 @if(article.clicked > 0) {
                 - <span class="views">@article.clicked lượt xem</span>
                 }
+                @if(article.commentTotal > 0) {
+                - <span class="views">@article.commentTotal bình luận</span>
+                }
             </span>
         </div>
         <p>@article.shortDescription(200)</p>

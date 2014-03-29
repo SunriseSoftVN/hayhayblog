@@ -2,7 +2,7 @@ package dao
 
 import com.novus.salat.dao.SalatDAO
 import se.radley.plugin.salat._
-import model.Article
+import model.{SortMode, Article}
 import play.api.Play.current
 import org.bson.types.ObjectId
 import com.mongodb.casbah.commons.MongoDBObject
@@ -17,7 +17,7 @@ import com.mongodb.casbah.commons.MongoDBObject
 object ArticleDao extends BaseDao[Article, String] {
   override def dao = new SalatDAO[Article, String](collection = mongoCollection("article")) {}
 
-  def findByCatId(catId: ObjectId, page: Int = 1, itemDisplay: Int = 10) = {
+  def findByCatId(catId: ObjectId, sortMode: String, page: Int = 1, itemDisplay: Int = 10) = {
     val skip = (page - 1) * itemDisplay
     val blogIds = BlogDao.find(
       MongoDBObject(
@@ -36,16 +36,22 @@ object ArticleDao extends BaseDao[Article, String] {
       totalPage += 1
     }
 
+    val sort = if (sortMode == SortMode.newest) {
+      MongoDBObject("publishedDate" -> -1)
+    } else {
+      MongoDBObject("commentTotal" -> -1, "clicked" -> -1, "publishedDate" -> -1)
+    }
+
     val articles = find(query)
       .skip(skip)
       .limit(itemDisplay)
-      .sort(MongoDBObject("publishedDate" -> -1))
+      .sort(sort)
       .toList
 
     (articles, totalPage.toInt)
   }
 
-  def findByBlogId(blogId: ObjectId, page: Int = 1, itemDisplay: Int = 10) = {
+  def findByBlogId(blogId: ObjectId, sortMode: String, page: Int = 1, itemDisplay: Int = 10) = {
     val skip = (page - 1) * itemDisplay
 
     val query = MongoDBObject("blogId" -> blogId)
@@ -57,17 +63,23 @@ object ArticleDao extends BaseDao[Article, String] {
       totalPage += 1
     }
 
+    val sort = if (sortMode == SortMode.newest) {
+      MongoDBObject("publishedDate" -> -1)
+    } else {
+      MongoDBObject("commentTotal" -> -1, "clicked" -> -1, "publishedDate" -> -1)
+    }
+
     val articles = find(query)
       .skip(skip)
       .limit(itemDisplay)
-      .sort(MongoDBObject("publishedDate" -> -1))
+      .sort(sort)
 
       .toList
 
     (articles, totalPage.toInt)
   }
 
-  def findByTag(tag: String, page: Int = 1, itemDisplay: Int = 10) = {
+  def findByTag(tag: String, sortMode: String, page: Int = 1, itemDisplay: Int = 10) = {
     val skip = (page - 1) * itemDisplay
 
     val query = MongoDBObject("tags" -> MongoDBObject("$regex" -> tag))
@@ -79,11 +91,16 @@ object ArticleDao extends BaseDao[Article, String] {
       totalPage += 1
     }
 
+    val sort = if (sortMode == SortMode.newest) {
+      MongoDBObject("publishedDate" -> -1)
+    } else {
+      MongoDBObject("commentTotal" -> -1, "clicked" -> -1, "publishedDate" -> -1)
+    }
+
     val articles = find(query)
       .skip(skip)
       .limit(itemDisplay)
-      .sort(MongoDBObject("publishedDate" -> -1))
-
+      .sort(sort)
       .toList
 
     (articles, totalPage.toInt)

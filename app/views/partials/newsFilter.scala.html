@@ -1,0 +1,7 @@
+@(sortMode: String)
+<div class="news-filter">
+    <h3>
+        <a class='@if(SortMode.newest == sortMode) {active}' href="?sort=newest">Bài mới nhất</a> |
+        <a class="@if(SortMode.hottest == sortMode) {active}" href="?sort=hottest">Đọc nhiều nhất</a>
+    </h3>
+</div>
