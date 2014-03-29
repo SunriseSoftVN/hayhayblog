@@ -21,7 +21,7 @@ object HomeCtr extends Controller with OptionalAuthElement with AuthConfigImpl w
     val sort = if (sortMode == SortMode.newest) {
       MongoDBObject("publishedDate" -> -1)
     } else {
-      //onlly in 7 days
+      //only in 7 days
       query.put("publishedDate", MongoDBObject("$gt" -> DateTime.now().minusDays(7)))
       MongoDBObject("commentTotal" -> -1, "clicked" -> -1, "publishedDate" -> -1)
     }
