@@ -13,7 +13,7 @@ import dao.BlogDao
  * @since 1/31/14 4:38 AM
  *
  */
-class FeedSpout(nrOfActor: Int = 20) extends Actor {
+class FeedSpout(nrOfActor: Int = 10) extends Actor {
 
   val httpClient = HttpClientBuilder.build()
 
