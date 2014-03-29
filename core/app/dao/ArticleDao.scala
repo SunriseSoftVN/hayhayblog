@@ -6,6 +6,7 @@ import model.{SortMode, Article}
 import play.api.Play.current
 import org.bson.types.ObjectId
 import com.mongodb.casbah.commons.MongoDBObject
+import org.joda.time.DateTime
 
 /**
  * The Class ArticleDao.
@@ -39,6 +40,7 @@ object ArticleDao extends BaseDao[Article, String] {
     val sort = if (sortMode == SortMode.newest) {
       MongoDBObject("publishedDate" -> -1)
     } else {
+      query.put("publishedDate", MongoDBObject("$gt" -> DateTime.now().minusDays(7)))
       MongoDBObject("commentTotal" -> -1, "clicked" -> -1, "publishedDate" -> -1)
     }
 
@@ -66,6 +68,7 @@ object ArticleDao extends BaseDao[Article, String] {
     val sort = if (sortMode == SortMode.newest) {
       MongoDBObject("publishedDate" -> -1)
     } else {
+      query.put("publishedDate", MongoDBObject("$gt" -> DateTime.now().minusDays(7)))
       MongoDBObject("commentTotal" -> -1, "clicked" -> -1, "publishedDate" -> -1)
     }
 
@@ -94,6 +97,7 @@ object ArticleDao extends BaseDao[Article, String] {
     val sort = if (sortMode == SortMode.newest) {
       MongoDBObject("publishedDate" -> -1)
     } else {
+      query.put("publishedDate", MongoDBObject("$gt" -> DateTime.now().minusDays(7)))
       MongoDBObject("commentTotal" -> -1, "clicked" -> -1, "publishedDate" -> -1)
     }
 

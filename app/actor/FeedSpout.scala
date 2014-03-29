@@ -24,7 +24,7 @@ class FeedSpout(nrOfActor: Int = 10) extends Actor {
 
   override def receive = {
     case Start =>
-      for (blog <- BlogDao.all) {
+      for (blog <- BlogDao.needToUpdate) {
         rssFetcher ! Crawl(blog)
       }
   }
