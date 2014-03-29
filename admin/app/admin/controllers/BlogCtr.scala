@@ -4,14 +4,13 @@ import play.api.mvc.Controller
 import jp.t2v.lab.play2.auth.AuthElement
 import auth.AuthConfigImpl
 import dto.PageDto
-import model.Administrator
+import model.{Administrator, Blog}
 import dao.{ArticleDao, CategoryDao, BlogDao}
 import play.api.data.Form
 import play.api.data.Forms._
 import com.mongodb.casbah.commons.Imports._
 import formater.ObjectIdFormat._
 import validation.Constraint._
-import model.Blog
 import org.joda.time.DateTime
 import org.apache.commons.lang3.StringUtils
 
@@ -29,6 +28,7 @@ object BlogCtr extends Controller with AuthElement with AuthConfigImpl with Admi
       "_id" -> of[ObjectId],
       "name" -> text(minLength = 3),
       "url" -> nonEmptyText.verifying(urlConstraint),
+      "iconId" -> optional(of[ObjectId]),
       "uniqueName" -> text,
       "rssUrl" -> nonEmptyText.verifying(urlConstraint),
       "status" -> nonEmptyText,

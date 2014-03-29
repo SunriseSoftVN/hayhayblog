@@ -2,7 +2,7 @@ package controllers
 
 import play.api.templates.Html
 import play.api.i18n.Messages
-import play.api.mvc.{SimpleResult, Controller}
+import play.api.mvc.SimpleResult
 import model.User
 import dao.CategoryDao
 import dto.TopMenuDto
@@ -14,7 +14,7 @@ import dto.TopMenuDto
  * @since 1/31/14 5:18 PM
  *
  */
-trait MainTemplate extends Controller {
+trait MainTemplate extends ControllerHelper {
 
 
   def navBar(implicit dto: TopMenuDto) = views.html.partials.navbar(dto)
@@ -38,9 +38,4 @@ trait MainTemplate extends Controller {
                        dto: TopMenuDto = TopMenuDto(CategoryDao.all, "home")) = BadRequest(
     views.html.tml.main(content, title, description, navBar, sideBar, footer)
   )
-
-  implicit class RichOption[E](op: Option[E]) {
-    def mapRender(f: E => SimpleResult) = op.map(f).getOrElse(NotFound)
-  }
-
 }
