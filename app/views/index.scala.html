@@ -1,9 +1,12 @@
-@(latestArticles: List[Article], totalPage: Long)
+@(latestArticles: List[Article], totalPage: Long, sortMode: String)
 @import views.html.partials._
 
 <div class="row">
     <div class="news-filter">
-        <h3><a class="active" href="">Bài mới</a> | <a href="">Đọc nhiều</a></h3>
+        <h3>
+            <a class='@if(SortMode.newest == sortMode) {active}' href="?sort=newest">Bài mới nhất</a> |
+            <a class="@if(SortMode.hottest == sortMode) {active}" href="?sort=hottest">Đọc nhiều nhất</a>
+        </h3>
     </div>
     <div id="article-container">
         @latestArticles.map { article =>
@@ -14,7 +17,7 @@
 
 <div class="navigation">
     @for(i <- 1l to totalPage) {
-    <a href="?page=@i">@i</a>
+    <a href="?sortMode=@sortMode&page=@i">@i</a>
     }
 </div>
 
