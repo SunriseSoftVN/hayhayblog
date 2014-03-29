@@ -2,6 +2,9 @@
 @import views.html.partials._
 
 <div class="row">
+    <div class="news-filter">
+        <h3><a class="active" href="">Bài mới</a> | <a href="">Đọc nhiều</a></h3>
+    </div>
     <div id="article-container">
         @latestArticles.map { article =>
             @smallarticle(article)
