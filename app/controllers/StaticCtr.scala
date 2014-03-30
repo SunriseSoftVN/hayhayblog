@@ -14,11 +14,11 @@ import auth.AuthConfigImpl
 object StaticCtr extends Controller with OptionalAuthElement with AuthConfigImpl with MainTemplate {
 
   def about = StackAction { implicit request =>
-    renderOk(views.html.statics.about())
+    renderOk(views.html.statics.about(), title = "Giới thiệu HayHayBlog")
   }
 
   def lienket = StackAction { implicit request =>
-    renderOk(views.html.statics.lienket())
+    renderOk(views.html.statics.lienket(), title = "Trao đổi liên kết với HayHayBlog")
   }
 
 }
