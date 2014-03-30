@@ -1,6 +1,6 @@
 package actor
 
-import model.Blog
+import model.{Article, Blog}
 
 /**
  * The Class Events.
@@ -20,4 +20,6 @@ case class Fetch(url: String)
 case class Image(url: String)
 
 case class FetchResult(image: Option[Image])
+
+case class UpdateComment(article: Article)
 

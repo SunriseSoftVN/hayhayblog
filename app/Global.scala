@@ -38,7 +38,7 @@ object Global extends WithFilters(HTMLCompressorFilter()) {
       ))
     }
     //crawling blog every 15 minutes
-    Akka.system.scheduler.schedule(10.seconds, 5.minutes, feedSpout, Start)
+    Akka.system.scheduler.schedule(10.seconds, 15.minutes, feedSpout, Start)
   }
 
   override def onLoadConfig(config: Configuration, path: File, classLoader: ClassLoader, mode: Mode.Mode) = if (mode == Mode.Prod) {

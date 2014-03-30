@@ -144,4 +144,9 @@ object ArticleDao extends BaseDao[Article, String] {
 
   def removeByBlogId(blogId: ObjectId) = remove(MongoDBObject("blogId" -> blogId))
 
+  def needToUpdateComment = find(
+    MongoDBObject(
+      "publishedDate" -> MongoDBObject("$gt" -> DateTime.now().minusDays(30))
+    )
+  ).toList
 }
