@@ -99,88 +99,94 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
       }
     })
 
+    //get number of comments
+    val slashModule = syndEntry.getModule(Slash.URI)
+    if (slashModule != null && slashModule.asInstanceOf[Slash].getComments != null) {
+      commentTotal = slashModule.asInstanceOf[Slash].getComments
+    }
+
     if (urlValidator.isValid(url)) {
       val normalizationUrl = new URL(url).getNormalizedUrl
-      if (ArticleDao.findOneById(normalizationUrl).isEmpty) {
+      ArticleDao.findOneById(normalizationUrl).map(article => {
+        // update comment total in case the article is exits.
+        ArticleDao.save(article.copy(commentTotal = commentTotal))
+      }).getOrElse {
         //double check to avoid duplicate item
         val exist = StringUtils.isNotBlank(syndEntry.getTitle) && ArticleDao.findOne(MongoDBObject(
           "blogId" -> blog._id,
           "title" -> StringUtils.trimToEmpty(syndEntry.getTitle)
         )).isDefined
         if (!exist) {
-
-          val cleanTitle = if (StringUtils.isNotBlank(syndEntry.getTitle)) Jsoup.parse(syndEntry.getTitle).text() else url
-          val title = if (StringUtils.isNotBlank(cleanTitle)) cleanTitle else url
-
-          if (StringUtils.isNotBlank(title)) {
-            val extractor = newsParser.extract(syndEntry, url)
-            var pubDate: Option[DateTime] = None
-            if (syndEntry.getPublishedDate != null) {
-              pubDate = Some(new DateTime(syndEntry.getPublishedDate))
-            }
-            if (pubDate.isEmpty && syndEntry.getUpdatedDate != null) {
-              pubDate = Some(new DateTime(syndEntry.getUpdatedDate))
-            }
-            val des = extractor._1.getOrElse("")
-            val rssHtml = extractor._2.getOrElse("")
-            val potentialImages = extractor._3
-
-            //get thumbnail by rome module
-            var featureImage: Option[String] = None
-            val mediaModule = syndEntry.getModule(MediaModule.URI)
-            if (mediaModule != null) {
-              val mediaModuleImpl = mediaModule.asInstanceOf[MediaEntryModuleImpl]
-              if (mediaModuleImpl.getMetadata != null) {
-                val thumbnails = mediaModuleImpl.getMetadata.getThumbnail
-                featureImage = thumbnails.headOption.map(_.getUrl.toString)
-              }
-            }
-
-            //get number of comments
-            val slashModule = syndEntry.getModule(Slash.URI)
-            if (slashModule != null && slashModule.asInstanceOf[Slash].getComments != null) {
-              commentTotal = slashModule.asInstanceOf[Slash].getComments
-            }
-
-            val tagSet = new mutable.HashSet[String]()
-            syndEntry.getCategories.foreach {
-              case sCat: SyndCategory =>
-                if (StringUtils.isNotBlank(sCat.getName)) {
-                  val tagName = clean(StringUtils.stripAccents(StringUtils.trimToEmpty(sCat.getName)).toLowerCase)
-                  tagSet += tagName
-                  val tag = TagDao.findOrCreate(tagName)
-                  TagDao.save(tag.copy(count = tag.count + 1))
-                }
-              case _ => //ignore
-            }
-
-            val tags = tagSet.mkString("", ",", "")
-
-            val cleanAuthor = if (StringUtils.isNotBlank(syndEntry.getAuthor)) Jsoup.parse(syndEntry.getAuthor).text() else ""
-            val author = if (StringUtils.isNotBlank(cleanAuthor)) Some(cleanAuthor) else None
-
-            val article = Article(
-              _id = normalizationUrl,
-              url = url,
-              title = StringUtils.capitalize(title),
-              uniqueTitle = genUniqueTitle(title),
-              blogName = blog.uniqueName,
-              description = des,
-              featureImage = featureImage,
-              author = author,
-              tags = if (StringUtils.isNotBlank(tags)) Some(tags) else None,
-              descriptionHtml = rssHtml.getBytes("UTF-8"),
-              blogId = blog._id,
-              commentTotal = commentTotal,
-              commentRss = commentRss,
-              publishedDate = pubDate.getOrElse(DateTime.now())
-            )
-
-            article.potentialImages ++= potentialImages
-            contentFetcher ! article
-          }
+          createArticle(syndEntry, url, normalizationUrl, blog, commentTotal, commentRss)
         }
       }
+    }
+  }
+
+  def createArticle(syndEntry: SyndEntry, url: String, normalizationUrl: String, blog: Blog, commentTotal: Int, commentRss: Option[String]) {
+    val cleanTitle = if (StringUtils.isNotBlank(syndEntry.getTitle)) Jsoup.parse(syndEntry.getTitle).text() else url
+    val title = if (StringUtils.isNotBlank(cleanTitle)) cleanTitle else url
+
+    if (StringUtils.isNotBlank(title)) {
+      val extractor = newsParser.extract(syndEntry, url)
+      var pubDate: Option[DateTime] = None
+      if (syndEntry.getPublishedDate != null) {
+        pubDate = Some(new DateTime(syndEntry.getPublishedDate))
+      }
+      if (pubDate.isEmpty && syndEntry.getUpdatedDate != null) {
+        pubDate = Some(new DateTime(syndEntry.getUpdatedDate))
+      }
+      val des = extractor._1.getOrElse("")
+      val rssHtml = extractor._2.getOrElse("")
+      val potentialImages = extractor._3
+
+      //get thumbnail by rome module
+      var featureImage: Option[String] = None
+      val mediaModule = syndEntry.getModule(MediaModule.URI)
+      if (mediaModule != null) {
+        val mediaModuleImpl = mediaModule.asInstanceOf[MediaEntryModuleImpl]
+        if (mediaModuleImpl.getMetadata != null) {
+          val thumbnails = mediaModuleImpl.getMetadata.getThumbnail
+          featureImage = thumbnails.headOption.map(_.getUrl.toString)
+        }
+      }
+
+      val tagSet = new mutable.HashSet[String]()
+      syndEntry.getCategories.foreach {
+        case sCat: SyndCategory =>
+          if (StringUtils.isNotBlank(sCat.getName)) {
+            val tagName = clean(StringUtils.stripAccents(StringUtils.trimToEmpty(sCat.getName)).toLowerCase)
+            tagSet += tagName
+            val tag = TagDao.findOrCreate(tagName)
+            TagDao.save(tag.copy(count = tag.count + 1))
+          }
+        case _ => //ignore
+      }
+
+      val tags = tagSet.mkString("", ",", "")
+
+      val cleanAuthor = if (StringUtils.isNotBlank(syndEntry.getAuthor)) Jsoup.parse(syndEntry.getAuthor).text() else ""
+      val author = if (StringUtils.isNotBlank(cleanAuthor)) Some(cleanAuthor) else None
+
+      val article = Article(
+        _id = normalizationUrl,
+        url = url,
+        title = StringUtils.capitalize(title),
+        uniqueTitle = genUniqueTitle(title),
+        blogName = blog.uniqueName,
+        description = des,
+        featureImage = featureImage,
+        author = author,
+        tags = if (StringUtils.isNotBlank(tags)) Some(tags) else None,
+        descriptionHtml = rssHtml.getBytes("UTF-8"),
+        blogId = blog._id,
+        commentTotal = commentTotal,
+        commentRss = commentRss,
+        publishedDate = pubDate.getOrElse(DateTime.now())
+      )
+
+      article.potentialImages ++= potentialImages
+      contentFetcher ! article
     }
   }
 
