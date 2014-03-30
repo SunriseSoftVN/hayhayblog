@@ -50,6 +50,9 @@
             <li>
                 <a href="@_article.url" title="Về trang gốc"><i class="fa fa-times-circle"></i></a>
             </li>
+            }.getOrElse {
+            <li><a href="/user/register">Đăng ký</a></li>
+            <li><a href="/user/login">Đăng nhập</a></li>
             }
         </ul>
     </div><!--/.nav-collapse -->

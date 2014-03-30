@@ -5,24 +5,26 @@
 @import views.html.bootstrapform._
 @implicitFieldConstructor = @{FieldConstructor(bootstrapform.filedContructor.f)}
 
-<div class="col-md-3 col-md-offset-4" style="height: 500px;">
-    <form action="/user/registerPost" method="post" role="form">
-        <h2 class="form-signin-heading">Đăng ký</h2>
-        @inputText(registerForm("email"), 'class -> "form-control", '_label -> Messages("lbl.email"))
-        @inputText(registerForm("fullname"), 'class -> "form-control", '_label -> Messages("lbl.fullname"))
-        @inputPassword(registerForm("password"), 'class -> "form-control", '_label -> Messages("lbl.password"))
-        @inputPassword(registerForm("rePassword"), 'class -> "form-control", '_label -> Messages("lbl.rePassword"))
+<h2 class="page-header">Đăng ký</h2>
+<div id="article-container">
+    <div class="col-md-4">
+        <form action="/user/registerPost" method="post" role="form">
+            @inputText(registerForm("email"), 'class -> "form-control", '_label -> Messages("lbl.email"))
+            @inputText(registerForm("fullname"), 'class -> "form-control", '_label -> Messages("lbl.fullname"))
+            @inputPassword(registerForm("password"), 'class -> "form-control", '_label -> Messages("lbl.password"))
+            @inputPassword(registerForm("rePassword"), 'class -> "form-control", '_label -> Messages("lbl.rePassword"))
 
-        @registerForm.globalError.map { error =>
-        <div class="form-group has-error">
-            <p class="help-block">
-                @Messages(error.message)
-            </p>
-        </div>
-        }
+            @registerForm.globalError.map { error =>
+            <div class="form-group has-error">
+                <p class="help-block">
+                    @Messages(error.message)
+                </p>
+            </div>
+            }
 
-        <div class="form-group">
-            <button class="btn btn-default pull-right" type="submit">Register</button>
-        </div>
-    </form>
+            <div class="form-group">
+                <button class="btn btn-default pull-right" type="submit">Register</button>
+            </div>
+        </form>
+    </div>
 </div>

@@ -5,31 +5,33 @@
 @import views.html.bootstrapform._
 @implicitFieldConstructor = @{FieldConstructor(bootstrapform.filedContructor.f)}
 
-<div class="col-md-3 col-md-offset-4" style="height: 500px;">
-    <form action="/user/auth" method="post" role="form">
-        <h2 class="form-signin-heading">Đăng nhập</h2>
-        @inputText(loginForm("email"), 'class -> "form-control", '_label -> Messages("lbl.email"))
-        @inputPassword(loginForm("password"), 'class -> "form-control", '_label -> Messages("lbl.password"))
+<h2 class="page-header">Đăng nhập</h2>
+<div id="article-container">
+    <div class="col-md-4">
+        <form action="/user/auth" method="post" role="form">
+            @inputText(loginForm("email"), 'class -> "form-control", '_label -> Messages("lbl.email"))
+            @inputPassword(loginForm("password"), 'class -> "form-control", '_label -> Messages("lbl.password"))
 
-        @loginForm.globalError.map { error =>
-        <div class="form-group has-error">
-            <p class="help-block">
-                @Messages(error.message)
-            </p>
-        </div>
-        }
+            @loginForm.globalError.map { error =>
+            <div class="form-group has-error">
+                <p class="help-block">
+                    @Messages(error.message)
+                </p>
+            </div>
+            }
 
-        <div class="form-group">
-            <button class="btn btn-default pull-right" type="submit">Login</button>
-        </div>
+            <div class="form-group">
+                <button class="btn btn-default pull-right" type="submit">Login</button>
+            </div>
 
-        <div class="clearfix"></div>
-        <hr/>
-        <div class="form-group text-center">
-            <p>Or</p>
-            <a class="zocial facebook" href="/facebook/login" title="SignIn with Facebook">
-                <span>Login with Facebook</span>
-            </a>
-        </div>
-    </form>
+            <div class="clearfix"></div>
+            <hr/>
+            <div class="form-group text-center">
+                <p>Or</p>
+                <a class="zocial facebook" href="/facebook/login" title="SignIn with Facebook">
+                    <span>Login with Facebook</span>
+                </a>
+            </div>
+        </form>
+    </div>
 </div>
