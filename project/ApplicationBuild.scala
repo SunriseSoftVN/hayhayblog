@@ -8,6 +8,7 @@ object ApplicationBuild extends Build {
   val appVersion = "0.0.1"
 
   val parserDependencies = Seq(
+    "org.jdom" % "jdom" % "2.0.2",
     "org.jsoup" % "jsoup" % "1.7.3",
     "org.scalanlp" %% "breeze-process" % "0.3",
     "com.googlecode.juniversalchardet" % "juniversalchardet" % "1.0.3"
