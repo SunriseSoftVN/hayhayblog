@@ -1,7 +1,7 @@
 application.name=HayHayBlog
 application.url=hayhayblog.com
 application.title=Blog Hay - Tổng hợp các blog hay nhất
-application.description=Tổng hợp các blog hay, giúp bạn dễ dàng theo dõi blog yêu thích của mình
+application.description=Tổng hợp các blog hay về khinh doanh, blog hay về tình yêu, blog hay về marketing, blog hay về SEO, blog hay về lập trình...
 login.failed=Tên đăng nhập hoặc mật khẩu không đúng
 password.error.match=Mật khẩu không giống nhau
 btn.submit=Lưu
