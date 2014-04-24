@@ -31,7 +31,7 @@ object ArticleCtr extends Controller with OptionalAuthElement with AuthConfigImp
       val (articles, totalPage) = ArticleDao.findByBlogId(blog._id, sortMode, page, 20)
       val catName = blog.category.map(_.shortName).getOrElse("")
       implicit val topMenuDto = TopMenuDto(CategoryDao.all, catName)
-      renderOk(views.html.article.view(articles, totalPage, sortMode), title = "Blog " + blog.name)
+      renderOk(views.html.article.view(articles, totalPage, sortMode), title = "Blog hay về " + catName  + " - " + blog.name)
     })
   })
 
