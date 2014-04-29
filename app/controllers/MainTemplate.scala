@@ -3,8 +3,8 @@ package controllers
 import play.api.templates.Html
 import play.api.i18n.Messages
 import play.api.mvc.SimpleResult
-import model.User
-import dao.CategoryDao
+import model.{Blog, User}
+import dao.{BlogDao, CategoryDao}
 import dto.TopMenuDto
 
 /**
@@ -20,7 +20,7 @@ trait MainTemplate extends ControllerHelper {
   def navBar(implicit dto: TopMenuDto) = views.html.partials.navbar(dto)
 
   def leftSideBar(implicit dto: TopMenuDto) = views.html.partials.leftSidebar(dto)
-  def rightSideBar(implicit dto: TopMenuDto) = views.html.partials.rightSideBar(dto)
+  def rightSideBar(implicit dto: TopMenuDto) = views.html.partials.rightSideBar(dto, BlogDao.top)
 
   def footer = views.html.partials.footer()
 
