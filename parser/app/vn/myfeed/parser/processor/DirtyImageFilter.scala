@@ -2,7 +2,7 @@ package vn.myfeed.parser.processor
 
 import vn.myfeed.parser.model.Article
 import vn.myfeed.parser.util.DirtyImagePattern
-import vn.myfeed.core.until.String2Int
+import utils.String2Int
 
 /**
  * The Class ImageFilter.

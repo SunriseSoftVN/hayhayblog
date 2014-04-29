@@ -1,4 +1,4 @@
-package actor
+package http
 
 import scala.util.Random
 

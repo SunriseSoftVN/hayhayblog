@@ -3,7 +3,7 @@ package controllers
 import play.api.mvc.{Action, Controller}
 import org.bson.types.ObjectId
 import dao.{ImageDao, BlogDao}
-import actor.HttpClientBuilder
+import http.HttpClientBuilder
 import org.apache.http.client.methods.HttpGet
 import scala.concurrent.{ExecutionContext, Future}
 import ExecutionContext.Implicits.global

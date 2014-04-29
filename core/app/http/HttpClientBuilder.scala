@@ -1,4 +1,4 @@
-package actor
+package http
 
 import org.apache.http.params.{CoreConnectionPNames, CoreProtocolPNames, BasicHttpParams}
 import org.apache.http.client.params.{CookiePolicy, ClientPNames}

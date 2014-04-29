@@ -9,7 +9,7 @@ import vn.myfeed.parser.h2.Db
 import org.expecty.Expecty
 import grizzled.slf4j.Logging
 import org.apache.http.client.methods.HttpGet
-import vn.myfeed.core.http.HttpClientBuilder
+import http.HttpClientBuilder
 
 /**
  * The Class TestArticleParser.

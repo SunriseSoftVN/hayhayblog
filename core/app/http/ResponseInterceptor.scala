@@ -1,4 +1,4 @@
-package actor
+package http
 
 import org.apache.http.{HttpResponse, HttpResponseInterceptor}
 import org.apache.http.protocol.HttpContext

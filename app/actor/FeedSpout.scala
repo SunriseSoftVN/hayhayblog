@@ -5,6 +5,7 @@ import play.api.libs.concurrent.Akka
 import akka.routing.RoundRobinRouter
 import play.api.Play.current
 import dao.BlogDao
+import http.HttpClientBuilder
 
 /**
  * The Class FeedSpout.

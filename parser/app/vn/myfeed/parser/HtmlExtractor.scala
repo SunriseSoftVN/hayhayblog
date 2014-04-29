@@ -5,7 +5,7 @@ import scala.collection.JavaConversions._
 import org.apache.http.client.utils.URIUtils
 import java.net.URI
 import org.apache.commons.lang3.StringUtils
-import edu.uci.ics.crawler4j.url.URLCanonicalizer
+import url.URLCanonicalizer
 import org.apache.commons.validator.routines.UrlValidator
 import scala._
 import scala.collection.mutable.ListBuffer

@@ -3,7 +3,7 @@ package vn.myfeed.parser.processor
 import vn.myfeed.parser.model.Article
 import org.apache.commons.lang3.StringUtils
 import org.apache.commons.validator.routines.UrlValidator
-import edu.uci.ics.crawler4j.url.URLCanonicalizer
+import url.URLCanonicalizer
 import collection.JavaConversions._
 import org.jsoup.nodes.Element
 
