@@ -39,4 +39,4 @@ GET        /assets/*file               controllers.Assets.at(path="/public", fil
 ->         /admin                      admin.Routes
 
 # Import parser module
-->         /parser                     parser.Routes
+->         /admin/parser               parser.Routes

@@ -49,7 +49,7 @@
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: '/parser/parseUrl',
+                url: '/admin/parser/parseUrl',
                 data: {url: $('#url').val()},
                 success: function (data) {
                     $('.title').html(data.title);
@@ -63,12 +63,12 @@
         });
 
         $('#saveBtn').click(function () {
-            $('#parserForm').attr('action', '/parser/saveUrl');
+            $('#parserForm').attr('action', '/admin/parser/saveUrl');
             $('#parserForm').submit();
         });
 
         $('#deleteBtn').click(function () {
-            $('#parserForm').attr('action', '/parser/deleteUrl');
+            $('#parserForm').attr('action', '/admin/parser/deleteUrl');
             $('#parserForm').submit();
         });
 
