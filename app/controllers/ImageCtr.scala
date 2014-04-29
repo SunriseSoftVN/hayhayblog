@@ -34,7 +34,7 @@ object ImageCtr extends Controller with ControllerHelper {
             //update image if the image age is too old
             if (image.lastUpdated.isBefore(DateTime.now().minusDays(30))) {
               download(image.url).mapRender(content => {
-                ImageDao.save(image.copy(content = content))
+                ImageDao.save(image.copy(content = content, lastUpdated = DateTime.now()))
                 Ok(content).as("image/png")
               })
             } else {
