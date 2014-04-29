@@ -1,4 +1,4 @@
-@(content: Html, title: String, description: String, _navBar: Html, _sideBar: Html, _footer: Html)
+@(content: Html, title: String, description: String, _navBar: Html, _leftSideBar: Html, _rightSideBar: Html, _footer: Html)
 
 @import views.html.partials._
 @import play._
@@ -16,12 +16,15 @@
     @_navBar
 </div>
 
-<div id="content" class="container">
-    <div class="col-md-3">
-        @_sideBar
+<div id="content" class="container-fluid">
+    <div class="col-md-2">
+        @_leftSideBar
     </div>
-    <div class="col-md-9">
+    <div class="col-md-7">
         @content
+    </div>
+    <div class="col-md-3">
+        @_rightSideBar
     </div>
 </div>
 

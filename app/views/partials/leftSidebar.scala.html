@@ -1,0 +1,11 @@
+@(data: TopMenuDto)
+
+@data.categories.map{ cat =>
+<div class="box">
+    <div class="box-header">
+        <h3 style="text-align: right">
+            <a href="/cat/@cat.shortName">@cat.name</a>
+        </h3>
+    </div>
+</div>
+}

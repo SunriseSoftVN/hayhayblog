@@ -19,7 +19,8 @@ trait MainTemplate extends ControllerHelper {
 
   def navBar(implicit dto: TopMenuDto) = views.html.partials.navbar(dto)
 
-  def sideBar(implicit dto: TopMenuDto) = views.html.partials.sidebar(dto)
+  def leftSideBar(implicit dto: TopMenuDto) = views.html.partials.leftSidebar(dto)
+  def rightSideBar(implicit dto: TopMenuDto) = views.html.partials.rightSideBar()
 
   def footer = views.html.partials.footer()
 
@@ -28,7 +29,7 @@ trait MainTemplate extends ControllerHelper {
                description: String = Messages("application.description"))
               (implicit user: Option[User],
                dto: TopMenuDto = TopMenuDto(CategoryDao.all, "home")) = Ok(
-    views.html.tml.main(content, title, description, navBar, sideBar, footer)
+    views.html.tml.main(content, title, description, navBar, leftSideBar, rightSideBar, footer)
   )
 
   def renderBadRequest(content: Html,
@@ -36,6 +37,6 @@ trait MainTemplate extends ControllerHelper {
                        description: String = Messages("application.description"))
                       (implicit user: Option[User],
                        dto: TopMenuDto = TopMenuDto(CategoryDao.all, "home")) = BadRequest(
-    views.html.tml.main(content, title, description, navBar, sideBar, footer)
+    views.html.tml.main(content, title, description, navBar, leftSideBar, rightSideBar, footer)
   )
 }
