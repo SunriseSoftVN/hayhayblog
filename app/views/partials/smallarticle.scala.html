@@ -1,8 +1,10 @@
 @(article: Article)
 @import formater._
 <div class="small-article">
-    <div class="col-md-8">
+    <div>
         <h3 class="title"><a href="/r/@article.blogName/@article.uniqueTitle">@article.title</a></h3>
+    </div>
+    <div class="col-md-8">
         <div class="meta">
             <span class="source">
                 @article.blog.map { _blog =>
