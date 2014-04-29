@@ -155,7 +155,7 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
       syndEntry.getCategories.foreach {
         case sCat: SyndCategory =>
           if (StringUtils.isNotBlank(sCat.getName)) {
-            val tagName = clean(StringUtils.stripAccents(StringUtils.trimToEmpty(sCat.getName)).toLowerCase)
+            val tagName = cleanTag(sCat.getName)
             tagSet += tagName
             val tag = TagDao.findOrCreate(tagName)
             TagDao.save(tag.copy(count = tag.count + 1))
@@ -190,13 +190,21 @@ class RssFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
     }
   }
 
-  private def genUniqueTitle(title: String) = StringUtils.stripAccents(title)
-    .replaceAll("[^a-zA-Z\\d\\s:]", "")
+  //make the blog url become seo friendly
+  private def genUniqueTitle(title: String) = utils.StringUtils.convertNonAscii(title)
+    .replaceAll("[^a-zA-Z\\d\\s:]", "") // remove non a-z character
     .replaceAll(" ", "-")
+    .replaceAll("--", "-")
+    .replaceAll("---", "-")
+    .replaceAll("----", "-")
     .replaceAll(":", "-")
     .toLowerCase
 
-  private def clean(title: String) = title
+  private def cleanTag(tag: String) = utils.StringUtils.convertNonAscii(tag)
+    .replaceAll("[^a-zA-Z\\d\\s:]", "") // remove non a-z character
+    .replaceAll(":", "")
     .replaceAll("\"", "")
+    .toLowerCase
+
 
 }
