@@ -1,0 +1,78 @@
+@import partials._
+
+<!DOCTYPE html>
+<html>
+<head>
+    @header()
+</head>
+<body>
+
+<div id="topmenu" class="navbar navbar-fixed-top">
+    @navbar()
+</div>
+
+<div class="ui-layout-north">
+    <form id="parserForm" class="form-inline" style="padding-top: 50px;" method="POST">
+        <input id="url" type="text" class="input-xxlarge" name="url" placeholder="Url">
+        <a id="parseBtn" class="btn btn-primary">Parse</a> ->
+        <a id="saveBtn" type="submit" class="btn">Save Result</a> Or
+        <a id="deleteBtn" type="submit" class="btn">Delete</a>
+    </form>
+</div>
+
+<iframe class="ui-layout-west left-col" src="" frameborder="0" scrolling="auto"></iframe>
+
+<div class="ui-layout-center right-col">
+    <legend>
+        <h3 class="title"></h3>
+    </legend>
+    <div class="content"></div>
+</div>
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('body').layout({
+            closable: false,
+            north__size: 100,
+            north__resizable: false,
+            west__size: '50%',
+            west__resizeWhileDragging: false,
+            maskContents: true,
+            spacing_open: 4
+        });
+
+
+        $('#parseBtn').click(function () {
+            $.blockUI({baseZ: 9999});
+            $('.left-col').attr('src', $('#url').val());
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '/parseUrl',
+                data: {url: $('#url').val()},
+                success: function (data) {
+                    $('.title').html(data.title);
+                    $('.content').html(data.text);
+                    $('.content img').imageloader();
+                },
+                error: function () {
+                    alert("Some thing go wrong");
+                }
+            })
+        });
+
+        $('#saveBtn').click(function () {
+            $('#parserForm').attr('action', 'saveUrl');
+            $('#parserForm').submit();
+        });
+
+        $('#deleteBtn').click(function () {
+            $('#parserForm').attr('action', 'deleteUrl');
+            $('#parserForm').submit();
+        });
+
+        $(document).ajaxStop($.unblockUI);
+    });
+</script>
+</html>

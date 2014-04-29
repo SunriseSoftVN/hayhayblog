@@ -1,0 +1,57 @@
+html, body, .container-fluid {
+    height: 100%;
+}
+
+body {
+    line-height: 1.5;
+    font-size: 15px;
+}
+
+.header {
+    padding-top: 50px;
+}
+
+.left-col, .right-col {
+    border: 1px solid #cfcfcf;
+    overflow: auto;
+    padding-bottom: 20px;
+}
+
+iframe {
+    padding: 0 !important; /* iframes should not have padding */
+    overflow: auto !important;
+}
+
+.ui-layout-mask {
+    opacity: .20 !important;
+    filter: alpha(opacity=20) !important;
+}
+
+.ui-layout-resizer-west {
+    background: #cfcfcf;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+    font-size: 14px !important;
+    line-height: 20px !important;
+}
+
+.right-col {
+    padding: 15px;
+}
+
+.content div {
+    margin-bottom: 1.5em;
+}
+
+.content p {
+    margin-bottom: 1.5em;
+}
+
+.content ul>li>p {
+  margin-bottom: 10px;
+}
+
+#editor {
+    height: 100%;
+}

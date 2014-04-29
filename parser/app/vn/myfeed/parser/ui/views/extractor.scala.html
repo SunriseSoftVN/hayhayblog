@@ -1,0 +1,65 @@
+@import partials._
+
+<!DOCTYPE html>
+<html>
+<head>
+    @header()
+</head>
+<body>
+
+<div id="topmenu" class="navbar navbar-fixed-top">
+    @navbar()
+</div>
+
+<div class="ui-layout-north">
+    <div style="padding-top: 50px">
+        <a href="#" class="btn btn-primary" id="extractBtn">Extract</a>
+    </div>
+</div>
+
+<div class="ui-layout-west left-col">
+    <div id="editor"></div>
+</div>
+
+<div class="ui-layout-center right-col">
+</div>
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('body').layout({
+            closable: false,
+            north__size: 100,
+            north__resizable: false,
+            west__size: '50%',
+            west__resizeWhileDragging: false,
+            maskContents: true,
+            spacing_open: 4
+        });
+        var editor = ace.edit("editor");
+        editor.setFontSize(14);
+        editor.setTheme("ace/theme/chrome");
+        editor.getSession().setMode("ace/mode/html");
+        $('#extractBtn').click(function () {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '/parseHtml',
+                data: {html: editor.getValue()},
+                success: function (data) {
+                    var content = $('.right-col');
+                    content.append('<ul>');
+                    _.each(data.images, function (img) {
+                        content.append("<li>" + img + "</li>")
+                    });
+                    content.append('</ul><br>');
+                    content.append(data.text)
+                },
+                error: function () {
+                    alert("Some thing go wrong");
+                }
+            })
+        });
+    });
+</script>
+</html>

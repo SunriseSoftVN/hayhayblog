@@ -1,0 +1,54 @@
+@import partials._
+
+<!DOCTYPE html>
+<html>
+<head>
+    @header()
+</head>
+<body>
+
+<div id="topmenu" class="navbar navbar-fixed-top">
+    @navbar()
+</div>
+
+<div style="padding-top: 50px;">
+    <form class="form-inline">
+        <input id="url" type="text" class="input-xxlarge" name="url" placeholder="Url">
+        <a id="parseBtn" class="btn btn-primary">Parse</a>
+    </form>
+</div>
+
+<div class="content">
+    <div class="url"></div>
+    <div class="web"></div>
+    <div class="name"></div>
+    <div class="description"></div>
+</div>
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#parseBtn').click(function () {
+            $.blockUI({baseZ: 9999});
+            $('.left-col').attr('src', $('#url').val());
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '/extractRss',
+                data: {url: $('#url').val()},
+                success: function (data) {
+                    $('.url').html(data.url);
+                    $('.web').html(data.web);
+                    $('.name').html(data.name);
+                    $('.description').html(data.description);
+                },
+                error: function () {
+                    alert("Some thing go wrong");
+                }
+            })
+        });
+
+        $(document).ajaxStop($.unblockUI);
+    });
+</script>
+</html>
