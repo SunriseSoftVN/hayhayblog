@@ -58,7 +58,7 @@ class TestArticleParser extends Logging {
     }
 
     expect {
-      passed == true
+      passed
     }
   }
 

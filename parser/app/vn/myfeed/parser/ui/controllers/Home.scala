@@ -83,7 +83,7 @@ object Home extends Controller {
         }
       })
     }
-    Redirect("/")
+    Redirect("/parser")
   }
 
   def deleteUrl = Action {
@@ -94,7 +94,7 @@ object Home extends Controller {
         println("Deleted")
       })
     }
-    Redirect("/")
+    Redirect("/parser")
   }
 
 

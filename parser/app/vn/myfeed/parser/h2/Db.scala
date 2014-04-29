@@ -10,6 +10,6 @@ import scala.slick.driver.H2Driver.simple._
  */
 object Db {
 
-  def database = Database.forURL("jdbc:h2:parser/src/test/resources/article", driver = "org.h2.Driver")
+  def database = Database.forURL("jdbc:h2:parser/test/resources/article", driver = "org.h2.Driver")
 
 }
