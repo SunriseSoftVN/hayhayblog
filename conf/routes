@@ -37,3 +37,6 @@ GET        /assets/*file               controllers.Assets.at(path="/public", fil
 
 # Import admin module
 ->         /admin                      admin.Routes
+
+# Import parser module
+->         /parser                     parser.Routes

@@ -1,4 +1,4 @@
-package controllers
+package vn.myfeed.parser.ui.controllers
 
 import play.api.mvc.{Action, Controller}
 import vn.myfeed.parser.ArticleParser

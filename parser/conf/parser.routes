@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                                   vn.myfeed.parser.ui.controllers.Home.index
+POST    /parseUrl                           vn.myfeed.parser.ui.controllers.Home.parseUrl
+POST    /saveUrl                            vn.myfeed.parser.ui.controllers.Home.saveUrl
+POST    /deleteUrl                          vn.myfeed.parser.ui.controllers.Home.deleteUrl
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               		controllers.Assets.at(path="/public", file)
+
