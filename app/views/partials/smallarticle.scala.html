@@ -1,13 +1,6 @@
 @(article: Article)
 @import formater._
 <div class="small-article">
-    <div class="col-md-3">
-        @article.featureImage.map { img =>
-        <a href="/r/@article.blogName/@article.uniqueTitle">
-            <img class="img" src="@img" alt="@article.title"/>
-        </a>
-        }
-    </div>
     <div class="col-md-9">
         <h3 class="title"><a href="/r/@article.blogName/@article.uniqueTitle">@article.title</a></h3>
         <div class="meta">
@@ -37,6 +30,13 @@
         </p>
         }
         <!--<p>@facebookLikeBtn(article.url)</p>-->
+    </div>
+    <div class="col-md-3">
+        @article.featureImage.map { img =>
+        <a href="/r/@article.blogName/@article.uniqueTitle">
+            <img class="img" src="@img" alt="@article.title"/>
+        </a>
+        }
     </div>
     <div class="clearfix"></div>
 </div>
