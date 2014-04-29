@@ -24,6 +24,8 @@ object ImageCtr extends Controller with ControllerHelper {
 
   val httpClient = HttpClientBuilder.build()
 
+  def googleFetchFaviconUrl(url: String) = s"http://www.google.com/s2/favicons?domain=$url&alt=feed"
+
   def favicon(blogId: ObjectId) = Action.async {
     Future {
       BlogDao.findOneById(blogId).mapRender(blog => {
@@ -41,7 +43,7 @@ object ImageCtr extends Controller with ControllerHelper {
           })
         }).getOrElse {
           //download image in case the blog does not have icon
-          val imageUrl = s"http://www.google.com/s2/favicons?domain=${blog.url}&alt=feed"
+          val imageUrl = googleFetchFaviconUrl(blog.url)
           download(imageUrl).mapRender(content => {
             val image = Image(
               url = imageUrl,
