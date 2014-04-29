@@ -40,7 +40,7 @@ object BlogDao extends BaseDao[Blog, ObjectId] {
 
   def findByName(name: String) = findOne(MongoDBObject("name" -> name))
 
-  def top = find(MongoDBObject.empty).sort(MongoDBObject("read" -> -1)).take(10).toList
+  def top = find(MongoDBObject("homePage" -> true)).sort(MongoDBObject("read" -> -1)).take(10).toList
 
   def canShowInHomePage = find(MongoDBObject("homePage" -> true)).toList
 
