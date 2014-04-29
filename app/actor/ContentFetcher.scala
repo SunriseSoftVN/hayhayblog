@@ -14,6 +14,7 @@ import org.jsoup.Jsoup
 import collection.JavaConversions._
 import org.apache.commons.lang3.StringUtils
 import utils.Options._
+import vn.myfeed.parser.ArticleParser
 
 /**
  * The Class ContentFetcher.
@@ -25,19 +26,23 @@ import utils.Options._
 class ContentFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor {
 
   val imageFetcher = Akka.system.actorOf(Props(new ImageFetcher(httpClient, persistent)))
+  val articleParser = new ArticleParser
 
   override def receive = {
     case article: Article =>
       var commentRss: Option[String] = article.commentRss
-      if (article.commentRss.isEmpty) {
-        try {
-          val response = httpClient.execute(new HttpGet(article.url))
-          Logger.info(s"Download ${response.getStatusLine.getStatusCode} : ${article.url}")
-          if (response.getStatusLine.getStatusCode == HttpStatus.SC_OK) {
-            val entity = response.getEntity
-            val content = EntityUtils.toByteArray(entity)
-            val input = new ByteArrayInputStream(content)
-            val doc = Jsoup.parse(input, null, article.url)
+      try {
+        val response = httpClient.execute(new HttpGet(article.url))
+        Logger.info(s"Download ${response.getStatusLine.getStatusCode} : ${article.url}")
+        if (response.getStatusLine.getStatusCode == HttpStatus.SC_OK) {
+          val entity = response.getEntity
+          val content = EntityUtils.toByteArray(entity)
+          val input1 = new ByteArrayInputStream(content)
+          val result = articleParser.parse(input1, article.title, None, article.url)
+          article.potentialImages ++= result.images.map(_.src)
+          if (article.commentRss.isEmpty) {
+            val input2 = new ByteArrayInputStream(content)
+            val doc = Jsoup.parse(input2, null, article.url)
             //try to find comment rss link
             val links = doc.select("link[rel=alternate]")
             links.foreach(link => {
@@ -46,13 +51,14 @@ class ContentFetcher(httpClient: HttpClient, persistent: ActorRef) extends Actor
                 commentRss = href
               }
             })
-            input.close()
+            input2.close()
           }
-          EntityUtils.consume(response.getEntity)
-        } catch {
-          case ex: Exception =>
-            Logger.error("Error: " + article.url, ex)
+          input1.close()
         }
+        EntityUtils.consume(response.getEntity)
+      } catch {
+        case ex: Exception =>
+          Logger.error("Error: " + article.url, ex)
       }
 
       val copyArticle = article.copy(commentRss = commentRss)

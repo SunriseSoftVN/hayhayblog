@@ -1,6 +1,6 @@
 package utils
 
-import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang3
 
 /**
  * The Class Empty2None.
@@ -12,13 +12,13 @@ import org.apache.commons.lang3.StringUtils
 object Options {
 
   def trim(value: Option[String]) = value.flatMap(st => {
-    if (StringUtils.isNotBlank(st)) {
+    if (lang3.StringUtils.isNotBlank(st)) {
       Some(st)
     } else {
       None
     }
   })
 
-  implicit def string2Option(st: String): Option[String] = if (StringUtils.isNotBlank(st)) Some(StringUtils.trimToEmpty(st)) else None
+  implicit def string2Option(st: String): Option[String] = if (lang3.StringUtils.isNotBlank(st)) Some(lang3.StringUtils.trimToEmpty(st)) else None
 
 }
