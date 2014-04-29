@@ -1,3 +1,30 @@
+@(data: TopMenuDto)
+
+
+@data.getCurrentCat.map{ cat =>
+<div class="box">
+    <div class="box-header">
+        <h3>
+            <a href="/cat/@cat.shortName">Các blog cùng thể loại</a>
+        </h3>
+    </div>
+    <div class="box-content">
+        <ul>
+            @cat.blogs.map { blog =>
+            <li>
+                <a href="/blog/@blog.uniqueName" title="@blog.name">
+                    <img src="/blog/favicon/@blog.id" alt="@blog.name"/>
+                    <span class="title">@blog.name</span> - <span class="meta">@blog.read lượt xem</span>
+                </a>
+            </li>
+            }
+        </ul>
+    </div>
+</div>
+
+<br/>
+}
+
 <div class="box">
     <div class="box-header">
         <h3>

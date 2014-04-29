@@ -20,7 +20,7 @@ trait MainTemplate extends ControllerHelper {
   def navBar(implicit dto: TopMenuDto) = views.html.partials.navbar(dto)
 
   def leftSideBar(implicit dto: TopMenuDto) = views.html.partials.leftSidebar(dto)
-  def rightSideBar(implicit dto: TopMenuDto) = views.html.partials.rightSideBar()
+  def rightSideBar(implicit dto: TopMenuDto) = views.html.partials.rightSideBar(dto)
 
   def footer = views.html.partials.footer()
 

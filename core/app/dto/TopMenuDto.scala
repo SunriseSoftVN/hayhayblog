@@ -12,4 +12,8 @@ import model.Category
 case class TopMenuDto(
                        categories: List[Category],
                        currentCat: String
-                       )
+                       ) {
+
+  def getCurrentCat = categories.find(_.shortName == currentCat)
+
+}
