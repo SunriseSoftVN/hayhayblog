@@ -29,8 +29,9 @@ object ArticleCtr extends Controller with OptionalAuthElement with AuthConfigImp
     BlogDao.findByBlogName(blogName).mapRender(blog => {
       val sortMode = request.getQueryString("sort").getOrElse(SortMode.newest)
       val (articles, totalPage) = ArticleDao.findByBlogId(blog._id, sortMode, page, 20)
-      val catName = blog.category.map(_.shortName).getOrElse("")
-      implicit val topMenuDto = TopMenuDto(CategoryDao.all, catName)
+      val catShortName = blog.category.map(_.shortName).getOrElse("")
+      val catName = blog.category.map(_.name).getOrElse("")
+      implicit val topMenuDto = TopMenuDto(CategoryDao.all, catShortName)
       renderOk(views.html.article.view(articles, totalPage, sortMode), title = "Blog hay về " + catName  + " - " + blog.name)
     })
   })
