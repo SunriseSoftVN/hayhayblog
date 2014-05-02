@@ -3,10 +3,12 @@ package controllers
 import play.api.mvc._
 import jp.t2v.lab.play2.auth.OptionalAuthElement
 import auth.AuthConfigImpl
-import dao.{BlogDao, ArticleDao}
+import dao.{EmailDao, BlogDao, ArticleDao}
 import com.mongodb.casbah.commons.MongoDBObject
-import model.SortMode
+import model.{Email, SortMode}
 import org.joda.time.DateTime
+import play.api.data.Form
+import play.api.data.Forms._
 
 object HomeCtr extends Controller with OptionalAuthElement with AuthConfigImpl with MainTemplate {
 
@@ -37,6 +39,27 @@ object HomeCtr extends Controller with OptionalAuthElement with AuthConfigImpl w
       .toList
 
     renderOk(views.html.index(articles, totalPage, sortMode))
+  })
+
+
+  def landing = StackAction(implicit request => {
+    Ok(views.html.landing())
+  })
+
+  val subscribeForm = Form {
+    "email" -> email
+  }
+
+  def subscribe = StackAction(implicit request => {
+    subscribeForm.bindFromRequest.fold(
+      error => Ok("invalid_email"),
+      email => {
+        if (EmailDao.findByEmail(email).isEmpty) {
+          EmailDao.save(Email(email = email))
+        }
+        Ok("success")
+      }
+    )
   })
 
 }

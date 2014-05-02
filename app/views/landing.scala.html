@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>HayHayBlog - Coming Soon Page</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
+
+        <!-- Custom font from Google Web Fonts -->
+        <link href="//fonts.googleapis.com/css?family=PT+Sans:700,400&subset=cyrillic" rel="stylesheet">
+
+        <!-- Bootstrap stylesheets -->
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template stylesheet -->
+        <link href="/assets/css/sunrise.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- Page heading -->
+            <h1 class="page-heading">HayHayBlog</h1>
+            <!-- /Page heading -->
+
+            <!-- Description -->
+            <p class="description">
+                HayHayBlog là một ứng dụng đọc blog giúp bạn dễ dàng <br/>
+                theo dõi và khám phá các bài viết hay của những blogger nổi tiếng, <br/>
+                trên nhiều lịch vực như thời trang, ẩm thực, công nghệ, tình yêu...
+            </p>
+            <!-- /Description -->
+
+            <!-- Subscription form -->
+            <form class="subscription-form form-inline" id="subscription-form" novalidate>
+                <!-- Email field -->
+                <input type="email" class="subscription-email" id="subscription-email" name="email" placeholder="Email">
+                <!-- /Email field -->
+
+                <!-- Subscribe button -->
+                <div class="subscription-submit-container">
+                    <button class="subscription-submit btn btn-large" id="subscription-submit">Đăng ký</button>
+                </div>
+                <!-- /Subscribe button -->
+            </form>
+            <!-- /Subscription form -->
+
+            <!-- Countdown -->
+            <div id="countdown" class="countdown">
+                <!-- Days -->
+                <div class="countdown-item">
+                    <div class="countdown-number countdown-days"></div>
+                    <div class="countdown-text">days</div>
+                </div>
+                <!-- /Days -->
+
+                <!-- Hours -->
+                <div class="countdown-item">
+                    <div class="countdown-number countdown-hours"></div>
+                    <div class="countdown-text">hours</div>
+                </div>
+                <!-- /Hours -->
+
+                <!-- Minutes -->
+                <div class="countdown-item">
+                    <div class="countdown-number countdown-minutes"></div>
+                    <div class="countdown-text">minutes</div>
+                </div>
+                <!-- /Minutes -->
+
+                <!-- Seconds -->
+                <div class="countdown-item">
+                    <div class="countdown-number countdown-seconds"></div>
+                    <div class="countdown-text">seconds</div>
+                </div>
+                <!-- /Seconds -->
+            </div>
+            <!-- /Countdown -->
+            <br/>
+            <p><a href="/home" style="text-decoration: none; color: #ffffff">Bấm vào đây để vào phiên bản cũ</a></p>
+        </div>
+
+
+        <!-- Scripts -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+        <script src="/assets/js/jquery.countdown.js"></script>
+        <script src="/assets/js/main.config.js"></script>
+        <script src="/assets/js/sunrise.js"></script>
+    </body>
+</html>
