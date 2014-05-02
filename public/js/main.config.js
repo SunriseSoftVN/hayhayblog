@@ -31,7 +31,7 @@ var config = {
     subscription_form_tooltips: {
 
         /* On successful subscription */
-        success: "You have been subscribed!",
+        success: "Cám ơn bạn đã đăng ký dùng thử HayHayBlog!",
 
         /* On some unknown error */
         default_error: "Error! Please, contact administration.",
