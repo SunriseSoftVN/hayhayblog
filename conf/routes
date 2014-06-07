@@ -2,12 +2,24 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Landing page
-GET        /                           controllers.HomeCtr.landing
-POST       /subscribe                  controllers.HomeCtr.subscribe
-
 # Home page
-GET        /home                       controllers.HomeCtr.index(page: Int ?= 1)
+GET        /                           controllers.HomeCtr.index(page: Int ?= 1)
+
+
+GET        /user/login                 controllers.UserCtr.login
+GET        /user/register              controllers.UserCtr.register
+POST       /user/registerPost          controllers.UserCtr.registerPost
+GET        /user/recover               controllers.UserCtr.recover
+POST       /user/recoverPost           controllers.UserCtr.recoverPost
+POST       /user/auth                  controllers.UserCtr.auth
+GET        /user/logout                controllers.UserCtr.logout
+GET        /user/profile               controllers.UserCtr.profile
+POST       /user/profilePost           controllers.UserCtr.profilePost
+
+GET        /facebook/login             controllers.FacebookCtr.login
+GET        /facebook/auth              controllers.FacebookCtr.auth
+GET        /google/login               controllers.GoogleCtr.login
+GET        /google/auth                controllers.GoogleCtr.auth
 
 GET        /cat/:shortName             controllers.ArticleCtr.index(shortName: String, page: Int ?= 1)
 GET        /blog/:blogName             controllers.ArticleCtr.blog(blogName: String, page: Int ?= 1)

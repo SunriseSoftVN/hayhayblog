@@ -41,25 +41,4 @@ object HomeCtr extends Controller with OptionalAuthElement with AuthConfigImpl w
     renderOk(views.html.index(articles, totalPage, sortMode))
   })
 
-
-  def landing = StackAction(implicit request => {
-    Ok(views.html.landing())
-  })
-
-  val subscribeForm = Form {
-    "email" -> email
-  }
-
-  def subscribe = StackAction(implicit request => {
-    subscribeForm.bindFromRequest.fold(
-      error => Ok("invalid_email"),
-      email => {
-        if (EmailDao.findByEmail(email).isEmpty) {
-          EmailDao.save(Email(email = email))
-        }
-        Ok("success")
-      }
-    )
-  })
-
 }
