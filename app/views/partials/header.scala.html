@@ -12,7 +12,7 @@
 @article.map{ _article =>
 <meta property="og:title" content="@_article.title"/>
 <meta property="og:description" content="@_article.shortDescription(500)"/>
-<meta rel=“canonical” href="@_article.url"/>
+<meta rel="canonical" href="@_article.url"/>
 @_article.featureImage.map{ img =>
 <meta property="og:image" content="@img"/>
 }
